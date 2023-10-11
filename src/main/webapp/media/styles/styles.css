@@ -1,0 +1,92 @@
+
+
+body {
+    margin: 0;
+    padding: 0;
+    background-image: url('../images/imagen2.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center center;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.navbar {
+    background-color: rgba(100, 67, 67, 0.7);
+}
+
+.navbar-brand {
+    color: #611b1b;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.container {
+    padding-top: 100px;
+}
+
+.dropdown-toggle{
+    background-color: transparent; 
+    border: none; 
+    color: black;    
+}
+
+#submenu-usuarios, #submenu-actividades {
+    display: none;
+}
+
+.dropdown-menu {
+    background-color: rgb(255, 253, 253)!important;
+    color: black;        
+}
+
+.dropdown-menu:active{
+    background-color: #a86262;
+}
+
+.dropdown-submenu-actividades .dropdown-item {
+    margin-left: 20px
+}
+
+.dropdown-submenu-usuario .dropdown-item {
+    margin-left: 20px
+}
+
+.dropdown-submenu-paquetes .dropdown-item {
+    margin-left: 20px
+}
+
+.dropdown-submenu-salidas .dropdown-item {
+    margin-left: 20px
+}
+
+.dropdown-menu:not():active{
+    display: none;
+    direction: column;
+}
+
+.dropdown-menu:active, .dropdown-act:active, .dropdown-usr:active {
+    display: block;
+    direction: column;
+    align-items:normal;    
+}
+
+.col-sm-2 col-form-label{
+    color: white;
+
+}
+
+label{
+    color: white;
+    font-weight: 400;
+    
+}
+
+
+
+
+
+
+
+
