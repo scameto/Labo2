@@ -1,11 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html>
-<html>
-<head>
+<%-- 
+    Document   : head
+    Author     : Igu
+--%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TurismoUy</title>
 
     <!-- Enlace a la hoja de estilo de Bootstrap (CDN) -->
@@ -20,8 +20,3 @@
     <!-- Enlace al archivo de estilos personalizados -->
     <link rel="stylesheet"  href="media/styles/styles.css">
 
-</head>
-<body>
-
-</body>
-</html>
