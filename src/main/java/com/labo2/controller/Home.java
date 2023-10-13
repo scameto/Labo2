@@ -50,7 +50,7 @@ public class Home extends HttpServlet {
 		switch(getEstado(req)){
 			case NO_LOGIN:
 				// hace que se ejecute el jsp sin cambiar la url
-				req.getRequestDispatcher("/WEB-INF/Iniciar.jsp"). //mandar a inicio de sesion
+				req.getRequestDispatcher("/WEB-INF/Index.jsp"). //mandar a inicio de sesion
 						forward(req, resp);
 				break;
 			case LOGIN_INCORRECTO:
@@ -61,7 +61,7 @@ public class Home extends HttpServlet {
 			case LOGIN_TURISTA:
 			case LOGIN_PROVEEDOR:
 				// manda una redirección a otra URL (cambia la URL)
-				resp.sendRedirect("/WEB-INF/index.jsp");
+				resp.sendRedirect("/WEB-INF/Index.jsp");
 				break;
 		}
 	}
