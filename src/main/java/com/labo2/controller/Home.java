@@ -14,6 +14,7 @@ import com.labo2.model.EstadoSesion;
 /**
  * Servlet implementation class Home
  */
+
 public class Home extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -49,7 +50,7 @@ public class Home extends HttpServlet {
 		switch(getEstado(req)){
 			case NO_LOGIN:
 				// hace que se ejecute el jsp sin cambiar la url
-				req.getRequestDispatcher("/WEB-INF/home/iniciar.jsp").
+				req.getRequestDispatcher("/WEB-INF/Iniciar.jsp"). //mandar a inicio de sesion
 						forward(req, resp);
 				break;
 			case LOGIN_INCORRECTO:
@@ -57,9 +58,10 @@ public class Home extends HttpServlet {
 				req.getRequestDispatcher("/WEB-INF/home/inicioErroneo.jsp").
 						forward(req, resp);
 				break;
-			case LOGIN_CORRECTO:
+			case LOGIN_TURISTA:
+			case LOGIN_PROVEEDOR:
 				// manda una redirección a otra URL (cambia la URL)
-				resp.sendRedirect("/labo2/perfil");
+				resp.sendRedirect("/WEB-INF/index.jsp");
 				break;
 		}
 	}
@@ -68,7 +70,8 @@ public class Home extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		processRequest(request, response);
+	//	response.getWriter().append("Served at: ").append(request.getContextPath()); 
 	}
 
 	/**

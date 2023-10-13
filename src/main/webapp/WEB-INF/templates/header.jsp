@@ -1,15 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="ISO-8859-1">
-
-</head>
-<body>
-
-    <!-- Barra de navegación Bootstrap -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
         <a class="navbar-brand" href="#">TurismoUy</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -22,13 +11,13 @@
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     <a class="dropdown-item usr-item" href="#">Usuarios</a>            
                     <div class="dropdown-submenu-usuario" aria-labelledby="submenu-usuarios">
-                        <a class="dropdown-item usr-item" href="#">Consultar Usuarios</a>
+                        <a class="dropdown-item usr-item" href="consultaUsuariosServlet">Consultar Usuarios</a>
                         <a class="dropdown-item usr-item" href="#">Modificar Usuarios</a>                  
                     </div>                        
                              
                         <a class="dropdown-item act-item" href="#">Actividades</a>            
                             <div class="dropdown-submenu-actividades" aria-labelledby="submenu-actividades">
-                                <a class="dropdown-item act-item" href="#">Alta Actividad Turistica</a>
+                                <a class="dropdown-item act-item" href="AltaActividad.html">Alta Actividad Turistica</a>
                                 <a class="dropdown-item act-item" href="#">Consulta Actividad Turistica</a>                  
                             </div>                               
                     
@@ -47,7 +36,7 @@
             </div>
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="inciarSesion.html">Iniciar sesión</a>
+                    <a class="nav-link" href="iniciar">Iniciar sesión</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="AltaUsuario.html">Registrarse</a>
@@ -132,18 +121,8 @@
             
         });
     </script>
-    
-      <!-- Contenido de la página -->
-    <div class="container">
-        <!-- Contenido de la página -->
-    </div>
-
-    
-        <!-- Importar jQuery desde la CDN de Google -->
+            <!-- Importar jQuery desde la CDN de Google -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
     
     <!-- Enlace al archivo JavaScript de Bootstrap (CDN) -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</body>
-</html>
