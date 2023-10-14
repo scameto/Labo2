@@ -49,14 +49,24 @@
     <servlet-name>consultaUsuariosServlet</servlet-name>
     <url-pattern>/consultaUsuariosServlet</url-pattern>
   </servlet-mapping>
-    <servlet>
+  <servlet>
     <description></description>
     <display-name>iniciar</display-name>
     <servlet-name>iniciar</servlet-name>
     <jsp-file>/WEB-INF/Iniciar.jsp</jsp-file>
   </servlet>
-    <servlet-mapping>
+  <servlet-mapping>
     <servlet-name>iniciar</servlet-name>
     <url-pattern>/iniciar</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>AltaActividad</display-name>
+    <servlet-name>AltaActividad</servlet-name>
+    <jsp-file>/WEB-INF/AltaActividad.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AltaActividad</servlet-name>
+    <url-pattern>/AltaActividad</url-pattern>
   </servlet-mapping>
 </web-app>

@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
-        <a class="navbar-brand" href="#">TurismoUy</a>
+        <a class="navbar-brand" href="Index.jsp">TurismoUy</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -17,7 +17,7 @@
                              
                         <a class="dropdown-item act-item" href="#">Actividades</a>            
                             <div class="dropdown-submenu-actividades" aria-labelledby="submenu-actividades">
-                                <a class="dropdown-item act-item" href="AltaActividad.html">Alta Actividad Turistica</a>
+                                <a class="dropdown-item act-item" href="AltaActividad">Alta Actividad Turistica</a>
                                 <a class="dropdown-item act-item" href="#">Consulta Actividad Turistica</a>                  
                             </div>                               
                     

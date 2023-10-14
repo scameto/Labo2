@@ -27,7 +27,7 @@
                     <div class="row mb-3">
                         <label for="inputUsuario" class="col-sm-2 col-form-label">Usuario</label>
                         <div class="col-sm-10">
-                            <input type="input" class="form-control" id="inputUsuario" name="inputUsuario"> <!-- rutea por name -->
+                            <input type="text" class="form-control" id="inputUsuario" name="inputUsuario"> <!-- rutea por name -->
                         </div>
                     </div>
                     <div class="row mb-3">
