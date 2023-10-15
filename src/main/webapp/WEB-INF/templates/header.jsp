@@ -1,3 +1,4 @@
+<%@page import="logica.datatypes.DataTurista"%>
 <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
 	<a class="navbar-brand" href="Index.jsp">TurismoUy</a>
 	<button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -45,21 +46,25 @@
 	</div>
 	<ul class="navbar-nav ml-auto">
 
-		<%  logica.datatypes.DataTurista loggedInUserObj = (logica.datatypes.DataTurista) session.getAttribute("usuario_logueado");
+		<%
+		DataTurista loggedInUserObj = (DataTurista) session.getAttribute("usuario_logueado");
 		if (loggedInUserObj != null) {
-		    String loggedInUser = loggedInUserObj.getNombre();
-		
-   				%>
+			String loggedInUser = loggedInUserObj.getNombre();
+		%>
 
-		<li class="nav-item"><span class="nav-link">Hola, <%= loggedInUser %></span>
+		<li class="nav-item"><span class="nav-link">Hola, <%=loggedInUser%></span>
 		</li>
 		<li class="nav-item"><a class="nav-link" href="logoutServlet">Cerrar sesión</a></li>
-		<% } else { %>
+		<%
+		} else {
+		%>
 
 		<li class="nav-item"><a class="nav-link" href="iniciar">Iniciar	sesión</a></li>
 		<li class="nav-item"><a class="nav-link" href="AltaUsuario.html">Registrarse</a>
 		</li>
-		<% } %>
+		<%
+		}
+		%>
 	</ul>
 	<ul class="navbar-nav">
 		<li class="nav-item"><a class="nav-link" href="#"
@@ -72,72 +77,76 @@
 
 <!-- mostrar u ocultar boton busqueda -->
 <script>
-        $(document).ready(function() {
-            $("#search-icon").click(function() {
-                $("#search-input").toggle("fast");
-            });
-        });
-    </script>
-<script> //comportamiento submenu usuarios
-        $(document).ready(function() {             
-            $(".dropdown-submenu-usuario").hide();           
+	$(document).ready(function() {
+		$("#search-icon").click(function() {
+			$("#search-input").toggle("fast");
+		});
+	});
+</script>
+<script>
+	//comportamiento submenu usuarios
+	$(document).ready(function() {
+		$(".dropdown-submenu-usuario").hide();
 
-            $(".usr-item").mouseenter(function() {
-                $(".dropdown-submenu-usuario").stop().show("fast");
-            });
-        });
-        $(document).ready(function() {
-            $(".usr-item").mouseleave(function() {
-                $(".dropdown-submenu-usuario").stop().hide("fast");
-            });
-            
-        });
-    </script>
-<script> //comportamiento submenu actividades
-        $(document).ready(function() {             
-            $(".dropdown-submenu-actividades").hide();           
+		$(".usr-item").mouseenter(function() {
+			$(".dropdown-submenu-usuario").stop().show("fast");
+		});
+	});
+	$(document).ready(function() {
+		$(".usr-item").mouseleave(function() {
+			$(".dropdown-submenu-usuario").stop().hide("fast");
+		});
 
-            $(".act-item").mouseenter(function() {
-                $(".dropdown-submenu-actividades").stop().show("fast");
-            });
-        });
-        $(document).ready(function() {
-            $(".act-item").mouseleave(function() {
-                $(".dropdown-submenu-actividades").stop().hide("fast");
-            });
-            
-        });
-    </script>
-<script> //comportamiento submenu actividades
-        $(document).ready(function() {             
-            $(".dropdown-submenu-paquetes").hide();           
+	});
+</script>
+<script>
+	//comportamiento submenu actividades
+	$(document).ready(function() {
+		$(".dropdown-submenu-actividades").hide();
 
-            $(".paq-item").mouseenter(function() {
-                $(".dropdown-submenu-paquetes").stop().show("fast");
-            });
-        });
-        $(document).ready(function() {
-            $(".paq-item").mouseleave(function() {
-                $(".dropdown-submenu-paquetes").stop().hide("fast");
-            });
-            
-        });
-    </script>
-<script> //comportamiento submenu actividades
-        $(document).ready(function() {             
-            $(".dropdown-submenu-salidas").hide();           
+		$(".act-item").mouseenter(function() {
+			$(".dropdown-submenu-actividades").stop().show("fast");
+		});
+	});
+	$(document).ready(function() {
+		$(".act-item").mouseleave(function() {
+			$(".dropdown-submenu-actividades").stop().hide("fast");
+		});
 
-            $(".sal-item").mouseenter(function() {
-                $(".dropdown-submenu-salidas").stop().show("fast");
-            });
-        });
-        $(document).ready(function() {
-            $(".sal-item").mouseleave(function() {
-                $(".dropdown-submenu-salidas").stop().hide("fast");
-            });
-            
-        });
-    </script>
+	});
+</script>
+<script>
+	//comportamiento submenu actividades
+	$(document).ready(function() {
+		$(".dropdown-submenu-paquetes").hide();
+
+		$(".paq-item").mouseenter(function() {
+			$(".dropdown-submenu-paquetes").stop().show("fast");
+		});
+	});
+	$(document).ready(function() {
+		$(".paq-item").mouseleave(function() {
+			$(".dropdown-submenu-paquetes").stop().hide("fast");
+		});
+
+	});
+</script>
+<script>
+	//comportamiento submenu actividades
+	$(document).ready(function() {
+		$(".dropdown-submenu-salidas").hide();
+
+		$(".sal-item").mouseenter(function() {
+			$(".dropdown-submenu-salidas").stop().show("fast");
+		});
+	});
+	$(document).ready(function() {
+		$(".sal-item").mouseleave(function() {
+			$(".dropdown-submenu-salidas").stop().hide("fast");
+		});
+
+	});
+</script>
 <!-- Importar jQuery desde la CDN de Google -->
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
