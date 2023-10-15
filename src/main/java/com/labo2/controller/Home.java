@@ -50,18 +50,18 @@ public class Home extends HttpServlet {
 		switch(getEstado(req)){
 			case NO_LOGIN:
 				// hace que se ejecute el jsp sin cambiar la url
-				req.getRequestDispatcher("/WEB-INF/Index.jsp"). //mandar a inicio de sesion
+				req.getRequestDispatcher("/Index.jsp"). //mandar a inicio de sesion
 						forward(req, resp);
 				break;
 			case LOGIN_INCORRECTO:
 				// hace que se ejecute el jsp sin cambiar la url
-				req.getRequestDispatcher("/WEB-INF/home/inicioErroneo.jsp").
+				req.getRequestDispatcher("/WEB-INF/AltaActividad.jsp").
 						forward(req, resp);
 				break;
 			case LOGIN_TURISTA:
 			case LOGIN_PROVEEDOR:
 				// manda una redirección a otra URL (cambia la URL)
-				resp.sendRedirect("/WEB-INF/Index.jsp");
+				resp.sendRedirect(req.getContextPath() + "/Index.jsp");
 				break;
 		}
 	}
@@ -71,7 +71,7 @@ public class Home extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		processRequest(request, response);
-	//	response.getWriter().append("Served at: ").append(request.getContextPath()); 
+		//response.getWriter().append("Served at: ").append(request.getContextPath()); 
 	}
 
 	/**
@@ -79,7 +79,8 @@ public class Home extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		processRequest(request, response);
+		//doGet(request, response);
 	}
 
 }
