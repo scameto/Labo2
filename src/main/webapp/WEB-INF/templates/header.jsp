@@ -32,15 +32,21 @@
 					<a class="dropdown-item usr-item" href="consultaUsuariosServlet">Consultar Usuarios</a>
 					<a class="dropdown-item usr-item" href="#">Modificar Usuarios</a>
 				</div>
-				 <% } %>
+				<% } %> <!-- ******************************************************************************* -->
+				<% if(usuarioLogueado instanceof logica.datatypes.DataProveedor) {%>
 				<a class="dropdown-item act-item" href="#">Actividades</a>
 				<div class="dropdown-submenu-actividades"
 					aria-labelledby="submenu-actividades">
-					<a class="dropdown-item act-item" href="AltaActividad">Alta
-						Actividad Turistica</a> <a class="dropdown-item act-item" href="#">Consulta
-						Actividad Turistica</a>
+					<a class="dropdown-item act-item" href="AltaActividad">Alta	Actividad Turistica</a> 
+					<a class="dropdown-item act-item" href="#">Consulta	Actividad Turistica</a>
 				</div>
-
+				<%} else {%>
+				<a class="dropdown-item act-item" href="#">Actividades</a>
+				<div class="dropdown-submenu-actividades"
+					aria-labelledby="submenu-actividades">					
+					<a class="dropdown-item act-item" href="#">Consulta	Actividad Turistica</a>
+				</div>
+				<% } %>	<!-- ******************************************************************************* -->			
 				<a class="dropdown-item paq-item" href="#">Paquetes</a>
 				<div class="dropdown-submenu-paquetes"
 					aria-labelledby="submenu-paquetes">
@@ -50,8 +56,9 @@
 				<a class="dropdown-item sal-item" href="#">Salidas</a>
 				<div class="dropdown-submenu-salidas"
 					aria-labelledby="submenu-salidas">
-					<a class="dropdown-item sal-item" href="#">Inscripcion Salida</a> <a
-						class="dropdown-item sal-item" href="#">Consulta Salida</a>
+					<a class="dropdown-item sal-item" href="#">Alta Salida</a> 
+					<a class="dropdown-item sal-item" href="#">Inscripcion Salida</a> 
+					<a class="dropdown-item sal-item" href="#">Consulta Salida</a>
 				</div>
 			</div>
 		</div>
