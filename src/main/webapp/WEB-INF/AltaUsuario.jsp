@@ -11,7 +11,7 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-6">                
-                <form onsubmit="return validateForm()" action="AltaUsuarioServlet" method="post" enctype="multipart/form-data">                     
+                <form onsubmit="return validateForm()" action="Alta-Usuario" method="post" >                     
                     <div>
                     <h5 class="tituloVentana">Alta Usuario</h5>
                     </div>
@@ -39,19 +39,19 @@
                     <div class="row mb-1">
                         <label for="inputUsuarioNick" class="col-sm-2 col-form-label">NickName</label>
                         <div class="col-sm-8">
-                            <input type="input" class="form-control" id="inputUsuarioNick" name="inputUsuarioNick">
+                            <input type="text" class="form-control" id="inputUsuarioNick" name="inputUsuarioNick">
                         </div>
                     </div>                   
                     <div class="row mb-1">
                         <label for="inputUsuarioNombre" class="col-sm-2 col-form-label">Nombre</label>
                         <div class="col-sm-8">
-                            <input type="input" class="form-control" id="inputUsuarioNombre" name="inputUsuarioNombre">
+                            <input type="text" class="form-control" id="inputUsuarioNombre" name="inputUsuarioNombre">
                         </div>
                     </div>
                     <div class="row mb-1">
                         <label for="inputUsuarioApellido" class="col-sm-2 col-form-label">Apellido</label>
                         <div class="col-sm-8">
-                            <input type="input" class="form-control" id="inputUsuarioApellido" name="inputUsuarioApellido">
+                            <input type="text" class="form-control" id="inputUsuarioApellido" name="inputUsuarioApellido">
                         </div>
                     </div>                    
                     <div class="row mb-1">
@@ -81,7 +81,7 @@
                      <div class="row mb-1">
                         <label for="inputUsuarioNacion" class="col-sm-2 col-form-label">Nacionalidad</label>
                         <div class="col-sm-8">
-                            <input type="input" class="form-control" id="inputUsuarioNacion" name="inputUsuarioNacion">
+                            <input type="text" class="form-control" id="inputUsuarioNacion" name="inputUsuarioNacion">
                         </div>
                     </div>
                     <div class="row mb-1">

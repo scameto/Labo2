@@ -21,6 +21,7 @@ import javax.swing.JOptionPane;
 /**
  * Servlet implementation class AltaUsuarioServlet
  */
+	@WebServlet("/Alta-Usuario")
 	public class AltaUsuarioServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     
@@ -36,7 +37,7 @@ import javax.swing.JOptionPane;
 
 	protected void processRequest(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		HttpSession objSesion = request.getSession();
+		HttpSession objSesion = request.getSession();//lo usamos para mostrar mensajes en la sesion
 		String userNick = request.getParameter("inputUsuarioNick");
 		String userNomb = request.getParameter("inputUsuarioNombre");
 		String userApe = request.getParameter("inputUsuarioApellido");
@@ -45,19 +46,22 @@ import javax.swing.JOptionPane;
 		String userNacion = request.getParameter("inputUsuarioNacion");
 		String userFNString = request.getParameter("inputUsuarioFNac");
 
-	    System.out.println("estamos en el procesRequest antes del SimpleDateFormat" + userFNString);	 
-
+	    System.out.println("estamos en el procesRequest antes del SimpleDateFormat   " + userFNString);	 
+	    System.out.println("estamos en el procesRequest antes del SimpleDateFormat   " + userNick);	
+	    System.out.println("estamos en el procesRequest antes del SimpleDateFormat   " + userApe);	
+	    System.out.println("estamos en el procesRequest antes del SimpleDateFormat   " + userEmail);	
+	    
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/yyyy");
 		Date userFN = null;		
-		try {
-			System.out.println("fecha antes del parse" );
+		//try {
+		//	System.out.println("fecha antes del parse" );
 
-			userFN = sdf.parse(userFNString);
-			System.out.println("fecha convertida " + userFN );
-		} catch (ParseException e) {		   
-		    e.printStackTrace();		    
-		    return;
-		}
+		//	userFN = sdf.parse(userFNString);
+		//	System.out.println("fecha convertida " + userFN );
+		//} catch (ParseException e) {		   
+		//    e.printStackTrace();		    
+		 //   return;
+		//}
 		if (userFN != null) {
 		    System.out.println("Fecha convertida: " + userFN);
 		} else {
@@ -113,7 +117,7 @@ import javax.swing.JOptionPane;
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		processRequest(request, response);
 	}
 
 	/**
