@@ -15,7 +15,7 @@
                     <div>
                     <h5 class="tituloVentana">Alta Usuario</h5>
                     </div>
-					 <% 
+					<% 
 					    String mensajeError = (String) session.getAttribute("mensajeError"); 
 					    if(mensajeError != null) {
 					%>
@@ -35,6 +35,15 @@
 					        session.removeAttribute("mensajeExito");
 					    }
 					    %>
+					 <div class="row mb-1">
+                     <label for="userType" class="col-sm-2 col-form-label">Tipo</label>
+                     <div class="col-sm-8">
+                            <select class="form-control" id="userType" name="userType">
+                                <option for="userType" value="proveedor">Proveedor</option>
+                                <option for="userType" value="turista">Turista</option>
+                            </select>
+                        </div>
+                    </div>
 					
                     <div class="row mb-1">
                         <label for="inputUsuarioNick" class="col-sm-2 col-form-label">NickName</label>
