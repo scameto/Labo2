@@ -10,11 +10,8 @@
 <jsp:include page="/WEB-INF/templates/header.jsp" />
 <div class="container">
         <div class="row justify-content-center">
-            <div class="col-lg-6">
-                
-				<form onsubmit="return validateForm()" action="AltaActividad" method="post">	
-                  				
-						
+            <div class="col-lg-6">                
+				<form onsubmit="return validateForm()" action="AltaActividad" method="post">           				
 					<div>
                     <h1 class="tituloVentana">Alta Actividad</h1>
                     </div>

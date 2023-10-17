@@ -99,7 +99,7 @@
             <li class="nav-item"><a class="nav-link" href="logoutServlet">Cerrar sesión</a></li>
         <% } else { %>
             <li class="nav-item"><a class="nav-link" href="iniciar">Iniciar sesión</a></li>
-            <li class="nav-item"><a class="nav-link" href="AltaUsuario.html">Registrarse</a></li>
+            <li class="nav-item"><a class="nav-link" href="AltaUsuario">Registrarse</a></li>
         <% } %>
 <!-- 
 	</ul>

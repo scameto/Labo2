@@ -77,4 +77,24 @@
     <servlet-name>logoutServlet</servlet-name>
     <url-pattern>/logoutServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>AltaUsuario</display-name>
+    <servlet-name>AltaUsuario</servlet-name>
+    <jsp-file>/WEB-INF/AltaUsuario.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AltaUsuario</servlet-name>
+    <url-pattern>/AltaUsuario</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>AltaUsuarioServlet</display-name>
+    <servlet-name>AltaUsuarioServlet</servlet-name>
+    <servlet-class>com.labo2.controller.AltaUsuarioServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AltaUsuarioServlet</servlet-name>
+    <url-pattern>/AltaUsuarioServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

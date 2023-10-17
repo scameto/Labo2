@@ -1,0 +1,64 @@
+/*
+
+Alta Usuario -- jsp pronto y controlado. armar el servlet
+	Ver tema imagen como se procesa y almacena en la BD;
+package com.labo2.controller;
+
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import logica.Fabrica;
+import logica.ISistema;
+
+import java.io.IOException;
+
+/**
+ * Servlet implementation class altaUsuarioServlet
+ */
+
+public class altaUsuarioServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+	
+	private ISistema sistema = Fabrica.getInstance().getISistema();
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public altaUsuarioServlet() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+	
+	protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		//HttpSession objSesion = request.getSession();
+		String userNick = request.getParameter("inputUsuarioNick");
+		String userNomb = request.getParameter("inputUsuarioNombre");
+		String userApe = request.getParameter("inputUsuarioApellido");
+		String userPass = request.getParameter("inputPassword");
+		String userEmail = request.getParameter("inputUsuarioEmail");
+		String userFN = request.getParameter("inputUsuarioFNac");
+		String userImage = request.getParameter("inputUsuarioImage");
+		
+	}
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		response.getWriter().append("Served at: ").append(request.getContextPath());
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
+
+}
+	
