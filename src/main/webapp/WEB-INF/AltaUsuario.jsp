@@ -11,7 +11,7 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-6">                
-                <form onsubmit="return validateForm()" action="AltaUsuario" method="post">                     
+                <form onsubmit="return validateForm()" action="AltaUsuarioServlet" method="post" enctype="multipart/form-data">                     
                     <div>
                     <h5 class="tituloVentana">Alta Usuario</h5>
                     </div>
@@ -24,8 +24,18 @@
 					    </div>
 					<%
 					    session.removeAttribute("mensajeError");
+					}
+					    String mensajeExito = (String) session.getAttribute("mensajeExito"); 
+					    if(mensajeExito != null) {
+					    %>
+					        <div class="alert alert-success">
+					            <%= mensajeExito %>
+					        </div>
+					    <%
+					        session.removeAttribute("mensajeExito");
 					    }
-					%>
+					    %>
+					
                     <div class="row mb-1">
                         <label for="inputUsuarioNick" class="col-sm-2 col-form-label">NickName</label>
                         <div class="col-sm-8">

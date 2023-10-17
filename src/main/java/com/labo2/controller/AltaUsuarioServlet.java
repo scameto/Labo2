@@ -6,11 +6,13 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import logica.Fabrica;
 import logica.ISistema;
 import logica.datatypes.DataTurista;
 
 import java.io.IOException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -34,40 +36,55 @@ import javax.swing.JOptionPane;
 
 	protected void processRequest(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		//HttpSession objSesion = request.getSession();
+		HttpSession objSesion = request.getSession();
 		String userNick = request.getParameter("inputUsuarioNick");
 		String userNomb = request.getParameter("inputUsuarioNombre");
 		String userApe = request.getParameter("inputUsuarioApellido");
 		String userPass = request.getParameter("inputPassword");
 		String userEmail = request.getParameter("inputUsuarioEmail");
-		String userNacion = request.getParameter("inputUsuarioNacion");		
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		String userNacion = request.getParameter("inputUsuarioNacion");
+		String userFNString = request.getParameter("inputUsuarioFNac");
+
+	    System.out.println("estamos en el procesRequest antes del SimpleDateFormat" + userFNString);	 
+
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/yyyy");
 		Date userFN = null;		
 		try {
-			userFN = sdf.parse(request.getParameter("inputUsuarioFNac"));
-		} catch (Exception e) {
-			request.getSession().setAttribute("mensajeError", "Formato de fecha inválido. Por favor, inténtalo de nuevo.");
-		    response.sendRedirect("AltaUsuario.jsp");
-		    System.out.println("estamos en el catch");
+			System.out.println("fecha antes del parse" );
+
+			userFN = sdf.parse(userFNString);
+			System.out.println("fecha convertida " + userFN );
+		} catch (ParseException e) {		   
+		    e.printStackTrace();		    
+		    return;
 		}
+		if (userFN != null) {
+		    System.out.println("Fecha convertida: " + userFN);
+		} else {
+		    System.out.println("Error al convertir la fecha");
+		}
+	    System.out.println("pasamos el simple date formata");
+	   
 		String userImage = request.getParameter("inputUsuarioImage");		
 		DataTurista newUser = tomarDatos(userNick, userNomb, userApe, userPass, userEmail, userNacion, userFN);		
 		if (sistema.checkUsernameRepetido("userNick")) { 
-			request.getSession().setAttribute("mensajeError", "El nombre de usuario ya existe. Por favor elige otro.");
-		    response.sendRedirect("AltaUsuario.jsp");
+			objSesion.setAttribute("mensajeError", "El nombre de usuario ya existe. Por favor elige otro.");
+		    response.sendRedirect("AltaUsuario");
 	        return;
 	    } 
 	    if (sistema.checkEmailRepetido(userEmail)) { 
-	    	 request.getSession().setAttribute("mensajeError", "El email ya está registrado.");
-	    	 response.sendRedirect("AltaUsuario.jsp");
+	    	 objSesion.setAttribute("mensajeError", "El email ya está registrado.");
+	    	 response.sendRedirect("AltaUsuario");
 	        return;
 	    }   
 	    System.out.println("estamos antes del registro");
 
 	    if (newUser != null && sistema.registrarUsuario(newUser)) {
-	    	 request.getSession().setAttribute("mensajeError", "El usuario fue registrado.");
-	    	 response.sendRedirect("AltaUsuario.jsp");
-	    	 
+	    	 objSesion.setAttribute("mensajeExito", "El usuario fue registrado.");
+	    	 response.sendRedirect("AltaUsuario");	    	 
+	    } else {
+	    	objSesion.setAttribute("mensajeError", "Hubo un problema en el registro del usuario.");
+	    	 response.sendRedirect("AltaUsuario");
 	    }
 	    System.out.println("estamos despues del registro");
 	    
@@ -86,6 +103,7 @@ import javax.swing.JOptionPane;
 	    
 	    return newUser;
 	}
+	
 	
 
 	
