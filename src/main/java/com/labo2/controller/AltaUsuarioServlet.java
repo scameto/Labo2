@@ -51,27 +51,20 @@ import javax.swing.JOptionPane;
 	    System.out.println("estamos en el procesRequest antes del SimpleDateFormat   " + userApe);	
 	    System.out.println("estamos en el procesRequest antes del SimpleDateFormat   " + userEmail);	
 	    
-		SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/yyyy");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd");
 		Date userFN = null;		
-		//try {
-		//	System.out.println("fecha antes del parse" );
-
-		//	userFN = sdf.parse(userFNString);
-		//	System.out.println("fecha convertida " + userFN );
-		//} catch (ParseException e) {		   
-		//    e.printStackTrace();		    
-		 //   return;
-		//}
-		if (userFN != null) {
-		    System.out.println("Fecha convertida: " + userFN);
-		} else {
-		    System.out.println("Error al convertir la fecha");
+		try {
+			System.out.println("fecha antes del parse" );
+			userFN = sdf.parse(userFNString);
+			System.out.println("fecha convertida " + userFN );
+		} catch (ParseException e) {		   
+			objSesion.setAttribute("mensajeError", "Error al parsear la fecha: " + e.getMessage());
+			response.sendRedirect("AltaUsuario");		    
+		    return;
 		}
-	    System.out.println("pasamos el simple date formata");
-	   
 		String userImage = request.getParameter("inputUsuarioImage");		
 		DataTurista newUser = tomarDatos(userNick, userNomb, userApe, userPass, userEmail, userNacion, userFN);		
-		if (sistema.checkUsernameRepetido("userNick")) { 
+		if (sistema.checkUsernameRepetido(userNick)) { 
 			objSesion.setAttribute("mensajeError", "El nombre de usuario ya existe. Por favor elige otro.");
 		    response.sendRedirect("AltaUsuario");
 	        return;
