@@ -8,9 +8,9 @@ body {
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: center center;
-    height: 100vh;
     overflow-y: auto;
 }
+
 
 .navbar {
     background-color: rgba(100, 67, 67, 0.7);

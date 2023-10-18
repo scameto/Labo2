@@ -1,3 +1,6 @@
+<%@page import="java.util.List"%>
+<%@page import="logica.modelos.Departamento"%>
+<%@page import="logica.datatypes.DataDepartamento"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -11,10 +14,22 @@
 <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-6">                
-				<form onsubmit="return validateForm()" action="AltaActividad" method="post">           				
+				<form onsubmit="return validateForm()" action="Alta-Actividad" method="post">           				
 					<div>
                     <h1 class="tituloVentana">Alta Actividad</h1>
                     </div>
+                    <div class="row mb-2">
+                    <label for="inputNombreDpto" class="col-sm-2 col-form-label">Depto</label>   
+                    	<div class="col-sm-8">                 
+		                   <select id="departamentoSelect" name="departamentoSelect">
+							<% List<DataDepartamento> departamentos = (List<DataDepartamento>)request.getAttribute("departamentos");
+							if(departamentos!=null)
+							for(DataDepartamento departamento: departamentos){%>
+							<option value="<%=departamento.getNombre()%>"><%=departamento.getNombre()%></option>
+							<%} %>
+							</select>	
+						</div>				
+					</div>
                     <div class="row mb-2">
                         <label for="inputNombreAct" class="col-sm-2 col-form-label">NombreAct</label>
                         <div class="col-sm-8">
@@ -67,7 +82,13 @@
         </div>
     </div>
 </body>
+ 
   <script>
+	  fetch('/Labo2/Alta-Actividad')
+	  .then(res => res.json())
+	  .then(data => {
+			console.log(data);
+	 })
        function validateForm() {
             var name = document.getElementById("inputNombreAct").value;
             if (name == "") {
