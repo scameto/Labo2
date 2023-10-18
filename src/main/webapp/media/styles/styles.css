@@ -9,7 +9,7 @@ body {
     background-attachment: fixed;
     background-position: center center;
     height: 100vh;
-    overflow: hidden;
+    overflow-y: auto;
 }
 
 .navbar {
@@ -23,7 +23,7 @@ body {
 }
 
 .container {
-    padding-top: 100px;
+    padding-top: 80px;
 }
 
 .dropdown-toggle{

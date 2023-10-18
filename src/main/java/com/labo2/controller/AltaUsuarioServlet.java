@@ -9,6 +9,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import logica.Fabrica;
 import logica.ISistema;
+import logica.datatypes.DataProveedor;
 import logica.datatypes.DataTurista;
 
 import java.io.IOException;
@@ -43,8 +44,11 @@ import javax.swing.JOptionPane;
 		String userApe = request.getParameter("inputUsuarioApellido");
 		String userPass = request.getParameter("inputPassword");
 		String userEmail = request.getParameter("inputUsuarioEmail");
-		String userNacion = request.getParameter("inputUsuarioNacion");
+		String userNacion = request.getParameter("inputUsuarioNacion"); //campo de Turista
 		String userFNString = request.getParameter("inputUsuarioFNac");
+		String userDesc = request.getParameter("inputUsuarioDesc"); // campo de Proveedor
+		String userLinkW = request.getParameter("inputUsuarioLinkW"); // campo de Proveedor
+		String userType = request.getParameter("userType");
 
 	    System.out.println("estamos en el procesRequest antes del SimpleDateFormat   " + userFNString);	 
 	    System.out.println("estamos en el procesRequest antes del SimpleDateFormat   " + userNick);	
@@ -62,29 +66,52 @@ import javax.swing.JOptionPane;
 			response.sendRedirect("AltaUsuario");		    
 		    return;
 		}
-		String userImage = request.getParameter("inputUsuarioImage");		
-		DataTurista newUser = tomarDatos(userNick, userNomb, userApe, userPass, userEmail, userNacion, userFN);		
-		if (sistema.checkUsernameRepetido(userNick)) { 
-			objSesion.setAttribute("mensajeError", "El nombre de usuario ya existe. Por favor elige otro.");
-		    response.sendRedirect("AltaUsuario");
-	        return;
-	    } 
-	    if (sistema.checkEmailRepetido(userEmail)) { 
-	    	 objSesion.setAttribute("mensajeError", "El email ya está registrado.");
-	    	 response.sendRedirect("AltaUsuario");
-	        return;
-	    }   
-	    System.out.println("estamos antes del registro");
-
-	    if (newUser != null && sistema.registrarUsuario(newUser)) {
-	    	 objSesion.setAttribute("mensajeExito", "El usuario fue registrado.");
-	    	 response.sendRedirect("AltaUsuario");	    	 
-	    } else {
-	    	objSesion.setAttribute("mensajeError", "Hubo un problema en el registro del usuario.");
-	    	 response.sendRedirect("AltaUsuario");
-	    }
-	    System.out.println("estamos despues del registro");
-	    
+		String userImage = request.getParameter("inputUsuarioImage");	
+		if (userType.equals("turista")) {
+			DataTurista newUser = tomarDatos(userNick, userNomb, userApe, userPass, userEmail, userNacion, userFN);		
+			if (sistema.checkUsernameRepetido(userNick)) { 
+				objSesion.setAttribute("mensajeError", "El nombre de usuario ya existe. Por favor elige otro.");
+			    response.sendRedirect("AltaUsuario");
+		        return;
+		    } 
+		    if (sistema.checkEmailRepetido(userEmail)) { 
+		    	 objSesion.setAttribute("mensajeError", "El email ya está registrado.");
+		    	 response.sendRedirect("AltaUsuario");
+		        return;
+		    }   
+		    System.out.println("estamos antes del registro");
+	
+		    if (newUser != null && sistema.registrarUsuario(newUser)) {
+		    	 objSesion.setAttribute("mensajeExito", "El usuario fue registrado.");
+		    	 response.sendRedirect("AltaUsuario");	    	 
+		    } else {
+		    	objSesion.setAttribute("mensajeError", "Hubo un problema en el registro del usuario.");
+		    	 response.sendRedirect("AltaUsuario");
+		    }
+		    System.out.println("estamos despues del registro");
+		} else if (userType.equals("proveedor")) {
+			DataProveedor newUser = tomarDatos(userNick, userNomb, userApe, userPass, userEmail, userDesc, userFN, userLinkW);		
+			if (sistema.checkUsernameRepetido(userNick)) { 
+				objSesion.setAttribute("mensajeError", "El nombre de usuario ya existe. Por favor elige otro.");
+			    response.sendRedirect("AltaUsuario");
+		        return;
+		    } 
+		    if (sistema.checkEmailRepetido(userEmail)) { 
+		    	 objSesion.setAttribute("mensajeError", "El email ya está registrado.");
+		    	 response.sendRedirect("AltaUsuario");
+		        return;
+		    }   
+		    System.out.println("estamos antes del registro");
+	
+		    if (newUser != null && sistema.registrarUsuario(newUser)) {
+		    	 objSesion.setAttribute("mensajeExito", "El usuario fue registrado.");
+		    	 response.sendRedirect("AltaUsuario");	    	 
+		    } else {
+		    	objSesion.setAttribute("mensajeError", "Hubo un problema en el registro del usuario.");
+		    	 response.sendRedirect("AltaUsuario");
+		    }
+		    System.out.println("estamos despues del registro");
+		}
 	}
 		
 		
@@ -101,7 +128,19 @@ import javax.swing.JOptionPane;
 	    return newUser;
 	}
 	
-	
+	private DataProveedor tomarDatos(String userNick, String userNomb, String userApe, String userPass, String userEmail, String userDesc, Date userFN, String userLinkW ) {
+	    DataProveedor newUser = new DataProveedor();	    
+	    newUser.setUsername(userNick);
+	    newUser.setNombre(userNomb);
+	    newUser.setApellido(userApe);
+	    newUser.setEmail(userEmail);
+	    newUser.setPassword(userPass);
+	    newUser.setDesc(userDesc);
+	    newUser.setFechaNac(userFN);
+	    newUser.setLinkWeb(userLinkW);
+	    
+	    return newUser;
+	}
 
 	
 	/**
