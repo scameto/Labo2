@@ -57,6 +57,7 @@
     <servlet-name>iniciar</servlet-name>
     <url-pattern>/iniciar</url-pattern>
   </servlet-mapping>
+  <!--  
   <servlet>
     <description></description>
     <display-name>AltaActividad</display-name>
@@ -65,9 +66,10 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>AltaActividad</servlet-name>
-    <url-pattern>/AltaActividad</url-pattern>
+    <url-pattern>/AltaActividad</url-pattern> 
   </servlet-mapping>
-  <servlet>
+  -->
+  <servlet>  
     <description></description>
     <display-name>logoutServlet</display-name>
     <servlet-name>logoutServlet</servlet-name>
@@ -95,6 +97,6 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>AltaActividadServlet</servlet-name>
-    <url-pattern>/AltaActividad.jsp</url-pattern>
+    <url-pattern>/AltaActividadServlet</url-pattern>
   </servlet-mapping>
 </web-app>
