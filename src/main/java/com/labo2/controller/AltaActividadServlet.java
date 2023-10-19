@@ -11,6 +11,7 @@ import logica.ISistema;
 import logica.datatypes.DataActividad;
 import logica.datatypes.DataDepartamento;
 import logica.datatypes.DataProveedor;
+import logica.datatypes.DataTurista;
 import logica.modelos.Departamento;
 import logica.modelos.Proveedor;
 
@@ -56,41 +57,71 @@ public class AltaActividadServlet extends HttpServlet {
 		String actCiudad = request.getParameter("inputCiudadAct");
 		String actCateg = request.getParameter("inputCategoriaAct"); 
 		String departamento = request.getParameter("departamentoSelect"); //aca es que obtenemos el departamento seleccionado
-		/*
+		Integer duracion;
+		Float costo;
+		Proveedor buscado = null;
 		DataProveedor yo = (DataProveedor) objSesion.getAttribute("usuario_logueado");
-		Proveedor miPro // get proveedor por id...
-		Date fechaHoy = new Date();
-		Integer.parseInt(actCosto);
+		System.out.println(yo.getNombre());
+		List<Proveedor> proveedor = sistema.getProveedores();
+		for(Proveedor proveed: proveedor) {
+			if(proveed.getNombre().equals(yo.getNombre())) {
+				buscado = proveed;
+				break;
+			}
+		}
+
 		
-		
-		
+		System.out.println("buscado" + buscado.getNombre());
+
+		Departamento deseado = null;
+		List<Departamento> depa = sistema.getDepartamentos();
+		for(Departamento depar: depa) {
+			if(depar.getNombre().equals(departamento)) {
+				deseado = depar;
+				break;
+			}
+		}
 	    
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd");
-		Date userFN = ;	
+		
 		
 		try {
-			System.out.println("fecha antes del parse" );
-			userFN = sdf.parse(fechaHoy);
-			System.out.println("fecha convertida " + userFN );
-		} catch (ParseException e) {		   
-			objSesion.setAttribute("mensajeError", "Error al parsear la fecha: " + e.getMessage());
-			response.sendRedirect("AltaUsuario");		    
+			costo = Float.parseFloat(actCosto);
+			duracion = Integer.parseInt(actDur);			
+			System.out.println("integer convertido" + costo + duracion );
+		} catch (NumberFormatException e) {		   
+			objSesion.setAttribute("mensajeError", "Error al parsear Costo o Duracion: " + e.getMessage());
+			response.sendRedirect("AltaActividad");		    
 		    return;
 		}
 		String actImage = request.getParameter("inputImageAct");
-		*/
+		
+		
+		DataActividad newAct = tomarDatos(actNomb, buscado, deseado, actDesc, duracion, costo, actCiudad );		
+		if (sistema.existeActividad(actNomb)) { 
+			objSesion.setAttribute("mensajeError", "El nombre de usuario ya existe. Por favor elige otro.");
+		    response.sendRedirect("AltaActividad");
+	        return;
+	    } 
+	    
+	    if (newAct != null && sistema.registrarActividad(newAct)) {
+	    	 objSesion.setAttribute("mensajeExito", "Actividad registrada exitosamente!.");
+	    	 response.sendRedirect("AltaActividad");	    	 
+	    } else {
+	    	objSesion.setAttribute("mensajeError", "Hubo un problema en el registro de la actividad.");
+	    	 response.sendRedirect("AltaActividad");
+	    }
+		
     }
-	private DataActividad tomarDatos(String nomAct, Proveedor prov, Departamento dept, String descripcion, int duracion, float costo, String ciudad, Date fechaAlta) {
+	private DataActividad tomarDatos(String nomAct, Proveedor prov, Departamento dept, String descripcion, int duracion, float costo, String ciudad) {
 		DataActividad newActividad = new DataActividad();		
 		newActividad.setCiudad(ciudad);
 		newActividad.setNomAct(nomAct);
 		newActividad.setDescripcion(descripcion);
 		newActividad.setDuracion(duracion);
-		newActividad.setCosto(costo);
-		Proveedor prov2 = (Proveedor) prov;
-		Departamento dept2 = (Departamento) dept;
-		newActividad.setProv(prov2);
-		newActividad.setDept(dept2);
+		newActividad.setCosto(costo);		
+		newActividad.setProv(prov);
+		newActividad.setDept(dept);
 		newActividad.setFechaAlta(new Date());
 		
 		return newActividad;

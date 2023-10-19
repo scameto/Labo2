@@ -18,6 +18,26 @@
 					<div>
                     <h1 class="tituloVentana">Alta Actividad</h1>
                     </div>
+                    	<% 
+					    String mensajeError = (String) session.getAttribute("mensajeError"); 
+					    if(mensajeError != null) {
+					%>
+					    <div class="alert alert-danger">
+					        <%= mensajeError %>
+					    </div>
+					<%
+					    session.removeAttribute("mensajeError");
+					}
+					    String mensajeExito = (String) session.getAttribute("mensajeExito"); 
+					    if(mensajeExito != null) {
+					    %>
+					        <div class="alert alert-success">
+					            <%= mensajeExito %>
+					        </div>
+					    <%
+					        session.removeAttribute("mensajeExito");
+					    }
+					    %>
                     <div class="row mb-2">
                     <label for="inputNombreDpto" class="col-sm-2 col-form-label">Depto</label>   
                     	<div class="col-sm-8">                 
