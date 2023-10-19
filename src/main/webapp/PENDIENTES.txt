@@ -1,0 +1,8 @@
+/*
+
+Alta Usuario --> jsp pronto y controlado. armar el servlet
+	Ver tema imagen como se procesa y almacena en la BD;
+	
+Iniciar--------> ver como camuflar la contrasena.. habia una manera.
+
+	

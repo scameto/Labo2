@@ -1,3 +1,4 @@
+<%@page import="com.labo2.model.EstadoSesion"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -15,7 +16,19 @@
 					<div>
                     <h1 class="tituloVentana">Iniciar Sesion</h1>
                     </div>
-                    <div class="row mb-3">
+                    
+                    	<%
+        					EstadoSesion estadoSesion = (EstadoSesion) session.getAttribute("estado_sesion");
+                        	if(estadoSesion != null && estadoSesion.equals(EstadoSesion.LOGIN_INCORRECTO)) {
+        						
+    					%>
+    						<div class="alert alert-danger" role="alert">
+    							Login incorrecto. Intentelo nuevamente! <br>
+    						</div>
+						<%
+						    }
+						%>
+					<div class="row mb-3">
                         <label for="userType" class="col-sm-2 col-form-label">Tipo</label>
                         <div class="col-sm-10">
                             <select class="form-control" id="userType" name="userType">

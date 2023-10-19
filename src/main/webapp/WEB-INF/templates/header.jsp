@@ -1,3 +1,5 @@
+<%@page import="logica.datatypes.DataTurista"%>
+<%@page import="com.labo2.model.EstadoSesion"%>
 <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
 	<a class="navbar-brand" href="Index.jsp">TurismoUy</a>
 	<button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -5,6 +7,11 @@
 		aria-expanded="false" aria-label="Toggle navigation">
 		<span class="navbar-toggler-icon"></span>
 	</button>
+	 <% 
+        EstadoSesion estadoSesion = (EstadoSesion) session.getAttribute("estado_sesion");
+        Object usuarioLogueado = session.getAttribute("usuario_logueado");
+    %>
+	
 	<div class="collapse navbar-collapse" id="navbarNav">
 		<div class="dropdown">
 			<button class="dropdown-toggle" type="button" id="dropdownMenuButton"
@@ -12,60 +19,95 @@
 				<i class="fa fa-bars"></i>
 			</button>
 			<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+				<% if(usuarioLogueado instanceof logica.datatypes.DataTurista) {%>  <!-- Opciones para turistas -->
 				<a class="dropdown-item usr-item" href="#">Usuarios</a>
 				<div class="dropdown-submenu-usuario"
 					aria-labelledby="submenu-usuarios">
-					<a class="dropdown-item usr-item" href="consultaUsuariosServlet">Consultar
-						Usuarios</a> <a class="dropdown-item usr-item" href="#">Modificar
-						Usuarios</a>
+					<a class="dropdown-item usr-item" href="consultaUsuariosServlet">Consultar Usuarios</a>
+					</div>
+				<%} else if(usuarioLogueado instanceof logica.datatypes.DataProveedor) {%>
+				<a class="dropdown-item usr-item" href="#">Usuarios</a>
+				<div class="dropdown-submenu-usuario"
+					aria-labelledby="submenu-usuarios">
+					<a class="dropdown-item usr-item" href="consultaUsuariosServlet">Consultar Usuarios</a>
+					<a class="dropdown-item usr-item" href="#">Modificar Usuarios</a>
 				</div>
-
+				<% } %> <!-- ******************************************************************************* -->
+				<% if(usuarioLogueado instanceof logica.datatypes.DataProveedor) {%>
 				<a class="dropdown-item act-item" href="#">Actividades</a>
 				<div class="dropdown-submenu-actividades"
 					aria-labelledby="submenu-actividades">
-					<a class="dropdown-item act-item" href="AltaActividad">Alta
-						Actividad Turistica</a> <a class="dropdown-item act-item" href="#">Consulta
-						Actividad Turistica</a>
+					<a class="dropdown-item act-item" href="AltaActividad">Alta	Actividad Turistica</a> 
+					<a class="dropdown-item act-item" href="#">Consulta	Actividad Turistica</a>
 				</div>
-
+				<%} else {%>
+				<a class="dropdown-item act-item" href="#">Actividades</a>
+				<div class="dropdown-submenu-actividades"
+					aria-labelledby="submenu-actividades">					
+					<a class="dropdown-item act-item" href="#">Consulta	Actividad Turistica</a>
+				</div>
+				<% } %>	<!-- ******************************************************************************* -->	
+				<% if(usuarioLogueado instanceof logica.datatypes.DataProveedor) {%>		
 				<a class="dropdown-item paq-item" href="#">Paquetes</a>
-				<div class="dropdown-submenu-paquetes"
-					aria-labelledby="submenu-paquetes">
-					<a class="dropdown-item paq-item" href="#">Compra Paquete</a> <a
-						class="dropdown-item paq-item" href="#">Consulta Paquete</a>
+				<div class="dropdown-submenu-paquetes" aria-labelledby="submenu-paquetes">
+					<a class="dropdown-item paq-item" href="#">Alta Paquete</a> 
+					<a class="dropdown-item paq-item" href="#">Compra Paquete</a> 
+					<a class="dropdown-item paq-item" href="#">Consulta Paquete</a>
 				</div>
+				<%} else if(usuarioLogueado instanceof logica.datatypes.DataTurista) {%>
+				<a class="dropdown-item paq-item" href="#">Paquetes</a>
+				<div class="dropdown-submenu-paquetes" aria-labelledby="submenu-paquetes">
+					<a class="dropdown-item paq-item" href="#">Compra Paquete</a> 
+					<a class="dropdown-item paq-item" href="#">Consulta Paquete</a>
+				</div>
+				<%} else {%>
+				<a class="dropdown-item paq-item" href="#">Paquetes</a>
+				<div class="dropdown-submenu-paquetes"	aria-labelledby="submenu-paquetes">					
+					<a class="dropdown-item paq-item" href="#">Consulta Paquete</a>
+				</div>
+				<% } %>	<!-- ******************************************************************************* -->	
+				<% if(usuarioLogueado instanceof logica.datatypes.DataProveedor) {%>					
 				<a class="dropdown-item sal-item" href="#">Salidas</a>
 				<div class="dropdown-submenu-salidas"
 					aria-labelledby="submenu-salidas">
-					<a class="dropdown-item sal-item" href="#">Inscripcion Salida</a> <a
-						class="dropdown-item sal-item" href="#">Consulta Salida</a>
+					<a class="dropdown-item sal-item" href="#">Alta Salida</a> 
+					<a class="dropdown-item sal-item" href="#">Inscripcion Salida</a> 
+					<a class="dropdown-item sal-item" href="#">Consulta Salida</a>
 				</div>
+				<%} else if(usuarioLogueado instanceof logica.datatypes.DataTurista) {%>
+				<a class="dropdown-item sal-item" href="#">Salidas</a>
+				<div class="dropdown-submenu-salidas" aria-labelledby="submenu-salidas">					
+					<a class="dropdown-item sal-item" href="#">Inscripcion Salida</a> 
+					<a class="dropdown-item sal-item" href="#">Consulta Salida</a>
+				</div>
+				<%} else {%>
+				<a class="dropdown-item sal-item" href="#">Salidas</a>
+				<div class="dropdown-submenu-salidas" aria-labelledby="submenu-salidas">					
+					<a class="dropdown-item sal-item" href="#">Consulta Salida</a>
+				</div>
+				<% } %>	<!-- ******************************************************************************* -->				
 			</div>
 		</div>
 	</div>
 	<ul class="navbar-nav ml-auto">
 
-		<%  logica.datatypes.DataTurista loggedInUserObj = (logica.datatypes.DataTurista) session.getAttribute("usuario_logueado");
-		if (loggedInUserObj != null) {
-		    String loggedInUser = loggedInUserObj.getNombre();
 		
-   				%>
-
-		<li class="nav-item"><span class="nav-link">Hola, <%= loggedInUser %></span>
-		</li>
-		<li class="nav-item"><a class="nav-link" href="logoutServlet">Cerrar sesión</a></li>
-		<% } else { %>
-
-		<li class="nav-item"><a class="nav-link" href="iniciar">Iniciar	sesión</a></li>
-		<li class="nav-item"><a class="nav-link" href="AltaUsuario.html">Registrarse</a>
-		</li>
-		<% } %>
+		<% if(estadoSesion == EstadoSesion.LOGIN_TURISTA || estadoSesion == EstadoSesion.LOGIN_PROVEEDOR) { %>
+			<li class="nav-item"><span class="nav-link">Hola, <%= ((usuarioLogueado instanceof logica.datatypes.DataTurista)
+																	? ((DataTurista) usuarioLogueado).getNombre()
+																	: ((logica.datatypes.DataProveedor) usuarioLogueado).getNombre()) %></span></li>
+            <li class="nav-item"><a class="nav-link" href="logoutServlet">Cerrar sesión</a></li>
+        <% } else { %>
+            <li class="nav-item"><a class="nav-link" href="iniciar">Iniciar sesión</a></li>
+            <li class="nav-item"><a class="nav-link" href="AltaUsuario">Registrarse</a></li>
+        <% } %>
+<!-- 
 	</ul>
 	<ul class="navbar-nav">
 		<li class="nav-item"><a class="nav-link" href="#"
 			id="search-icon"><i class="fas fa-search"></i></a></li>
 		<li class="nav-item"><input type="text" id="search-input"
-			class="form-control" placeholder="Buscar"></li>
+			class="form-control" placeholder="Buscar"></li>  -->
 	</ul>
 	</div>
 </nav>
@@ -123,7 +165,7 @@
             
         });
     </script>
-<script> //comportamiento submenu actividades
+<script> //comportamiento submenu salidas
         $(document).ready(function() {             
             $(".dropdown-submenu-salidas").hide();           
 
