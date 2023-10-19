@@ -104,11 +104,6 @@
 </body>
  
   <script>
-	//  fetch('/Labo2/Alta-Actividad')
-	  
-	//  .then(data => {
-	//		console.log(data);
-	// })
        function validateForm() {
             var name = document.getElementById("inputNombreAct").value;
             if (name == "") {

@@ -68,9 +68,7 @@ public class AltaActividadServlet extends HttpServlet {
 				buscado = proveed;
 				break;
 			}
-		}
-
-		
+		}		
 		System.out.println("buscado" + buscado.getNombre());
 
 		Departamento deseado = null;
@@ -80,11 +78,8 @@ public class AltaActividadServlet extends HttpServlet {
 				deseado = depar;
 				break;
 			}
-		}
-	    
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd");
-		
-		
+		}	    
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd");			
 		try {
 			costo = Float.parseFloat(actCosto);
 			duracion = Integer.parseInt(actDur);			
@@ -99,7 +94,7 @@ public class AltaActividadServlet extends HttpServlet {
 		
 		DataActividad newAct = tomarDatos(actNomb, buscado, deseado, actDesc, duracion, costo, actCiudad );		
 		if (sistema.existeActividad(actNomb)) { 
-			objSesion.setAttribute("mensajeError", "El nombre de usuario ya existe. Por favor elige otro.");
+			objSesion.setAttribute("mensajeError", "El nombre de Actividad ya existe. Por favor elige otro.");
 		    response.sendRedirect("AltaActividad");
 	        return;
 	    } 
@@ -108,7 +103,7 @@ public class AltaActividadServlet extends HttpServlet {
 	    	 objSesion.setAttribute("mensajeExito", "Actividad registrada exitosamente!.");
 	    	 response.sendRedirect("AltaActividad");	    	 
 	    } else {
-	    	objSesion.setAttribute("mensajeError", "Hubo un problema en el registro de la actividad.");
+	    	objSesion.setAttribute("mensajeError", "Hubo un problema en el registro de la Actividad.");
 	    	 response.sendRedirect("AltaActividad");
 	    }
 		
@@ -131,14 +126,12 @@ public class AltaActividadServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) 
-            throws ServletException, IOException {
-        
+            throws ServletException, IOException {        
         List<DataDepartamento> listdepartamentos = sistema.getDepartamentosData();
         request.setAttribute("departamentos", listdepartamentos);        
         // mandar el formulario al usuario
         request.getRequestDispatcher("/WEB-INF/AltaActividad.jsp").forward(request, response);
-        // me esta listando los departamentos cargados
-		
+        // me esta listando los departamentos cargados		
     }
 
 	/**
