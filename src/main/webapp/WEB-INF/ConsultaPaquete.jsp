@@ -1,5 +1,15 @@
+<%@ page import="java.util.List" %>
+<%@page import="logica.modelos.Departamento"%>
+<%@page import="logica.datatypes.DataDepartamento"%>
+<%@page import="logica.modelos.Paquete"%>
+<%@page import="logica.datatypes.DataPaquete"%>
+
+
+
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,10 +26,12 @@
                 <form>
                     <div class="form-group">
                         <label for="paquetes">Paquetes:</label>
-                        <select class="form-control" id="cbPaquetes">
-                            <option value="opcion1">Opción 1</option>
-                            <option value="opcion2">Opción 2</option>
-                        </select>
+                        <select class="form-control" id="paqueteSelect" name="paqueteSelect">
+							<% List<Paquete> paquetes = (List<Paquete>)request.getAttribute("paquetes");
+							if(paquetes!=null)
+								for(Paquete paquete: paquetes){%>
+									<option value="<%=paquete.getNombre()%>"><%=paquete.getNombre()%></option><%} %>
+						</select>
                     </div>
                     <div class="form-group">
                         <label for="actividades">Actividades del paquete seleccionado:</label>
