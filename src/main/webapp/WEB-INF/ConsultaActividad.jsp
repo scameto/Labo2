@@ -1,3 +1,4 @@
+<%@page import="logica.datatypes.DataActividad"%>
 <%@page import="logica.datatypes.DataCategoria"%>
 <%@page import="java.util.List"%>
 <%@page import="logica.modelos.Departamento"%>
@@ -8,17 +9,17 @@
 <html>
 <head>
 <jsp:include page="/WEB-INF/templates/head.jsp" />
-<title>Alta Actividad</title>
+<title> Consulta Actividad</title>
 </head>
 <body>
 <jsp:include page="/WEB-INF/templates/header.jsp" />
 <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-6">                
-				<form onsubmit="return validateForm()" action="AltaActividad" method="post">           				
+				<form onsubmit="return validateForm()" action="ConsultaActividad" method="post">           				
 					<div>
-                    <h1 class="tituloVentana">Alta Actividad</h1>
-                    </div>
+                    <h1 class="tituloVentana">Consulta Actividad</h1>
+                    </div> <!-- ----------------------------------MENSAJES A USUARIO ----------------------------------------------- -->
                     	<% 
 					    String mensajeError = (String) session.getAttribute("mensajeError"); 
 					    if(mensajeError != null) {
@@ -38,7 +39,7 @@
 					    <%
 					        session.removeAttribute("mensajeExito");
 					    }
-					    %>
+					    %> <!-- ----------------------------------MENSAJES A USUARIO ----------------------------------------------- -->
                     <div class="row mb-2">
                     <label for="inputNombreDpto" class="col-sm-2 col-form-label">Depto</label>   
                     	<div class="col-sm-8">                 
@@ -51,38 +52,8 @@
 							</select>	
 						</div>				
 					</div>
-                    <div class="row mb-2">
-                        <label for="inputNombreAct" class="col-sm-2 col-form-label">NombreAct</label>
-                        <div class="col-sm-8">
-                            <input type="text" class="form-control" id="inputNombreAct" name="inputNombreAct">
-                        </div>
-                    </div>                   
-                    <div class="row mb-2">
-                        <label for="inputDescAct" class="col-sm-2 col-form-label">Descripcion</label>
-                        <div class="col-sm-8">
-                            <input type="text" class="form-control" id="inputDescAct" name="inputDescAct">
-                        </div>
-                    </div>
-                    <div class="row mb-2">
-                        <label for="inputDuracionAct" class="col-sm-2 col-form-label">Duracion(hs)</label>
-                        <div class="col-sm-8">
-                            <input type="number" class="form-control" id="inputDuracionAct" name="inputDuracionAct">
-                        </div>
-                    </div>                    
-                    <div class="row mb-2">
-                        <label for="inputCostoAct" class="col-sm-2 col-form-label">Costo($uy)</label>
-                        <div class="col-sm-8">
-                            <input type="number" class="form-control" id="inputCostoAct" name="inputCostoAct">
-                        </div>
-                    </div>                
-                    <div class="row mb-2">
-                        <label for="inputCiudadAct" class="col-sm-2 col-form-label">Ciudad</label>
-                        <div class="col-sm-8">
-                            <input type="text" class="form-control" id="inputCiudadAct" name="inputCiudadAct">
-                        </div>
-                    </div>
-                    <div class="row mb-2">
-                        <label for="inputCategoriaAct" class="col-sm-2 col-form-label">Categoria</label>
+					<div class="row mb-2">
+                    <label for="inputCategoriaAct" class="col-sm-2 col-form-label">Categoria</label>
                         <div class="col-sm-8">
                         	 <select id="categoriaSelect" name="categoriaSelect" class="form-control">
 							<% List<DataCategoria> categorias =(List<DataCategoria>)request.getAttribute("categorias");
@@ -90,14 +61,50 @@
 							for(DataCategoria cat: categorias){%>
 							<option value="<%=cat.getNombre()%>"><%=cat.getNombre()%></option>
 							<%} %>
-							</select>
-                            
+							</select>                            
                         </div>
                     </div>
                     <div class="row mb-2">
-                        <label for="inputImageAct" class="col-sm-2 col-form-label">Foto_link</label>
+                    <label for="inputCategoriaAct" class="col-sm-2 col-form-label">Actividad</label>
                         <div class="col-sm-8">
-                            <input type="file" class="form-control" id="inputImageAct" name="inputImageAct">
+                        	 <select id="actividadSelect" name="actividadSelect" class="form-control">
+							<% List<DataActividad> actividades =(List<DataActividad>)request.getAttribute("actividades");
+							if(actividades!=null)
+							for(DataActividad act: actividades){%>
+							<option value="<%=act.getNomAct()%>"><%=act.getNomAct()%></option>
+							<%} %>
+							</select>                            
+                        </div>
+                    </div>                                   
+                    <div class="row mb-2">
+                        <label for="readDescAct" class="col-sm-2 col-form-label">Descripcion</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="readDescAct" name="readDescAct" readonly>
+                        </div>
+                    </div>
+                    <div class="row mb-2">
+                        <label for="readDuracionAct" class="col-sm-2 col-form-label">Duracion(hs)</label>
+                        <div class="col-sm-8">
+                            <input type="number" class="form-control" id="readDuracionAct" name="readDuracionAct" readonly>
+                        </div>
+                    </div>                    
+                    <div class="row mb-2">
+                        <label for="readCostoAct" class="col-sm-2 col-form-label">Costo($uy)</label>
+                        <div class="col-sm-8">
+                            <input type="number" class="form-control" id="readCostoAct" name="readCostoAct" readonly>
+                        </div>
+                    </div>                
+                    <div class="row mb-2">
+                        <label for="readCiudadAct" class="col-sm-2 col-form-label">Ciudad</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="readCiudadAct" name="readCiudadAct" readonly>
+                        </div>
+                    </div>
+                 
+                    <div class="row mb-2">
+                        <label for="readImageAct" class="col-sm-2 col-form-label">Foto_link</label>
+                        <div class="col-sm-8">
+                            <input type="file" class="form-control" id="readImageAct" name="readImageAct">
                         </div>
                     </div>
                     <div class="row mb-2">

@@ -26,8 +26,8 @@ import java.util.List;
 /**
  * Servlet implementation class AltaActividadServlet
  */
-@WebServlet("/AltaActividad")
-public class AltaActividadServlet extends HttpServlet {
+@WebServlet("/ConsultaActividad")
+public class ConsultaActividadServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	private ISistema sistema = Fabrica.getInstance().getISistema();
@@ -35,36 +35,23 @@ public class AltaActividadServlet extends HttpServlet {
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AltaActividadServlet() {
+    public ConsultaActividadServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
+	DataDepartamento deseado = null;
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
     	
     	
 		HttpSession objSesion = request.getSession();//lo usamos para mostrar mensajes en la sesion
-		/*
-		List<DataDepartamento> departamentos = sistema.getDepartamentosData();
-		request.setAttribute("departamentos", departamentos);
-		for (DataDepartamento departamento : departamentos) {
-		    System.out.println(departamento);
-		}*/
-		
-		String actNomb = request.getParameter("inputNombreAct");
-		String actDesc = request.getParameter("inputDescAct");
-		String actDur = request.getParameter("inputDuracionAct");
-		String actCosto = request.getParameter("inputCostoAct");
-		String actCiudad = request.getParameter("inputCiudadAct");
+		String actividad = request.getParameter("actividadSelect");
 		String actCateg = request.getParameter("categoriaSelect"); 
 		String departamento = request.getParameter("departamentoSelect"); //aca es que obtenemos el departamento seleccionado
-		Integer duracion;
-		Float costo;
-		//DataProveedor buscado = null;
+		
 		DataProveedor yo = (DataProveedor) objSesion.getAttribute("usuario_logueado");
-		System.out.println(yo.getNombre());
-		DataDepartamento deseado = null;
+		//System.out.println(yo.getNombre());
 		List<DataDepartamento> depa = sistema.getDepartamentosData();
 		for(DataDepartamento depar: depa) {
 			if(depar.getNombre().equals(departamento)) {
@@ -81,7 +68,15 @@ public class AltaActividadServlet extends HttpServlet {
 				break;
 			}
 		}
+		DataActividad elegida = null;
+		List<DataActividad> actividades = sistema.getActividadesConfirmadas(deseado.getId());
+		for(DataActividad dact: actividades) {
+			if(dact.getNomAct().equals(actividad))
+				elegida = dact;				
+		}
+			
 		
+		/*
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd");			
 		try {
 			costo = Float.parseFloat(actCosto);
@@ -109,7 +104,7 @@ public class AltaActividadServlet extends HttpServlet {
 	    	objSesion.setAttribute("mensajeError", "Hubo un problema en el registro de la Actividad.");
 	    	 response.sendRedirect("AltaActividad");
 	    }
-		
+		*/
     }
 	private DataActividad tomarDatos(String nomAct, DataProveedor prov, DataDepartamento dept, String descripcion, int duracion, float costo, String ciudad, List<DataCategoria> cat) {
 		DataActividad newActividad = new DataActividad();		
@@ -136,9 +131,22 @@ public class AltaActividadServlet extends HttpServlet {
         // mandar el formulario al usuario
         // me esta listando los departamentos cargados		
         List<DataCategoria> listCategoorias = sistema.getCategoriasData();
-        request.setAttribute("categorias", listCategoorias);        
+        request.setAttribute("categorias", listCategoorias); 
+        String departamentoSeleccionado = request.getParameter("departamentoSelect");
+        DataDepartamento deseado = null;
+        for(DataDepartamento depar: listdepartamentos) {
+            if(depar.getNombre().equals(departamentoSeleccionado)) {
+                deseado = depar;
+                break;
+            }
+        }
+
+        if (deseado != null) {
+            List<DataActividad> listaActividades = sistema.getActividadesConfirmadas(deseado.getId());
+            request.setAttribute("actividades", listaActividades);
+        }
         // mandar el formulario al usuario
-        request.getRequestDispatcher("/WEB-INF/AltaActividad.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/ConsultaActividad.jsp").forward(request, response);
     }
 
 	/**
