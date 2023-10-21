@@ -39,19 +39,18 @@ public class ConsultaActividadServlet extends HttpServlet {
         super();
         // TODO Auto-generated constructor stub
     }
-	DataDepartamento deseado = null;
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
     	
-    	
+		DataDepartamento deseado = null;
+		
 		HttpSession objSesion = request.getSession();//lo usamos para mostrar mensajes en la sesion
 		String actividad = request.getParameter("actividadSelect");
 		String actCateg = request.getParameter("categoriaSelect"); 
 		String departamento = request.getParameter("departamentoSelect"); //aca es que obtenemos el departamento seleccionado
 		
 		DataProveedor yo = (DataProveedor) objSesion.getAttribute("usuario_logueado");
-		//System.out.println(yo.getNombre());
 		List<DataDepartamento> depa = sistema.getDepartamentosData();
 		for(DataDepartamento depar: depa) {
 			if(depar.getNombre().equals(departamento)) {
@@ -71,9 +70,25 @@ public class ConsultaActividadServlet extends HttpServlet {
 		DataActividad elegida = null;
 		List<DataActividad> actividades = sistema.getActividadesConfirmadas(deseado.getId());
 		for(DataActividad dact: actividades) {
-			if(dact.getNomAct().equals(actividad))
+			System.out.println(dact.getNomAct());
+			if(dact.getNomAct().equals(actividad)) {
 				elegida = dact;				
-		}
+			}
+			if(elegida == null) {
+				objSesion.setAttribute("mensajeError", "Error al traer la Actividad, intente nuevamente.");
+			    response.sendRedirect("ConsultaActividad");
+			}
+		}/*
+		String desc = elegida.getDescripcion();
+		request.setAttribute("readDescAct", desc);
+		Integer dur = elegida.getDuracion();
+		request.setAttribute("readDuracionAct", dur.toString());
+		Float costo = elegida.getCosto();
+		request.setAttribute("readCostoAct", costo.toString());
+		String ciudad = elegida.getCiudad();
+		request.setAttribute("readCiudadAct", ciudad);
+			*/	
+	}
 			
 		
 		/*
@@ -105,22 +120,7 @@ public class ConsultaActividadServlet extends HttpServlet {
 	    	 response.sendRedirect("AltaActividad");
 	    }
 		*/
-    }
-	private DataActividad tomarDatos(String nomAct, DataProveedor prov, DataDepartamento dept, String descripcion, int duracion, float costo, String ciudad, List<DataCategoria> cat) {
-		DataActividad newActividad = new DataActividad();		
-		newActividad.setCiudad(ciudad);
-		newActividad.setNomAct(nomAct);
-		newActividad.setDescripcion(descripcion);
-		newActividad.setDuracion(duracion);
-		newActividad.setCosto(costo);		
-		newActividad.setProv(prov);
-		newActividad.setDept(dept);
-		newActividad.setCategorias(cat);
-		newActividad.setFechaAlta(new Date());
-		
-		return newActividad;
-	}
-    
+
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -133,6 +133,7 @@ public class ConsultaActividadServlet extends HttpServlet {
         List<DataCategoria> listCategoorias = sistema.getCategoriasData();
         request.setAttribute("categorias", listCategoorias); 
         String departamentoSeleccionado = request.getParameter("departamentoSelect");
+        request.setAttribute("departamentoSeleccionado", departamentoSeleccionado);
         DataDepartamento deseado = null;
         for(DataDepartamento depar: listdepartamentos) {
             if(depar.getNombre().equals(departamentoSeleccionado)) {
@@ -140,11 +141,35 @@ public class ConsultaActividadServlet extends HttpServlet {
                 break;
             }
         }
-
+        List<DataActividad> listaActividades = null;
         if (deseado != null) {
-            List<DataActividad> listaActividades = sistema.getActividadesConfirmadas(deseado.getId());
+             listaActividades = sistema.getActividadesConfirmadas(deseado.getId());
             request.setAttribute("actividades", listaActividades);
         }
+        String actividadSeleccionada = request.getParameter("actividadSelect");
+        DataActividad ele = null;
+        if(listaActividades!=null) {
+        	for(DataActividad act: listaActividades) {
+        		if(act.getNomAct().equals(actividadSeleccionada)) {
+        			ele = act;
+        		}
+        	}  	      	
+        	if(ele != null) {
+        	   
+        		request.setAttribute("readDescAct", ele.getDescripcion());
+        		Integer dur = ele.getDuracion();
+        		request.setAttribute("readDuracionAct", dur.toString());
+        		Float costo = ele.getCosto();
+        		request.setAttribute("readCostoAct", costo.toString());
+        		request.setAttribute("readCiudadAct", ele.getCiudad());
+        	    
+        	}
+        }
+        
+        
+        
+        
+        
         // mandar el formulario al usuario
         request.getRequestDispatcher("/WEB-INF/ConsultaActividad.jsp").forward(request, response);
     }

@@ -16,7 +16,7 @@
 <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-6">                
-				<form onsubmit="return validateForm()" action="ConsultaActividad" method="post">           				
+				<form onsubmit="return validateForm()" action="ConsultaActividad" method="get">           				
 					<div>
                     <h1 class="tituloVentana">Consulta Actividad</h1>
                     </div> <!-- ----------------------------------MENSAJES A USUARIO ----------------------------------------------- -->
@@ -79,25 +79,25 @@
                     <div class="row mb-2">
                         <label for="readDescAct" class="col-sm-2 col-form-label">Descripcion</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control" id="readDescAct" name="readDescAct" readonly>
+                            <input type="text" class="form-control" id="readDescAct" name="readDescAct" value="${readDescAct}" readonly>
                         </div>
                     </div>
                     <div class="row mb-2">
                         <label for="readDuracionAct" class="col-sm-2 col-form-label">Duracion(hs)</label>
                         <div class="col-sm-8">
-                            <input type="number" class="form-control" id="readDuracionAct" name="readDuracionAct" readonly>
+                            <input type="number" class="form-control" id="readDuracionAct" name="readDuracionAct" value="${readDuracionAct}" readonly>
                         </div>
                     </div>                    
                     <div class="row mb-2">
                         <label for="readCostoAct" class="col-sm-2 col-form-label">Costo($uy)</label>
                         <div class="col-sm-8">
-                            <input type="number" class="form-control" id="readCostoAct" name="readCostoAct" readonly>
+                            <input type="number" class="form-control" id="readCostoAct" name="readCostoAct" value="${readCostoAct}" readonly>
                         </div>
                     </div>                
                     <div class="row mb-2">
                         <label for="readCiudadAct" class="col-sm-2 col-form-label">Ciudad</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control" id="readCiudadAct" name="readCiudadAct" readonly>
+                            <input type="text" class="form-control" id="readCiudadAct" name="readCiudadAct" value="${readCiudadAct}" readonly>
                         </div>
                     </div>
                  

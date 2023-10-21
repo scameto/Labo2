@@ -8,7 +8,7 @@ PENDIENTES													|						PRONTAS
  SANTIAGO
 ------------------------------------------------------------------------------------------------------------------											
 																					ALTA ACTIVIDAD TURISTICA SC (LISTO Y AJUSTADO)
-CONSULTA DE ACTIVIDAD TURISTICA		-EN PROCESO Y AVANZADO-						
+CONSULTA DE ACTIVIDAD TURISTICA		-EN PROCESO Y AVANZADO-	falta listar por categoria					
 ALTA DE SALIDA TURISTICA									
 ------------------------------------------------------------------------------------------------------------------
  MARIANO
