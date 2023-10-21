@@ -18,6 +18,8 @@ import logica.datatypes.DataProveedor;
 import logica.datatypes.DataSalida;
 import logica.datatypes.DataTurista;
 import logica.datatypes.DataActividad;
+import logica.datatypes.DataCategoria;
+import logica.datatypes.DataDepartamento;
 
 @WebServlet("/consultaActividad")
 public class ConsultaActividadServlet2 extends HttpServlet {
@@ -37,16 +39,32 @@ public class ConsultaActividadServlet2 extends HttpServlet {
             throws ServletException, IOException {
         HttpSession objSesion = request.getSession();
         
-        if (request.getParameter("username") == null) {
-            List<String> usernames = sistema.obtenerNombresTuristasYProveedores();
-
-            if (usernames == null || usernames.isEmpty()) {
-                objSesion.setAttribute("mensaje", "No hay usuarios para mostrar.");
-            } else {
-                request.setAttribute("usernames", usernames);
-            }
-            request.getRequestDispatcher("/WEB-INF/ConsultaActividad2.jsp").forward(request, response);
+        if(request.getParameter("nombreDepto") != null) {
+        	String idD = request.getParameter("nombreDepto");
+        	Long idDepartamento = Long.parseLong(idD);
+        	List<DataActividad> actividades = sistema.getActividadesConfirmadas(idDepartamento);
+        	String departametoJson = gson.toJson(actividades);
+            response.setContentType("application/json");
+            response.getWriter().write(departametoJson);
         }
+        if (request.getParameter("deptos") == null) {
+            List<DataDepartamento> departamentos = (List<DataDepartamento>) sistema.getDepartamentosData();
+            if (departamentos == null || departamentos.isEmpty()) {
+                objSesion.setAttribute("mensaje", "No hay departamentos para mostrar.");
+            } else {
+                request.setAttribute("deptos", departamentos);
+            }
+        }
+        if (request.getParameter("categoria")== null) {
+            List<DataCategoria> categorias = (List<DataCategoria>) sistema.getCategoriasData();
+            if (categorias == null || categorias.isEmpty()) {
+                objSesion.setAttribute("mensaje", "No hay categorias para mostrar.");
+            } else {
+                request.setAttribute("categoria", categorias);
+            }            
+        }
+        request.getRequestDispatcher("/WEB-INF/ConsultaActividad2.jsp").forward(request, response);
+
     }
     
     @Override
@@ -55,17 +73,20 @@ public class ConsultaActividadServlet2 extends HttpServlet {
         
         String username = request.getParameter("username");
         String idAct = request.getParameter("idActividad");
+        DataDepartamento elegido = null;
         if (username != null) {
-            DataTurista turista = sistema.findTurista(username);
-            if(turista!= null) {
-                String turistaJson = gson.toJson(turista);
+            List<DataDepartamento> dep = sistema.getDepartamentosData();
+            for(DataDepartamento de: dep) {
+            	if(de.getNombre().equals(username)) {
+            		elegido = de;
+            		break;
+            	}
+            }
+            if(elegido!= null) {
+                String departamentoJson = gson.toJson(elegido);
                 response.setContentType("application/json");
-                response.getWriter().write(turistaJson);
-            }else {
-            	DataProveedor prov = sistema.findProveedor(username);
-                String proveedorJson = gson.toJson(prov);
-                response.setContentType("application/json");
-                response.getWriter().write(proveedorJson);
+                response.getWriter().write(departamentoJson);
+            
             } 
         }else if(idAct != null) {
         	Long idActividad = Long.parseLong(idAct);

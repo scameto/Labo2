@@ -26,7 +26,7 @@ import java.util.List;
 /**
  * Servlet implementation class AltaActividadServlet
  */
-//@WebServlet("/ConsultaActividad")
+@WebServlet("/ConsultaActividad")
 public class ConsultaActividadServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
@@ -164,8 +164,7 @@ public class ConsultaActividadServlet extends HttpServlet {
         		request.setAttribute("readCiudadAct", ele.getCiudad());
         	    
         	}
-        }
-        
+        }   
         
         
         

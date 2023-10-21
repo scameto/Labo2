@@ -1,3 +1,5 @@
+<%@page import="logica.datatypes.DataCategoria"%>
+<%@page import="logica.datatypes.DataDepartamento"%>
 <%@page import="java.util.List"%>
 <%@page import="logica.datatypes.DataTurista"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -14,30 +16,57 @@
 		<div class="row justify-content-center">
 			<div class="col-lg-3">
 				<div>
-					<h1 class="tituloVentana">Consultar Usuarios</h1>
-					<div id="tuvieja">
-						<h2>Turistas:</h2>
-						<div id="listaUsuarios">
+					<h1 class="tituloVentana">Consulta Actividades</h1>
+					<div id="cajaDepartamentos">
+						<div id="listaActividades">
+							<label for="departamentos">Departamentos:</label>
 							<ul class="list-group">
 								<%
-								List<String> usernames = (List<String>) request.getAttribute("usernames");
-								if (usernames != null) {
-									for (String username : usernames) {
+								List<DataDepartamento> deptos = (List<DataDepartamento>) request.getAttribute("deptos");
+								if (deptos != null) {
+									for (DataDepartamento username : deptos) {
 								%>
 								<li class="list-group-item"
-									onclick="seleccionarUsuario('<%=username%>')"><%=username%></li>
+									onclick="seleccionarDepartamento('<%=username.getId()%>')"><%=username.getNombre()%></li>
 								<%
 								}
 								}
 								%>
 							</ul>
 						</div>
+
 					</div>
+
+					<div class="select">
+						<label for="categorias">Categorías:</label>
+						<ul id="categorias" name="categoria">
+
+							<%
+							List<DataCategoria> categorias = (List<DataCategoria>)request.getAttribute("categoria");
+							if (categorias != null) {
+								for (DataCategoria cat : categorias) {
+							%>
+							<li class="list-group-item"
+								onclick="seleccionarCategoria('<%=cat%>')"><%=cat%></li>
+							<%
+							}
+							}
+							%>
+							<!-- Aquí vendría el código JSP para llenar las categorías -->
+						</ul>
+					</div>
+
 				</div>
 			</div>
+
 			<style>
-#tuvieja {
-	max-height: 80vh;
+#cajaDepartamentos {
+	max-height: 40vh;
+	overflow-y: auto;
+}
+
+#cajaCategorias {
+	max-height: 40vh;
 	overflow-y: auto;
 }
 
@@ -45,6 +74,7 @@
 	overflow-y: auto;
 	max-height: 30vh;
 }
+
 #cardSalidas {
 	overflow-y: auto;
 	max-height: 30vh;
@@ -182,12 +212,46 @@
 	</div>
 
 	<script>
+		function seleccionarDepartamento(idDepartamento) {
+			// Crear un objeto XMLHttpRequest
+			var xhr = new XMLHttpRequest();
+			console.log("llegue no se q ...");
+			// Configurar la solicitud
+			xhr.open('GET', 'http://localhost:8080/Labo2/consultaActividad?idDepto=' // esto es una queryparam
+					+ idDepartamento, true);
+			xhr.setRequestHeader('Content-Type', 'application/json');
+
+			// Definir el comportamiento al cambio de estado
+			xhr.onreadystatechange = function() {
+				// Verificar si la solicitud se completó exitosamente
+				if (xhr.readyState == 4 && xhr.status == 200) {
+					// Analizar la respuesta como JSON
+					var actividades = JSON.parse(xhr.responseText);
+
+					// Ubicar el contenedor donde se mostrarán las actividades
+					var contenedorActividades = document
+							.getElementById('cardActividades');
+
+					// Limpiar cualquier contenido previo
+					contenedorActividades.innerHTML = '';
+
+					// Rellenar el contenedor con las actividades
+					for (var i = 0; i < actividades.length; i++) {
+						var actividad = actividades[i];
+						var elementoActividad = document.createElement('p');
+						elementoActividad.innerText = actividad.nombre; // Asume que cada actividad tiene un atributo 'nombre'
+						contenedorActividades.appendChild(elementoActividad);
+					}
+				}
+			};
+			// Enviar la solicitud
+			xhr.send();
+		}
+
 		function seleccionarUsuario(username) {
 			var xhr = new XMLHttpRequest();
-			xhr.open("POST", "http://localhost:8080/Labo2/ConsultarUsuario",
-					true);
-			xhr.setRequestHeader("Content-Type",
-					"application/x-www-form-urlencoded");
+			xhr.open("POST", "http://localhost:8080/Labo2/consultaActividad2", true);
+			xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 			xhr.onreadystatechange = function() {
 				if (xhr.readyState == 4 && xhr.status == 200) {
 					// Analizar la respuesta JSON del servidor
@@ -232,11 +296,30 @@
 				}
 			};
 			xhr.send("username=" + username);
-		}
+		}//funcion de prueba------------------------------------------------------------------------------------------
+		/*
+// 		function seleccionarCategorias() {
+// 			var categorias =
+<%-- 			<%=request.getAttribute("categoria")%> --%>
+// 		; // Obtener las categorías del backend
+// 			var selectCategoria = document.getElementById("selectCategoria");
 
+// 			// Llenar el select con las categorías
+// 			categorias.forEach(function(categoria) {
+// 				var option = document.createElement("option");
+// 				option.value = categoria.id; // Suponiendo que tu objeto DataCategoria tiene un campo 'id'
+// 				option.textContent = categoria.nombre; // Suponiendo que tu objeto DataCategoria tiene un campo 'nombre'
+// 				selectCategoria.appendChild(option);
+// 			});
+// 		}
+
+// 		window.onload = function() {
+// 			cargarCategorias();
+// 		}*/
+		//----------------------------------------------------------------------------------------------------------------
 		function consultarActividadesProveedor(usernameProv) {
 			var xhr = new XMLHttpRequest();
-			xhr.open("POST", "http://localhost:8080/Labo2/ConsultarUsuario",
+			xhr.open("POST", "http://localhost:8080/Labo2/consultaActividad",
 					true);
 			xhr.setRequestHeader("Content-Type",
 					"application/x-www-form-urlencoded");
@@ -283,47 +366,56 @@
 			};
 			xhr.send("usernameProv=" + usernameProv);
 		}
-		
+
 		function buscarSalidas(actividadId) {
-		    var xhr = new XMLHttpRequest();
-		    xhr.open("POST", "http://localhost:8080/Labo2/ConsultarUsuario", true);
-		    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-		    xhr.onreadystatechange = function() {
-		        if (xhr.readyState == 4) {
-		            if (xhr.status == 200) {
-		                var salidas = JSON.parse(xhr.responseText);
-		                // Construir el contenido HTML de las salidas
-		                var salidasHtml = "";
-		                if (salidas.length > 0) {
-		                    salidas.forEach(function(salida) {
-		                        salidasHtml += "<div class='salida'>";
-		                        salidasHtml += "<h4>" + salida.nombre + "</h4>";
-		                        salidasHtml += "<hr>";
-		                        salidasHtml += "<p>Cantidad Máxima: " + salida.cantMax + "</p>";
-		                        salidasHtml += "<p>Cantidad Actual: " + salida.cantActual + "</p>";
-		                        salidasHtml += "<p>Fecha de Alta: " + salida.fechaAlta + "</p>";
-		                        salidasHtml += "<p>Fecha de Salida: " + salida.fechaSalida + "</p>";
-		                        salidasHtml += "<p>Hora de Salida: " + salida.horaSalida + "</p>";
-		                        salidasHtml += "<p>Lugar de Salida: " + salida.lugarSalida + "</p>";
-		                        salidasHtml += "</div>";
-		                    });
-		                } else {
-		                    salidasHtml += "<p>No hay salidas disponibles para esta actividad.</p>";
-		                }
+			var xhr = new XMLHttpRequest();
+			xhr.open("POST", "http://localhost:8080/Labo2/consultaActividad",
+					true);
+			xhr.setRequestHeader("Content-Type",
+					"application/x-www-form-urlencoded");
+			xhr.onreadystatechange = function() {
+				if (xhr.readyState == 4) {
+					if (xhr.status == 200) {
+						var salidas = JSON.parse(xhr.responseText);
+						// Construir el contenido HTML de las salidas
+						var salidasHtml = "";
+						if (salidas.length > 0) {
+							salidas
+									.forEach(function(salida) {
+										salidasHtml += "<div class='salida'>";
+										salidasHtml += "<h4>" + salida.nombre
+												+ "</h4>";
+										salidasHtml += "<hr>";
+										salidasHtml += "<p>Cantidad Máxima: "
+												+ salida.cantMax + "</p>";
+										salidasHtml += "<p>Cantidad Actual: "
+												+ salida.cantActual + "</p>";
+										salidasHtml += "<p>Fecha de Alta: "
+												+ salida.fechaAlta + "</p>";
+										salidasHtml += "<p>Fecha de Salida: "
+												+ salida.fechaSalida + "</p>";
+										salidasHtml += "<p>Hora de Salida: "
+												+ salida.horaSalida + "</p>";
+										salidasHtml += "<p>Lugar de Salida: "
+												+ salida.lugarSalida + "</p>";
+										salidasHtml += "</div>";
+									});
+						} else {
+							salidasHtml += "<p>No hay salidas disponibles para esta actividad.</p>";
+						}
 
-		                // Agregar el contenido al elemento con id cardSalidas
-		                document.getElementById("cardSalidas").innerHTML = salidasHtml;
-		            } else {
-		                // Manejar errores si es necesario
-		                console.error("Error al obtener salidas de la actividad.");
-		            }
-		        }
-		    };
-		    // Enviar el ID de la actividad al servidor
-		    xhr.send("idActividad=" + actividadId);
+						// Agregar el contenido al elemento con id cardSalidas
+						document.getElementById("cardSalidas").innerHTML = salidasHtml;
+					} else {
+						// Manejar errores si es necesario
+						console
+								.error("Error al obtener salidas de la actividad.");
+					}
+				}
+			};
+			// Enviar el ID de la actividad al servidor
+			xhr.send("idActividad=" + actividadId);
 		}
-
-
 	</script>
 </body>
 </html>

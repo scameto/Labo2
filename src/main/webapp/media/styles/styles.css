@@ -87,6 +87,13 @@ h1.tituloVentana{
 	color: white;
 	
 }
+.containerDepto {
+    flex: 1;
+    padding-right: 20px;
+    height: 40px;
+    overflow-y: auto;
+    /* Agregar más estilos según sea necesario */
+}
 
 
 
