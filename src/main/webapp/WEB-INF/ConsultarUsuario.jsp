@@ -46,6 +46,7 @@
 	overflow-y: auto;
 	max-height: 30vh;
 }
+
 #cardSalidas {
 	overflow-y: auto;
 	max-height: 30vh;
@@ -164,12 +165,14 @@
 								</div>
 								<div class="row">
 									<div class="col-md-6">
-										<div class="card mb-4 mb-md-0">
+										<div class="card mb-4 mb-md-0" id="contenedorActividades"
+											style="display: none;">
 											<div class="card-body" id="cardActividades"></div>
 										</div>
 									</div>
 									<div class="col-md-6">
-										<div class="card mb-4 mb-md-0">
+										<div class="card mb-4 mb-md-0" id="contenedorSalidas"
+											style="display: none;">
 											<div class="card-body" id="cardSalidas"></div>
 										</div>
 									</div>
@@ -184,6 +187,7 @@
 
 	<script>
 		function seleccionarUsuario(username) {
+			document.getElementById("contenedorSalidas").style.display = "none";
 			var xhr = new XMLHttpRequest();
 			xhr.open("POST", "http://localhost:8080/Labo2/ConsultarUsuario",
 					true);
@@ -199,6 +203,11 @@
 							document.getElementById("emailUsuario").textContent = usuario.email;
 							document.getElementById("fechaNacUsuario").textContent = usuario.fechaNac;
 							if (usuario.nacionalidad != null) {
+								//Aca es turista
+								document
+										.getElementById("contenedorActividades").style.display = "none";
+								buscarSalidasTurista(username);
+
 								//Ocultar lo de proveedores
 								document.getElementById("descProveedorHr").style.display = "none";
 								document.getElementById("descProveedorRow").style.display = "none";
@@ -211,7 +220,10 @@
 										.getElementById("nacionalidadTuristaRow").style.display = "flex";
 
 							} else {
+								//Aca es proveedor
 								//Ocultar lo de turista
+								document
+										.getElementById("contenedorActividades").style.display = "block";
 								document.getElementById("hrNacionalidad").style.display = "none";
 								document
 										.getElementById("nacionalidadTuristaRow").style.display = "none";
@@ -284,47 +296,104 @@
 			};
 			xhr.send("usernameProv=" + usernameProv);
 		}
-		
-		function buscarSalidas(actividadId) {
-		    var xhr = new XMLHttpRequest();
-		    xhr.open("POST", "http://localhost:8080/Labo2/ConsultarUsuario", true);
-		    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-		    xhr.onreadystatechange = function() {
-		        if (xhr.readyState == 4) {
-		            if (xhr.status == 200) {
-		                var salidas = JSON.parse(xhr.responseText);
-		                // Construir el contenido HTML de las salidas
-		                var salidasHtml = "";
-		                if (salidas.length > 0) {
-		                    salidas.forEach(function(salida) {
-		                        salidasHtml += "<div class='salida'>";
-		                        salidasHtml += "<h4>" + salida.nombre + "</h4>";
-		                        salidasHtml += "<hr>";
-		                        salidasHtml += "<p>Cantidad Máxima: " + salida.cantMax + "</p>";
-		                        salidasHtml += "<p>Cantidad Actual: " + salida.cantActual + "</p>";
-		                        salidasHtml += "<p>Fecha de Alta: " + salida.fechaAlta + "</p>";
-		                        salidasHtml += "<p>Fecha de Salida: " + salida.fechaSalida + "</p>";
-		                        salidasHtml += "<p>Hora de Salida: " + salida.horaSalida + "</p>";
-		                        salidasHtml += "<p>Lugar de Salida: " + salida.lugarSalida + "</p>";
-		                        salidasHtml += "</div>";
-		                    });
-		                } else {
-		                    salidasHtml += "<p>No hay salidas disponibles para esta actividad.</p>";
-		                }
 
-		                // Agregar el contenido al elemento con id cardSalidas
-		                document.getElementById("cardSalidas").innerHTML = salidasHtml;
-		            } else {
-		                // Manejar errores si es necesario
-		                console.error("Error al obtener salidas de la actividad.");
-		            }
-		        }
-		    };
-		    // Enviar el ID de la actividad al servidor
-		    xhr.send("idActividad=" + actividadId);
+		function buscarSalidasTurista(username) {
+			document.getElementById("contenedorSalidas").style.display = "block";
+			var xhr = new XMLHttpRequest();
+			xhr.open("POST", "http://localhost:8080/Labo2/ConsultarUsuario", true);
+			xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+			xhr.onreadystatechange = function() {
+				if (xhr.readyState == 4 && xhr.status == 200) {
+					if (JSON.parse(xhr.responseText) != null) {
+						var salidasTurista = JSON.parse(xhr.responseText);
+						console.log(salidasTurista);
+						var salidasHtml = "";
+						
+						if(salidasTurista.length > 0){
+							salidasTurista.forEach(function(salida) {
+								salidasHtml += "<div class='salida'>";
+								salidasHtml += "<h4>" + salida.nombre
+										+ "</h4>";
+								salidasHtml += "<hr>";
+								salidasHtml += "<p>Cantidad Máxima: "
+										+ salida.cantMax + "</p>";
+								salidasHtml += "<p>Cantidad Actual: "
+										+ salida.cantActual + "</p>";
+								salidasHtml += "<p>Fecha de Alta: "
+										+ salida.fechaAlta + "</p>";
+								salidasHtml += "<p>Fecha de Salida: "
+										+ salida.fechaSalida + "</p>";
+								salidasHtml += "<p>Hora de Salida: "
+										+ salida.horaSalida + "</p>";
+								salidasHtml += "<p>Lugar de Salida: "
+										+ salida.lugarSalida + "</p>";
+								salidasHtml += "</div>";
+							});
+						}else {
+							actividadesHtml += "<div class='actividad'>"
+									+ "<p>"
+									+ "Este turista no se ha inscripto a ninguna actividad, Que tacaño!."
+									+ "</p>" + "</div>";
+						}
+						document.getElementById("cardSalidas").innerHTML = salidasHtml;
+					
+					}
+				}
+			};
+			xhr.send("usernameTuristaSalidas=" + username);
+
 		}
 
+		function buscarSalidas(actividadId) {
+			document.getElementById("contenedorSalidas").style.display = "block";
+			var xhr = new XMLHttpRequest();
+			xhr.open("POST", "http://localhost:8080/Labo2/ConsultarUsuario",
+					true);
+			xhr.setRequestHeader("Content-Type",
+					"application/x-www-form-urlencoded");
+			xhr.onreadystatechange = function() {
+				if (xhr.readyState == 4) {
+					if (xhr.status == 200) {
+						var salidas = JSON.parse(xhr.responseText);
+						// Construir el contenido HTML de las salidas
+						var salidasHtml = "";
+						if (salidas.length > 0) {
+							salidas
+									.forEach(function(salida) {
+										salidasHtml += "<div class='salida'>";
+										salidasHtml += "<h4>" + salida.nombre
+												+ "</h4>";
+										salidasHtml += "<hr>";
+										salidasHtml += "<p>Cantidad Máxima: "
+												+ salida.cantMax + "</p>";
+										salidasHtml += "<p>Cantidad Actual: "
+												+ salida.cantActual + "</p>";
+										salidasHtml += "<p>Fecha de Alta: "
+												+ salida.fechaAlta + "</p>";
+										salidasHtml += "<p>Fecha de Salida: "
+												+ salida.fechaSalida + "</p>";
+										salidasHtml += "<p>Hora de Salida: "
+												+ salida.horaSalida + "</p>";
+										salidasHtml += "<p>Lugar de Salida: "
+												+ salida.lugarSalida + "</p>";
+										salidasHtml += "</div>";
+									});
+						} else {
+							salidasHtml += "<p>No hay salidas disponibles para esta actividad.</p>";
+						}
 
+						// Agregar el contenido al elemento con id cardSalidas
+						document.getElementById("cardSalidas").innerHTML = salidasHtml;
+					} else {
+						// Manejar errores si es necesario
+						console
+								.error("Error al obtener salidas de la actividad.");
+					}
+				}
+			};
+			// Enviar el ID de la actividad al servidor
+			xhr.send("idActividad=" + actividadId);
+		}
 	</script>
 </body>
 </html>

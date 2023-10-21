@@ -67,18 +67,21 @@ public class ConsultarUsuarios extends HttpServlet {
             } 
         }else if(idAct != null) {
         	Long idActividad = Long.parseLong(idAct);
-        	System.out.println(idActividad);
         	List<DataSalida> salidas = sistema.getSalidasData(idActividad);
-        	request.setAttribute("salidas", salidas);
             String salidasJson = gson.toJson(salidas);
             response.setContentType("application/json");
             response.getWriter().write(salidasJson);
         } 
-        else {
+        else if(request.getParameter("usernameTuristaSalidas") != null) {
+        	List<DataSalida> salidas = sistema.listarSalidasInscritas(request.getParameter("usernameTuristaSalidas"));
+        	
+            String salidasJson = gson.toJson(salidas);
+            
+            response.setContentType("application/json");
+            response.getWriter().write(salidasJson);
+        }else {
         	String usernameProv = (String)request.getParameter("usernameProv");
             List<DataActividad> actividades = (List<DataActividad>) sistema.getActividadesProveedorConfirmadas(usernameProv);
-            System.out.println("actis " + actividades);
-            request.setAttribute("listaActividades", actividades);
             String actividadesJson = gson.toJson(actividades);
             response.setContentType("application/json");
             response.getWriter().write(actividadesJson);
