@@ -56,15 +56,11 @@ public class ConsultarUsuarios extends HttpServlet {
         if (username != null) {
             DataTurista turista = sistema.findTurista(username);
             if(turista!= null) {
-            	request.setAttribute("turistaSeleccionado", turista);
-                request.setAttribute("tipo", "Turista");
                 String turistaJson = gson.toJson(turista);
                 response.setContentType("application/json");
                 response.getWriter().write(turistaJson);
             }else {
             	DataProveedor prov = sistema.findProveedor(username);
-                request.setAttribute("tipo", "Proveedor");
-                request.setAttribute("proveedorSeleccionado", prov);
                 String proveedorJson = gson.toJson(prov);
                 response.setContentType("application/json");
                 response.getWriter().write(proveedorJson);
