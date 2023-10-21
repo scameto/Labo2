@@ -38,13 +38,13 @@
 				<div class="dropdown-submenu-actividades"
 					aria-labelledby="submenu-actividades">
 					<a class="dropdown-item act-item" href="AltaActividad">Alta	Actividad Turistica</a> 
-					<a class="dropdown-item act-item" href="ConsultaActividad">Consulta	Actividad Turistica</a>
+					<a class="dropdown-item act-item" href="consultaActividad">Consulta	Actividad Turistica</a>
 				</div>
 				<%} else {%>
 				<a class="dropdown-item act-item" href="#">Actividades</a>
 				<div class="dropdown-submenu-actividades"
 					aria-labelledby="submenu-actividades">					
-					<a class="dropdown-item act-item" href="ConsultaActividad">Consulta	Actividad Turistica</a>
+					<a class="dropdown-item act-item" href="consultaActividad">Consulta	Actividad Turistica</a>
 				</div>
 				<% } %>	<!-- ******************************************************************************* -->	
 				<% if(usuarioLogueado instanceof logica.datatypes.DataProveedor) {%>		
