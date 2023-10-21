@@ -47,6 +47,16 @@
     <servlet-name>consultaUsuariosServlet</servlet-name>
     <url-pattern>/consultaUsuariosServlet</url-pattern>
   </servlet-mapping>
+  
+    <servlet>
+    <servlet-name>ConsultaPaqueteServlet</servlet-name>
+    <servlet-class>com.labo2.controller.ConsultaPaqueteServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ConsultaPaqueteServlet</servlet-name>
+    <url-pattern>/ConsultaPaquete</url-pattern>
+  </servlet-mapping>
+  
   <servlet>
     <description></description>
     <display-name>iniciar</display-name>

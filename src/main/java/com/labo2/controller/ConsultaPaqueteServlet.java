@@ -18,8 +18,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-
-@WebServlet("/ConsultaPaquete")
 public class ConsultaPaqueteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
@@ -40,19 +38,18 @@ public class ConsultaPaqueteServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException {
         
-        List<Paquete> paquetes = sistema.getPaquetes();
-        request.setAttribute("paquetes", paquetes);        
-        // mandar el formulario al usuario
+//        List<Paquete> paquetes = sistema.getPaquetes();
+//        request.setAttribute("paquetes", paquetes);        
+//        // mandar el formulario al usuario
         request.getRequestDispatcher("/WEB-INF/ConsultaPaquete.jsp").forward(request, response);
-        
-        
-      
-		
+        	
     }
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+        request.getRequestDispatcher("/WEB-INF/ConsultaPaquete.jsp").forward(request, response);
+
+//		doGet(request, response);
 	}
 
 }
