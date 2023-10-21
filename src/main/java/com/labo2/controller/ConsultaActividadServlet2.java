@@ -20,6 +20,7 @@ import logica.datatypes.DataTurista;
 import logica.datatypes.DataActividad;
 import logica.datatypes.DataCategoria;
 import logica.datatypes.DataDepartamento;
+import logica.datatypes.DataPaquete;
 
 @WebServlet("/consultaActividad")
 public class ConsultaActividadServlet2 extends HttpServlet {
@@ -63,15 +64,65 @@ public class ConsultaActividadServlet2 extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+    	//cargamso las actividades confirmadas por departamento 
     	 if(request.getParameter("idDepto") != null) {
          	String idD = request.getParameter("idDepto");
          	Long idDepartamento = Long.parseLong(idD);
          	List<DataActividad> actividades = sistema.getActividadesConfirmadas(idDepartamento);
          	System.out.println( " asdsa" + actividades);
          	String actividadesJson = gson.toJson(actividades);
-             response.setContentType("application/json");
-             response.getWriter().write(actividadesJson);
+            response.setContentType("application/json");
+            response.getWriter().write(actividadesJson);
          }
+    	//cargamso las actividades confirmadas por categoria 
+    	 if(request.getParameter("idCateg") != null) {
+         	String idC = request.getParameter("idCateg");
+         	DataCategoria cate = null;
+         	List<DataCategoria> listaCat = (List<DataCategoria>) sistema.getCategoriasData();
+         	for(DataCategoria cat: listaCat) {
+         		if(cat.getId().equals(idC));
+         			cate = cat;
+         			break;
+         	}
+	        if(cate !=null) {
+	         	String nomCategoria = cate.getNombre();
+	         	List<DataActividad> actividades = sistema.getActividadesPorCategoria(nomCategoria);
+	         	String actividadesJson = gson.toJson(actividades);
+	            response.setContentType("application/json");
+	            response.getWriter().write(actividadesJson);
+	        }else {
+	            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+	            response.getWriter().write("Categoria no encontrada");
+	        
+	        }
+         }
+    	//cargando las salidas por actividad seleccionada
+    	 if(request.getParameter("idPaquet") != null) {
+          	String idP = request.getParameter("idPaquet");
+          	Long idPaquete = Long.parseLong(idP);
+          	List<DataPaquete> paquetes = sistema.getPaquetesPorActividadData(idPaquete);
+          	System.out.println( " asdsa" + paquetes);
+            String paquetesJson = (paquetes != null && !paquetes.isEmpty()) ? gson.toJson(paquetes) : "[]";
+          	//String paquetesJson = gson.toJson(paquetes);
+            response.setContentType("application/json");
+            response.getWriter().write(paquetesJson);
+          }
+    	//cargando los Paquetes por actividad seleccionada
+    	 if(request.getParameter("idActiv") != null) {
+          	String idA = request.getParameter("idActiv");
+          	Long idActividad = Long.parseLong(idA);
+          	List<DataSalida> salidas = sistema.getSalidasData(idActividad);          	
+          	System.out.println( " asdsa" + salidas);
+          	String salidasJson = null;
+          	if(salidas!=null && !salidas.isEmpty()) {
+              	salidasJson = gson.toJson(salidas);
+          	}else {
+          		salidasJson = "[]";
+          	}          	
+            response.setContentType("application/json");
+            response.getWriter().write(salidasJson);
+          }
+    	 
 //        String username = request.getParameter("username");
 //        String idAct = request.getParameter("idActividad");
 //        DataDepartamento elegido = null;
@@ -94,9 +145,9 @@ public class ConsultaActividadServlet2 extends HttpServlet {
 //        	System.out.println(idActividad);
 //        	List<DataSalida> salidas = sistema.getSalidasData(idActividad);
 //        	request.setAttribute("salidas", salidas);
-//            String salidasJson = gson.toJson(salidas);
-//            response.setContentType("application/json");
-//            response.getWriter().write(salidasJson);
+//          String salidasJson = gson.toJson(salidas);
+//          response.setContentType("application/json");
+//          response.getWriter().write(salidasJson);
 //        } 
 //        else {
 //        	String usernameProv = (String)request.getParameter("usernameProv");
