@@ -6,7 +6,7 @@
 <jsp:include page="/WEB-INF/templates/head.jsp" />
 <title>Alta Usuario</title>
 </head>
-<body>   
+<body>  
 
 <jsp:include page="/WEB-INF/templates/header.jsp" />
     <div class="container">

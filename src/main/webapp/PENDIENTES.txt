@@ -1,8 +1,32 @@
 /*
 
-Alta Usuario --> jsp pronto y controlado. armar el servlet
-	Ver tema imagen como se procesa y almacena en la BD;
 	
 Iniciar--------> ver como camuflar la contrasena.. habia una manera.
 
-	
+PENDIENTES													|						PRONTAS
+------------------------------------------------------------------------------------------------------------------
+ SANTIAGO
+------------------------------------------------------------------------------------------------------------------											
+																					ALTA ACTIVIDAD TURISTICA SC (LISTO Y AJUSTADO)
+CONSULTA DE ACTIVIDAD TURISTICA		-EN PROCESO Y AVANZADO-						
+ALTA DE SALIDA TURISTICA									
+------------------------------------------------------------------------------------------------------------------
+ MARIANO
+------------------------------------------------------------------------------------------------------------------
+CONSULTA DE SALIDA TURISTICA
+INSCRIPCION a SALIDA TURISTICA
+CONSULTA DE PAQUETE DE ACTIVIDADES TURISTICAS -proceso-
+COMPRA DE PAQUETES
+------------------------------------------------------------------------------------------------------------------
+ MATIAS
+------------------------------------------------------------------------------------------------------------------
+																					INICIO DE SESION SC
+																					CIERRE DE SESION SC
+																					ALTA DE USUARIO SC
+CONSULTA DE USUARIO
+MODIFICAR DATOS DE USUARIO										
+																					S.CENTRAL -> ALTA DE CATEGORIA (NUEVO) MB
+																					S.CENTRAL -> ACEPTAR / RECHAZAR ACTIVIDAD TURISTICA (NUEVO) MB
+																					S.CENTRAL -> AGREGAR ACTIVIDAD TURISTICA a PAQUETE (MODIFICAR) MB
+
+*/

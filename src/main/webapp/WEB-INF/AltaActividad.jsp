@@ -1,3 +1,4 @@
+<%@page import="logica.datatypes.DataCategoria"%>
 <%@page import="java.util.List"%>
 <%@page import="logica.modelos.Departamento"%>
 <%@page import="logica.datatypes.DataDepartamento"%>
@@ -14,15 +15,35 @@
 <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-6">                
-				<form onsubmit="return validateForm()" action="Alta-Actividad" method="post">           				
+				<form onsubmit="return validateForm()" action="AltaActividad" method="post">           				
 					<div>
                     <h1 class="tituloVentana">Alta Actividad</h1>
                     </div>
+                    	<% 
+					    String mensajeError = (String) session.getAttribute("mensajeError"); 
+					    if(mensajeError != null) {
+					%>
+					    <div class="alert alert-danger">
+					        <%= mensajeError %>
+					    </div>
+					<%
+					    session.removeAttribute("mensajeError");
+					}
+					    String mensajeExito = (String) session.getAttribute("mensajeExito"); 
+					    if(mensajeExito != null) {
+					    %>
+					        <div class="alert alert-success">
+					            <%= mensajeExito %>
+					        </div>
+					    <%
+					        session.removeAttribute("mensajeExito");
+					    }
+					    %>
                     <div class="row mb-2">
                     <label for="inputNombreDpto" class="col-sm-2 col-form-label">Depto</label>   
                     	<div class="col-sm-8">                 
-		                   <select id="departamentoSelect" name="departamentoSelect">
-							<% List<DataDepartamento> departamentos = (List<DataDepartamento>)request.getAttribute("departamentos");
+		                   <select id="departamentoSelect" name="departamentoSelect" class="form-control">
+							<% List<DataDepartamento> departamentos=(List<DataDepartamento>)request.getAttribute("departamentos");
 							if(departamentos!=null)
 							for(DataDepartamento departamento: departamentos){%>
 							<option value="<%=departamento.getNombre()%>"><%=departamento.getNombre()%></option>
@@ -63,7 +84,14 @@
                     <div class="row mb-2">
                         <label for="inputCategoriaAct" class="col-sm-2 col-form-label">Categoria</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control" id="inputCategoriaAct" name="inputCategoriaAct">
+                        	 <select id="categoriaSelect" name="categoriaSelect" class="form-control">
+							<% List<DataCategoria> categorias =(List<DataCategoria>)request.getAttribute("categorias");
+							if(categorias!=null)
+							for(DataCategoria cat: categorias){%>
+							<option value="<%=cat.getNombre()%>"><%=cat.getNombre()%></option>
+							<%} %>
+							</select>
+                            
                         </div>
                     </div>
                     <div class="row mb-2">
@@ -84,11 +112,6 @@
 </body>
  
   <script>
-	  fetch('/Labo2/Alta-Actividad')
-	  .then(res => res.json())
-	  .then(data => {
-			console.log(data);
-	 })
        function validateForm() {
             var name = document.getElementById("inputNombreAct").value;
             if (name == "") {
