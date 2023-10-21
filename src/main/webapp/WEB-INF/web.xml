@@ -37,15 +37,13 @@
     <servlet-name>EstadoSesion</servlet-name>
     <url-pattern>/EstadoSesion</url-pattern>
   </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>consultaUsuariosServlet</display-name>
-    <servlet-name>consultaUsuariosServlet</servlet-name>
-    <servlet-class>com.labo2.controller.consultaUsuariosServlet</servlet-class>
+ <servlet>
+    <servlet-name>ConsultarUsuario</servlet-name>
+    <servlet-class>com.labo2.controller.ConsultarUsuarios</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>consultaUsuariosServlet</servlet-name>
-    <url-pattern>/consultaUsuariosServlet</url-pattern>
+    <servlet-name>ConsultarUsuario</servlet-name>
+    <url-pattern>/ConsultarUsuario</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>
