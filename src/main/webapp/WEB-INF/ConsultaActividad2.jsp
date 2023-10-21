@@ -217,7 +217,7 @@
 			var xhr = new XMLHttpRequest();
 			console.log("llegue no se q ...");
 			// Configurar la solicitud
-			xhr.open('GET', 'http://localhost:8080/Labo2/consultaActividad?idDepto=' // esto es una queryparam
+			xhr.open('POST', 'http://localhost:8080/Labo2/consultaActividad?idDepto=' // esto es una queryparam
 					+ idDepartamento, true);
 			xhr.setRequestHeader('Content-Type', 'application/json');
 
@@ -225,22 +225,41 @@
 			xhr.onreadystatechange = function() {
 				// Verificar si la solicitud se completó exitosamente
 				if (xhr.readyState == 4 && xhr.status == 200) {
-					// Analizar la respuesta como JSON
-					var actividades = JSON.parse(xhr.responseText);
+					if (JSON.parse(xhr.responseText) != null) {
+						var actividades = JSON.parse(xhr.responseText);
+						var actividadesHtml = "";
 
-					// Ubicar el contenedor donde se mostrarán las actividades
-					var contenedorActividades = document
-							.getElementById('cardActividades');
+						// Construir el contenido HTML de las actividades
+						if (actividades.length != 0) {
+							actividades
+									.forEach(function(actividad) {
+										actividadesHtml += "<div class='actividad' onclick='buscarSalidas("
+												+ actividad.id
+												+ ")'>"
+												+ "<h4 style='cursor: pointer;'>"
+												+ actividad.nomAct
+												+ "</h4>"
+												+ "<hr>"
+												+ "<p>"
+												+ actividad.descripcion
+												+ "</p>"
+												+ "<hr>"
+												+ "<p>"
+												+ actividad.duracion
+												+ " horas</p>"
+												+ "<hr>"
+												+ "<p>$"
+												+ actividad.costo
+												+ "</p>" + "<hr>" + "</div>";
+									});
+						} else {
+							actividadesHtml += "<div class='actividad'>"
+									+ "<p>"
+									+ "Este proveedor no tiene actividades activas."
+									+ "</p>" + "</div>";
+						}
 
-					// Limpiar cualquier contenido previo
-					contenedorActividades.innerHTML = '';
-
-					// Rellenar el contenedor con las actividades
-					for (var i = 0; i < actividades.length; i++) {
-						var actividad = actividades[i];
-						var elementoActividad = document.createElement('p');
-						elementoActividad.innerText = actividad.nombre; // Asume que cada actividad tiene un atributo 'nombre'
-						contenedorActividades.appendChild(elementoActividad);
+						document.getElementById("cardActividades").innerHTML = actividadesHtml;
 					}
 				}
 			};
