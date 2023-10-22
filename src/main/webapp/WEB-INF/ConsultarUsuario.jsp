@@ -79,6 +79,10 @@
 											<button type="button" class="btn btn-primary" id="btneditarPerfil"
 												data-toggle="modal" data-target="#miModal"
 												style="display: none;">Editar Perfil</button>
+												<button type="button" class="btn btn-primary" id="btneditarPerfilProveedor"
+        											data-toggle="modal" data-target="#proveedorMiModal"
+        											style="display: none;">Editar Perfil</button>
+
 
 
 
@@ -186,6 +190,77 @@
 		</div>
 	</div>
 
+<div class="modal fade" id="proveedorMiModal"
+		role="dialog" aria-labelledby="proveedorMiModalLabel"
+		aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="proveedorMiModalLabel">Título del
+						Modal</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form id="proveedorMiModalForm">
+						<div class="mb-3">
+							<label for="proveedorCampo0" class="form-label">Username</label>
+							<input type="text" class="form-control" id="proveedorUsername"
+								placeholder="Username" readonly>
+						</div>
+						<div class="mb-3">
+							<label for="proveedorCampo1" class="form-label">Nombre</label> <input
+								type="text" class="form-control" id="proveedorNombre"
+								placeholder="Nombre">
+						</div>
+						<div class="mb-3">
+							<label for="proveedorCampo2" class="form-label">Apellido</label>
+							<input type="text" class="form-control" id="proveedorApellido"
+								placeholder="Apellido">
+						</div>
+						<div class="mb-3">
+							<label for="proveedorFechaNacimiento" class="form-label">Fecha
+								de Nacimiento</label> <input type="date" class="form-control"
+								id="proveedorFechaNacimiento">
+						</div>
+						<div class="mb-3">
+							<label for="proveedorEmail" class="form-label">Email</label> <input
+								type="email" class="form-control" id="proveedorEmail"
+								placeholder="Correo electrónico" readonly>
+						</div>
+						<div class="mb-3">
+    <label for="proveedorPassword" class="form-label">Contraseña</label>
+    <div class="input-group">
+        <input type="password" class="form-control" id="proveedorPassword" placeholder="Contraseña">
+        <button class="btn btn-outline-secondary" type="button" id="togglePasswordVisibility">
+            <i class="fas fa-eye" id="passwordVisibilityIcon"></i>
+        </button>
+    </div>
+</div>
+						<div class="mb-3">
+							<label for="proveedorNacionalidad" class="form-label">Descripcion</label>
+							<input type="text" class="form-control" id="proveedorDescripcion"
+								placeholder="Descripcion">
+						</div>
+						<div class="mb-3">
+							<label for="proveedorLinkWeb" class="form-label">LinkWeb</label>
+							<input type="text" class="form-control" id="proveedorLinkWeb"
+								placeholder="LinkWeb">
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary"
+						data-dismiss="modal">Cerrar</button>
+					<button type="button" class="btn btn-primary"
+						onclick="editar()">Guardar Cambios</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
 	<div class="modal fade" id="miModal" tabindex="-1" role="dialog"
 		aria-labelledby="miModalLabel" aria-hidden="true">
 		<div class="modal-dialog" role="document">
@@ -243,6 +318,73 @@
 
 	<script>
 
+	// Obtén el elemento del campo de contraseña y el botón de alternar visibilidad
+	var passwordInput = document.getElementById("proveedorPassword");
+	var togglePasswordButton = document.getElementById("togglePasswordVisibility");
+	var passwordVisibilityIcon = document.getElementById("passwordVisibilityIcon");
+
+	// Agrega un evento de clic al botón de alternar visibilidad
+	togglePasswordButton.addEventListener("click", function() {
+	    // Alterna el tipo de entrada del campo de contraseña entre "password" y "text"
+	    if (passwordInput.type === "password") {
+	        passwordInput.type = "text";
+	        // Cambia el icono a ojo abierto
+	        passwordVisibilityIcon.classList.remove("fa-eye");
+	        passwordVisibilityIcon.classList.add("fa-eye-slash");
+	    } else {
+	        passwordInput.type = "password";
+	        // Cambia el icono a ojo cerrado
+	        passwordVisibilityIcon.classList.remove("fa-eye-slash");
+	        passwordVisibilityIcon.classList.add("fa-eye");
+	    }
+	});
+
+	
+	function convertirFormatoFecha(fecha) {
+	    // Dividir la fecha en palabras separadas
+	    var partesFecha = fecha.split(' ');
+
+	    // Mapear el nombre del mes a su número correspondiente (en este caso, "dic." a "12")
+	    var meses = {
+	        "ene.": "01", "feb.": "02", "mar.": "03", "abr.": "04", "may.": "05", "jun.": "06",
+	        "jul.": "07", "ago.": "08", "sep.": "09", "oct.": "10", "nov.": "11", "dic.": "12"
+	    };
+
+	    // Obtener el número del mes del objeto de meses
+	    var mesNumero = meses[partesFecha[0]];
+
+	    // Obtener el día y el año de las partes restantes de la fecha
+	    var dia = partesFecha[1].replace(',', ''); // Eliminar la coma del día
+	    var año = partesFecha[2];
+
+	    // Formatear la fecha como "YYYY-MM-DD"
+	    var fechaFormateada = año + '-' + mesNumero + '-' + dia;
+
+	    return fechaFormateada;
+	}
+
+	
+	function cargarModalProveedor() {
+		// Obtener los valores de los campos del usuario seleccionado
+		var username = document.getElementById("usernameUsuarioTitle").textContent;
+		var nombre = document.getElementById("nombreUsuario").textContent;
+		var apellido = document.getElementById("apellidoUsuario").textContent; // Agrega un ID a tu elemento de apellido
+		var fechaNacimiento = document.getElementById("fechaNacUsuario").textContent;
+		var email = document.getElementById("emailUsuario").textContent;
+		var descripcion = document.getElementById("descProveedor").textContent;
+		var linkWeb = document.getElementById("linkWebProveedor").textContent;
+
+		// Asignar los valores a los elementos del formulario modal
+		document.getElementById("proveedorUsername").value = username;
+		document.getElementById("proveedorNombre").value = nombre;
+		document.getElementById("proveedorApellido").value = apellido;
+		var fechaFormateada = convertirFormatoFecha(fechaNacimiento);
+	    document.getElementById("proveedorFechaNacimiento").value = fechaFormateada;
+		document.getElementById("proveedorEmail").value = email;
+		document.getElementById("proveedorDescripcion").value = descripcion;
+		document.getElementById("proveedorLinkWeb").value = linkWeb;
+		}
+	
 	function cargarModal() {
 	    // Obtener los valores de los campos del usuario seleccionado
 	    var username = document.getElementById("usernameUsuarioTitle").textContent;
@@ -250,62 +392,121 @@
 	    var apellido = document.getElementById("apellidoUsuario").textContent; // Agrega un ID a tu elemento de apellido
 	    var fechaNacimiento = document.getElementById("fechaNacUsuario").textContent;
 	    var email = document.getElementById("emailUsuario").textContent;
+	    var nacionalidad = document.getElementById("nacionalidadUsuario").textContent;
 
 	    // Asignar los valores a los elementos del formulario modal
 	    document.getElementById("username").value = username;
-	    document.getElementById("nombre").value = "test";
+	    document.getElementById("nombre").value = nombre;
 	    document.getElementById("apellido").value = apellido;
-	    document.getElementById("fechaNacimiento").value = fechaNacimiento;
+	    var fechaFormateada = convertirFormatoFecha(fechaNacimiento);
+	    document.getElementById("fechaNacimiento").value = fechaFormateada;
 	    document.getElementById("email").value = email;
-	}
+	    document.getElementById("nacionalidad").value = nacionalidad;
+	}	
+	    function editar() {
+	    	<% 
+	        EstadoSesion estadoSesionn = (EstadoSesion) session.getAttribute("estado_sesion");
+	        Object usuarioLoguead = session.getAttribute("usuario_logueado");
+	        %>
 
-	
-function editar() {
-	//Rellenar los campos
-	
-	
-	//Tomar los valores
-	var username = document.getElementById("usernameUsuarioTitle").textContent;
-    var nombre = document.getElementById("nombre").value;
-    var apellido = document.getElementById("apellido").value;
-    var fechaNacimiento = document.getElementById("fechaNacimiento").value;
-    var email = document.getElementById("emailUsuario").textContent;
-    
-    <%
-    DataTurista turista = (DataTurista) session.getAttribute("usuario_logueado");
-    String password = turista.getPassword();
-    %>
-    
-    var password = "<%= password %>";
-    var nacionalidad = document.getElementById("nacionalidad").value;
+	        <% if(usuarioLoguead instanceof DataTurista) {%>
+	        var username = document.getElementById("usernameUsuarioTitle").textContent;
+	        var nombre = document.getElementById("nombre").value;
+	        var apellido = document.getElementById("apellido").value;
+	        var fechaNacimiento = document.getElementById("fechaNacimiento").value;
+	        var email = document.getElementById("emailUsuario").textContent;
+	        var nacionalidad = document.getElementById("nacionalidad").value;
+	        
+	        if (username === "" || nombre === "" || apellido === "" || fechaNacimiento === "" || email === "" || nacionalidad === "") {
+	            alert("Por favor, completa todos los campos.");
+	            return;
+	        }
 
-    var datos = {
-    	username: username,
-        nombre: nombre,
-        apellido: apellido,
-        password: password,
-        nacionalidad: nacionalidad,
-        fechaNacimiento: fechaNacimiento,
-        email: email
-    };
+	        <%
+	        DataTurista turista = (DataTurista) session.getAttribute("usuario_logueado");
+	        String password = turista.getPassword();
+	        %> 
 
-    var datosJSON = JSON.stringify(datos);
-	
-			var xhr = new XMLHttpRequest();
-			xhr.open("POST", "http://localhost:8080/Labo2/ConsultarUsuario",
-					true);
-			xhr.setRequestHeader("Content-Type",
-					"application/x-www-form-urlencoded");
-			xhr.onreadystatechange = function() {
-				if (xhr.readyState == 4 && xhr.status == 200) {
-					// Analizar la respuesta JSON del servidor
-					if (JSON.parse(xhr.responseText) != null) {
-					}
-				}
-			};
-			console.log(datosJSON);
-			xhr.send("editarXD=" + "Turista" + "&datos=" + datosJSON);
-		}
+	        var password = "<%= password %>";
+	        
+
+	        var datos = {
+	            username: username,
+	            nombre: nombre,
+	            apellido: apellido,
+	            password: password,
+	            nacionalidad: nacionalidad,
+	            fechaNacimiento: fechaNacimiento,
+	            email: email
+	        };
+
+	        var datosJSON = JSON.stringify(datos);
+
+	        var xhr = new XMLHttpRequest();
+	        xhr.open("POST", "http://localhost:8080/Labo2/ConsultarUsuario", true);
+	        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+	        xhr.onreadystatechange = function() {
+	            if (xhr.readyState == 4 && xhr.status == 200) {
+	            	var modalElement = $("#miModal");
+	                console.log(modalElement); 
+	                modalElement.modal("hide"); 
+	                window.location.reload();
+	            }
+	        };
+	        console.log(datosJSON);
+	        xhr.send("editarXD=" + "Turista" + "&datos=" + datosJSON);
+	        <% } if(usuarioLoguead instanceof DataProveedor) { %>
+
+	        var username = document.getElementById("usernameUsuarioTitle").textContent;
+	        var nombre = document.getElementById("proveedorNombre").value;
+	        var apellido = document.getElementById("proveedorApellido").value;
+	        var fechaNacimiento = document.getElementById("proveedorFechaNacimiento").value;
+	        var email = document.getElementById("emailUsuario").textContent;
+	        var descripcion = document.getElementById("proveedorDescripcion").value;
+	        var linkWeb = document.getElementById("proveedorLinkWeb").value;
+	        
+	        if (username === "" || nombre === "" || apellido === "" || fechaNacimiento === "" || email === "" || descripcion === "" || linkWeb === "") {
+	            alert("Por favor, completa todos los campos.");
+	            return;
+	        }
+
+	        <% DataProveedor prov2=(DataProveedor) session.getAttribute("usuario_logueado"); 
+	        String provpassword2 = prov2.getPassword();
+	        %>
+
+	        var password = "<%= provpassword2 %>";
+
+	        var datos = {
+	            username: username,
+	            nombre: nombre,
+	            apellido: apellido,
+	            password: password,
+	            fechaNacimiento: fechaNacimiento,
+	            email: email,
+	            descripcion: descripcion,
+	            linkWeb: linkWeb
+	        };
+
+	        var datosJSON = JSON.stringify(datos);
+
+	        var xhr = new XMLHttpRequest();
+	        xhr.open("POST", "http://localhost:8080/Labo2/ConsultarUsuario", true);
+	        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+	        xhr.onreadystatechange = function() {
+	            if (xhr.readyState == 4 && xhr.status == 200) {
+	            	var modalElement = $("#proveedorMiModal");
+	                console.log(modalElement); 
+	                modalElement.modal("hide"); 
+	                window.location.reload();
+	            }
+	        };
+	        console.log(datosJSON);
+	        xhr.send("editarProv=" + "Proveedor" + "&datos=" + datosJSON);
+	        <% } %>
+
+	        
+
+	    }
 
 		function seleccionarUsuario(username) {
 			document.getElementById("contenedorSalidas").style.display = "none";
@@ -372,7 +573,9 @@ function editar() {
 								var usuarioLogueado = getUsuarioActual();
 								if(estadoSesion.includes("LOGIN") && usuarioLogueado.includes(username)){
 									consultarActividadesProveedorTodas(username);
-									console.log("ando aca");
+									document.getElementById("btneditarPerfilProveedor").style.display = "block";
+									cargarModalProveedor();
+									
 								}else{
 									consultarActividadesProveedor(username);
 								}
@@ -405,12 +608,11 @@ function editar() {
 		function getUsuarioActual() {
 		    <%EstadoSesion estadoSesion = (EstadoSesion) session.getAttribute("estado_sesion");
 Object usuarioLogueado = session.getAttribute("usuario_logueado");
-if (usuarioLogueado instanceof DataTurista) {%>
+	if (usuarioLogueado instanceof DataTurista) {%> 
 		    var turistaActual = "<%=(DataTurista) session.getAttribute("usuario_logueado")%>";
 		    return turistaActual;
 		    <%} else if (usuarioLogueado instanceof DataProveedor) {%>
-		    var proveedorActual = "<%=(DataProveedor) session.getAttribute("usuario_logueado")%>
-		";
+		    var proveedorActual = "<%=(DataProveedor) session.getAttribute("usuario_logueado")%>";
 			return proveedorActual;
 	<%} else {%>
 		console.log("Sos un invitado");
@@ -418,10 +620,26 @@ if (usuarioLogueado instanceof DataTurista) {%>
 	<%}%>
 		}
 
-		// Llama a la función cuando la página se carga
 		window.onload = function() {
-			getUsuarioActual();
+			 var nombreUsuario = "";
+		    var usuarioActual = getUsuarioActual();
+		    if (usuarioActual) {
+		        <% if(usuarioLogueado instanceof DataTurista) {%>
+		        <%
+		        DataTurista t = (DataTurista) session.getAttribute("usuario_logueado");
+		        %>
+		            nombreUsuario = "<%= t.getUsername() %>"; // Usa el método correspondiente para obtener el nombre del turista
+		        <% } else if(usuarioLogueado instanceof DataProveedor) {%>
+		        <%
+		        DataProveedor p = (DataProveedor) session.getAttribute("usuario_logueado");
+		        %>
+		            nombreUsuario = "<%= p.getUsername() %>"; // Usa el método correspondiente para obtener el nombre del proveedor
+		        <% } %>
+		       
+		    }
+		    seleccionarUsuario(nombreUsuario);
 		};
+
 
 		function consultarActividadesProveedor(usernameProv) {
 			var xhr = new XMLHttpRequest();

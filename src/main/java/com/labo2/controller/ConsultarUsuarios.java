@@ -113,7 +113,6 @@ public class ConsultarUsuarios extends HttpServlet {
 		}
 		
 		if (request.getParameter("editarXD") != null) {
-		    if(request.getParameter("editarXD") == "Turista") {
 		    	String jsonPayload = request.getParameter("datos");
 			    JSONObject jsonObject = new JSONObject(jsonPayload);
 			    String nombre = jsonObject.getString("nombre");
@@ -128,12 +127,26 @@ public class ConsultarUsuarios extends HttpServlet {
 			    sistema.actualizarTurista(turista);
 
 			    System.out.println("Turista deserializado: " + turista);
-		    }else {
-		    	
-		    }
-			
 			
 		}
+		if (request.getParameter("editarProv") != null) {
+	    	String jsonPayload = request.getParameter("datos");
+		    JSONObject jsonObject = new JSONObject(jsonPayload);
+		    String tusername = jsonObject.getString("username");
+		    String nombre = jsonObject.getString("nombre");
+		    String apellido = jsonObject.getString("apellido");
+		    String fechaNacimiento = jsonObject.getString("fechaNacimiento");
+		    Date fechaNac = parsearFecha(fechaNacimiento);
+		    String email = jsonObject.getString("email");
+		    String descripcion = jsonObject.getString("descripcion");
+		    String linkWeb = jsonObject.getString("linkWeb");
+		    String password = jsonObject.getString("password");
+		    DataProveedor proveedor = new DataProveedor(tusername,nombre,apellido,email,password,fechaNac,descripcion,linkWeb);
+		    sistema.actualizarProveedor(proveedor);
+
+		    System.out.println("Turista deserializado: " + proveedor);
+		
+	}
 	}
 	
 	public Date parsearFecha(String fecha) {
