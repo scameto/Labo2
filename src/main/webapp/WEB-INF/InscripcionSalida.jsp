@@ -8,7 +8,7 @@
 <html>
 <head>
 <jsp:include page="/WEB-INF/templates/head.jsp" />
-<title>Consultar Usuario</title>
+<title>Inscripcion Salida</title>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/templates/header.jsp" />
@@ -16,7 +16,7 @@
 		<div class="row justify-content-center">
 			<div class="col-lg-3">
 				<div>
-					<h1 class="tituloVentana">Consulta Actividades</h1>
+					<h1 class="tituloVentana">Inscripcion Salida</h1>
 					<div id="cajaDepartamentos">
 						<div id="listaActividades">
 							<label for="departamentos">Departamentos:</label>
@@ -223,7 +223,7 @@ function seleccionarDepartamento(idDepartamento) {
 	var xhr = new XMLHttpRequest();
 	console.log("llegue no se q ...");
 	// Configurar la solicitud
-	xhr.open('POST', 'http://localhost:8080/Labo2/consultaActividad?idDepto=' // esto es una queryparam
+	xhr.open('POST', 'http://localhost:8080/Labo2/inscripcionSalida?idDepto=' // esto es una queryparam
 			+ idDepartamento, true);
 	xhr.setRequestHeader('Content-Type', 'application/json');
 
@@ -281,7 +281,7 @@ function seleccionarCategoria(idCategoria) {
 	var xhr = new XMLHttpRequest();
 	console.log("llegue no se q ...");
 	// Configurar la solicitud
-	xhr.open('POST', 'http://localhost:8080/Labo2/consultaActividad?idCateg=' // esto es una queryparam
+	xhr.open('POST', 'http://localhost:8080/Labo2/inscripcionSalida?idCateg=' // esto es una queryparam
 			+ idCategoria, true);
 	xhr.setRequestHeader('Content-Type', 'application/json');
 
@@ -334,7 +334,7 @@ function seleccionarCategoria(idCategoria) {
 }
 function buscarPaquetes(idActividad) { // esta funcion muesta las salidas asociadas a una actividad
 	var xhr = new XMLHttpRequest();
-	xhr.open("POST", "http://localhost:8080/Labo2/consultaActividad?idPaquet=" + idActividad,
+	xhr.open("POST", "http://localhost:8080/Labo2/inscripcionSalida?idPaquet=" + idActividad,
 			true);
 	xhr.setRequestHeader("Content-Type",
 			"application/x-www-form-urlencoded");
@@ -378,7 +378,7 @@ function buscarPaquetes(idActividad) { // esta funcion muesta las salidas asocia
 }
 function buscarSalidas(idActividad) { // esta funcion muesta las salidas asociadas a una actividad
 	var xhr = new XMLHttpRequest();
-	xhr.open("POST", "http://localhost:8080/Labo2/consultaActividad?idActiv=" + idActividad,
+	xhr.open("POST", "http://localhost:8080/Labo2/inscripcionSalida?idActiv=" + idActividad,
 			true);
 	xhr.setRequestHeader("Content-Type",
 			"application/x-www-form-urlencoded");

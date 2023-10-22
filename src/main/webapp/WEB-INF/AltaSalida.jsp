@@ -40,37 +40,37 @@
 					        session.removeAttribute("mensajeExito");
 					    }
 					    %>
+                  	
+					<div class="row mb-2">	
+					<label for="inputNombreAct" class="col-sm-2 col-form-label">Departamento</label>									
+					 <Select id="departamentoSelect" name="departamentoSelect" class="form-control col-sm-8" onchange="seleccionarDepartamento(this.value)" >
+								<option value=""></option>
+								<% List<DataDepartamento> departamentos=(List<DataDepartamento>)request.getAttribute("deptos");
+								if(departamentos!=null)
+								for(DataDepartamento departamento: departamentos){%>
+								<option 
+								value="<%=departamento.getId()%>" 
+								><%=departamento.getNombre()%></option>
+								<%} %>
+					</Select>	
+					</div>			
+<!-- 					<div class="row mb-2"> -->
+<!-- 					    <label for="inputNombreAct" class="col-sm-2 col-form-label">Actividad</label>						 -->
+<!-- 						<div class="card col-sm-8"> -->
+<!-- 							<div class="card-body" class="form-control" id="cardActividades" name="inputActividad"></div> -->
+<!-- 						</div> -->
+<!-- 					</div>					 -->
+					<div class="row mb-2">	
+					<label for="inputNombreAct" class="col-sm-2 col-form-label">Actividad</label>									
+					 <Select id="actividadSelect" name="actividadSelect" class="form-control col-sm-8"  >
+							
+					</Select>	
+					</div>
+
                     <div class="row mb-2">
-                    <label for="inputNombreDpto" class="col-sm-2 col-form-label">Depto</label>   
-                    	<div class="col-sm-8"> 
-                    	<div id="cajaDepartamentos">                
-		                   	
-							<ul class="list-group">
-								<%
-								List<DataDepartamento> deptos = (List<DataDepartamento>) request.getAttribute("deptos");
-								if (deptos != null) {
-									for (DataDepartamento username : deptos) {
-								%>
-								<li class="list-group-item"
-									onclick="seleccionarDepartamento('<%=username.getId()%>')"><%=username.getNombre()%></li>
-								<%
-								}
-								}
-								%>
-							</ul>
-							</div>	
-						</div>				
-					</div>					
-					<div class="row mb-2">
-					    <label for="inputNombreAct" class="col-sm-2 col-form-label">Actividad</label>						
-						<div class="card col-sm-8">
-							<div class="card-body" class="form-control" id="cardActividades" name="inputActividad"></div>
-						</div>
-					</div>					
-                    <div class="row mb-2">
-                        <label for="inputNombreAct" class="col-sm-2 col-form-label">NombreSal</label>
+                        <label for="inputNombreSal" class="col-sm-2 col-form-label">NombreSal</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control" id="inputNombreAct" name="inputNombreAct">
+                            <input type="text" class="form-control" id="inputNombreSal" name="inputNombreSal">
                         </div>
                     </div>                   
                     <div class="row mb-2">
@@ -137,7 +137,7 @@ function seleccionarDepartamento(idDepartamento) {
 	var xhr = new XMLHttpRequest();
 	console.log("llegue no se q ...");
 	// Configurar la solicitud
-	xhr.open('POST', 'http://localhost:8080/Labo2/AltaSalida?idDepto=' // esto es una queryparam
+	xhr.open('POST', 'http://localhost:8080/Labo2/ListarActividades?idDepto=' // esto es una queryparam
 			+ idDepartamento, true);
 	xhr.setRequestHeader('Content-Type', 'application/json');
 
@@ -153,13 +153,13 @@ function seleccionarDepartamento(idDepartamento) {
 				if (actividades.length != 0) {
 					actividades
 							.forEach(function(actividad) {
-								actividadesHtml += "<div class='actividad' onclick='SeleccionarActividad(" 
-										+ actividad.id 										
-										+ ")'>"
-										+ "<h6 style='cursor: pointer;'>"
-										+ actividad.nomAct
-										+ "</h6>"										
-										+ "</p>" + "<hr>" + "</div>";
+								actividadesHtml += "<option value='"+actividad.id+"' > "+actividad.nomAct+" </option>"
+// 										+ actividad.id 										
+// 										+ ")'>"
+// 										+ "<h6 style='cursor: pointer;'>"
+// 										+ actividad.nomAct
+// 										+ "</h6>"										
+// 										+ "</p>" + "<hr>" + "</div>";
 							});
 				} else {
 					actividadesHtml += "<div class='actividad'>"
@@ -168,7 +168,7 @@ function seleccionarDepartamento(idDepartamento) {
 							+ "</p>" + "</div>";
 				}
 
-				document.getElementById("cardActividades").innerHTML = actividadesHtml;
+				document.getElementById("actividadSelect").innerHTML = actividadesHtml;
 			}
 		}
 	};
