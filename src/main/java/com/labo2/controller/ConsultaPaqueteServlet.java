@@ -32,6 +32,17 @@ public class ConsultaPaqueteServlet extends HttpServlet {
         System.out.println("Paquetes: " + paquetes);
 
 
+        // Accedo al primer paquete de la lista
+        DataPaquete primerPaquete = paquetes.get(0);
+
+        // imprimo datos del primer paquete de la lista
+        System.out.println("Nombre del primer paquete: " + primerPaquete.getNombre());
+        System.out.println("Descripción del primer paquete: " + primerPaquete.getDescripcion());
+        System.out.println("Validez del primer paquete: " + primerPaquete.getValidez());
+        System.out.println("Descuento del primer paquete: " + primerPaquete.getDescuento());
+        System.out.println("Actividades del paquete: " + primerPaquete.getActividades());
+
+        
         if (paquetes == null || paquetes.isEmpty()) {
             objSesion.setAttribute("mensaje", "No hay paquetes para mostrar.");
         } else {

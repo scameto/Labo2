@@ -39,15 +39,13 @@
                     <div class="form-group">
                         <label for="actividades">Actividades del paquete seleccionado:</label>
                         <select class="form-control" id="cbActividades">
-                            <option value="opcion1">Opción 1</option>
-                            <option value="opcion2">Opción 2</option>
+                        
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="categorias">Categoria/s del paquete seleccionado:</label>
                         <select class="form-control" id="cbCategorias">
-                            <option value="opcion1">Opción 1</option>
-                            <option value="opcion2">Opción 2</option>
+                            
                         </select>
                     </div>
                     <div class="form-group">
@@ -73,21 +71,55 @@
             </div>
         </div>
     </div>
-    <script>
-        function actualizarDatos(select) {
-            console.log("Script ejecutado"); // para ver si entraba al script
-            var paquetes = <%= new Gson().toJson(paquetes) %>;
-            var selectedValue = select.value;
-            
-            for (var i = 0; i < paquetes.length; i++) {
-                if (paquetes[i].nombre === selectedValue) {
-                    document.getElementById("descripcion").value = paquetes[i].descripcion;
-                    document.getElementById("validez").value = paquetes[i].validez;
-                    document.getElementById("descuento").value = paquetes[i].descuento;
-                    break;
-                }
-            }
-        }
-    </script>
+	<script>
+		function actualizarDatos(select) {
+			console.log("entro al script");
+		    var paquetes = <%= new Gson().toJson(paquetes) %>;
+		    var selectedValue = select.value;
+		    var actividadesSelect = document.getElementById("cbActividades");
+	
+		    actividadesSelect.innerHTML = ''; // Limpiar las opciones actuales
+	
+		    for (var i = 0; i < paquetes.length; i++) {
+		        if (paquetes[i].nombre === selectedValue) {
+		        	
+		            var paquete = paquetes[i];
+		            console.log("Nombre: " + paquete.nombre);
+		            console.log("Descripción: " + paquete.descripcion);
+		            console.log("Validez: " + paquete.validez);
+		            console.log("Descuento: " + paquete.descuento);
+
+		            document.getElementById("descripcion").value = paquetes[i].descripcion;
+		            document.getElementById("validez").value = paquetes[i].validez;
+		            document.getElementById("descuento").value = paquetes[i].descuento;
+		            
+		            
+
+		            // Carga actividades asociadas al paquete
+		            var actividades = paquetes[i].actividades;
+		            if (actividades && actividades.length > 0) {
+		                actividades.forEach(function (actividad) {
+		                    var option = document.createElement("option");
+		                    option.value = actividad.id;
+		                    option.textContent = actividad.nombre;
+		                    actividadesSelect.appendChild(option);
+		                    paquete.actividades.forEach(function(actividad) {
+		                        console.log("ID: " + actividad.id);
+		                        console.log("Nombre: " + actividad.nombre);
+		                    });
+		                });
+		            } else {
+		                // Si no hay actividades asociadas, muestra un mensaje predeterminado
+		                var option = document.createElement("option");
+		                option.value = '';
+		                option.textContent = 'No hay actividades asociadas';
+		                actividadesSelect.appendChild(option);
+		            }
+		            break;
+		        }
+		    }
+		}
+	</script>
+		
 </body>
 </html>
