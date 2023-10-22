@@ -8,48 +8,40 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import logica.Fabrica;
 import logica.ISistema;
-import logica.datatypes.DataDepartamento;
-import logica.modelos.Departamento;
-import logica.modelos.Paquete;
+import logica.datatypes.DataPaquete;
 
 import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
+@WebServlet("/ConsultaPaqueteServlet")
 public class ConsultaPaqueteServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-	
-	private ISistema sistema = Fabrica.getInstance().getISistema();
-       
-    
-    public ConsultaPaqueteServlet() {
-        super();
+    private static final long serialVersionUID = 1L;
+    private ISistema sistema;
+
+    @Override
+    public void init() throws ServletException {
+        super.init();
+        sistema = Fabrica.getInstance().getISistema();
     }
-    
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-    	
-    	
-		HttpSession objSesion = request.getSession();//lo usamos para mostrar mensajes en la sesion
-	}
-    
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) 
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-//        List<Paquete> paquetes = sistema.getPaquetes();
-//        request.setAttribute("paquetes", paquetes);        
-//        // mandar el formulario al usuario
+        HttpSession objSesion = request.getSession();
+
+        List<DataPaquete> paquetes = sistema.getPaquetesData();
+        System.out.println("Paquetes: " + paquetes);
+
+
+        if (paquetes == null || paquetes.isEmpty()) {
+            objSesion.setAttribute("mensaje", "No hay paquetes para mostrar.");
+        } else {
+            request.setAttribute("paquetes", paquetes);
+        }
         request.getRequestDispatcher("/WEB-INF/ConsultaPaquete.jsp").forward(request, response);
-        	
     }
+    
+  
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-        request.getRequestDispatcher("/WEB-INF/ConsultaPaquete.jsp").forward(request, response);
-
-//		doGet(request, response);
-	}
-
+    
+    
 }
