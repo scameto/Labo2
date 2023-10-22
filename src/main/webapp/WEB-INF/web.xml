@@ -86,5 +86,7 @@
   <servlet-mapping>
     <servlet-name>AltaActividadServlet</servlet-name>
     <url-pattern>/AltaActividadServlet</url-pattern>
-  </servlet-mapping> 
+  </servlet-mapping>
+ 
+   
 </web-app>

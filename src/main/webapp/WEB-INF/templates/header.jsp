@@ -84,6 +84,7 @@
 				<a class="dropdown-item sal-item" href="#">Salidas</a>
 				<div class="dropdown-submenu-salidas" aria-labelledby="submenu-salidas">					
 					<a class="dropdown-item sal-item" href="#">Consulta Salida</a>
+					<a class="dropdown-item sal-item" href="AltaSalida">Alta Salida</a> <!-- ELIMINAAAAAAARRRRRRRRRRRRR!!!!! -->
 				</div>
 				<% } %>	<!-- ******************************************************************************* -->				
 			</div>
