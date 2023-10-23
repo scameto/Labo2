@@ -74,9 +74,13 @@
 	<script>
 		function actualizarDatos(select) {
 			console.log("entro al script");
+			console.log("-----------------------------");
+			
 		    var paquetes = <%= new Gson().toJson(paquetes) %>;
+		    console.log("Lista de paquetes que traigo: ", paquetes);
 		    var selectedValue = select.value;
 		    var actividadesSelect = document.getElementById("cbActividades");
+
 	
 		    actividadesSelect.innerHTML = ''; // Limpiar las opciones actuales
 	
@@ -84,10 +88,16 @@
 		        if (paquetes[i].nombre === selectedValue) {
 		        	
 		            var paquete = paquetes[i];
+		            console.log("Paquete seleccionado: ", paquete);
+		            console.log("-----------------------------");
 		            console.log("Nombre: " + paquete.nombre);
 		            console.log("Descripción: " + paquete.descripcion);
 		            console.log("Validez: " + paquete.validez);
 		            console.log("Descuento: " + paquete.descuento);
+		            console.log("-----------------------------");
+		            
+
+
 
 		            document.getElementById("descripcion").value = paquetes[i].descripcion;
 		            document.getElementById("validez").value = paquetes[i].validez;
@@ -95,18 +105,16 @@
 		            
 		            
 
-		            // Carga actividades asociadas al paquete
+		         // Carga actividades asociadas al paquete
 		            var actividades = paquetes[i].actividades;
+		            actividadesSelect.innerHTML = ''; // Limpiar las opciones actuales
+
 		            if (actividades && actividades.length > 0) {
 		                actividades.forEach(function (actividad) {
 		                    var option = document.createElement("option");
 		                    option.value = actividad.id;
 		                    option.textContent = actividad.nombre;
 		                    actividadesSelect.appendChild(option);
-		                    paquete.actividades.forEach(function(actividad) {
-		                        console.log("ID: " + actividad.id);
-		                        console.log("Nombre: " + actividad.nombre);
-		                    });
 		                });
 		            } else {
 		                // Si no hay actividades asociadas, muestra un mensaje predeterminado
@@ -115,11 +123,15 @@
 		                option.textContent = 'No hay actividades asociadas';
 		                actividadesSelect.appendChild(option);
 		            }
-		            break;
+
 		        }
 		    }
 		}
 	</script>
+	
+	
+	
+	
 		
 </body>
 </html>
