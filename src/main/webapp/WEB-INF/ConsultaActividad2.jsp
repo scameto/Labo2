@@ -104,28 +104,28 @@
 								</div>
 								<div class="card mb-4 mb-lg-0">
 									<div class="card-body p-0">
-										<ul class="list-group list-group-flush rounded-3">
-											<li
-												class="list-group-item d-flex justify-content-between align-items-center p-3">
-												<p class="mb-0">https://mdbootstrap.com</p>
-											</li>
-											<li
-												class="list-group-item d-flex justify-content-between align-items-center p-3">
-												<p class="mb-0">mdbootstrap</p>
-											</li>
-											<li
-												class="list-group-item d-flex justify-content-between align-items-center p-3">
-												<p class="mb-0">@mdbootstrap</p>
-											</li>
-											<li
-												class="list-group-item d-flex justify-content-between align-items-center p-3">
-												<p class="mb-0">mdbootstrap</p>
-											</li>
-											<li
-												class="list-group-item d-flex justify-content-between align-items-center p-3">
-												<p class="mb-0">mdbootstrap</p>
-											</li>
-										</ul>
+<!-- 										<ul class="list-group list-group-flush rounded-3"> -->
+<!-- 											<li -->
+<!-- 												class="list-group-item d-flex justify-content-between align-items-center p-3"> -->
+<!-- 												<p class="mb-0">https://mdbootstrap.com</p> -->
+<!-- 											</li> -->
+<!-- 											<li -->
+<!-- 												class="list-group-item d-flex justify-content-between align-items-center p-3"> -->
+<!-- 												<p class="mb-0">mdbootstrap</p> -->
+<!-- 											</li> -->
+<!-- 											<li -->
+<!-- 												class="list-group-item d-flex justify-content-between align-items-center p-3"> -->
+<!-- 												<p class="mb-0">@mdbootstrap</p> -->
+<!-- 											</li> -->
+<!-- 											<li -->
+<!-- 												class="list-group-item d-flex justify-content-between align-items-center p-3"> -->
+<!-- 												<p class="mb-0">mdbootstrap</p> -->
+<!-- 											</li> -->
+<!-- 											<li -->
+<!-- 												class="list-group-item d-flex justify-content-between align-items-center p-3"> -->
+<!-- 												<p class="mb-0">mdbootstrap</p> -->
+<!-- 											</li> -->
+<!-- 										</ul> -->
 									</div>
 								</div>
 							</div>
@@ -340,13 +340,13 @@ function buscarPaquetes(idActividad) { // esta funcion muesta las salidas asocia
 										+ "</h4>";
 										paquetesHtml += "<hr>";
 										paquetesHtml += "<p>Descripcion: "
-										+ paquete.desc + "</p>";
+										+ paquete.descripcion + "</p>";
 										paquetesHtml += "<p>Validez: "
-										+ paquete.val + "</p>";
+										+ paquete.validez + "</p>";
 										paquetesHtml += "<p>Descuento: "
-										+ paquete.descuen + "</p>";
+										+ paquete.descuento + "</p>";
 										paquetesHtml += "<p>Fecha Alta: "
-										+ paquete.fAlta + "</p>";										
+										+ paquete.fechaAlta + "</p>";										
 										paquetesHtml += "</div>";
 							});
 				} else {
