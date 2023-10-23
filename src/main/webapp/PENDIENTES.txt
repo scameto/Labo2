@@ -7,13 +7,16 @@ PENDIENTES													|						PRONTAS
 ------------------------------------------------------------------------------------------------------------------
  SANTIAGO
 ------------------------------------------------------------------------------------------------------------------											
-																					ALTA ACTIVIDAD TURISTICA SC (LISTO Y AJUSTADO)
-CONSULTA DE ACTIVIDAD TURISTICA		-EN PROCESO Y AVANZADO-						
-ALTA DE SALIDA TURISTICA									
+																					ALTA ACTIVIDAD TURISTICA SC (LISTO Y AJUSTADO
+CONSULTA DE ACTIVIDAD TURISTICA		-EN PROCESO Y AVANZADO-	agregar categoria de la actividad y formatear datos actividad				
+ALTA DE SALIDA TURISTICA	
+CONSULTA DE SALIDA TURISTICA - copiar consulta Actividad, sacar paquetes luego de formatear		
+INSCRIPCION a SALIDA TURISTICA
+					
 ------------------------------------------------------------------------------------------------------------------
  MARIANO
 ------------------------------------------------------------------------------------------------------------------
-CONSULTA DE SALIDA TURISTICA
+
 INSCRIPCION a SALIDA TURISTICA
 CONSULTA DE PAQUETE DE ACTIVIDADES TURISTICAS -proceso-
 COMPRA DE PAQUETES

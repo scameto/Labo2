@@ -40,13 +40,13 @@
 				<div class="dropdown-submenu-actividades"
 					aria-labelledby="submenu-actividades">
 					<a class="dropdown-item act-item" href="AltaActividad">Alta	Actividad Turistica</a> 
-					<a class="dropdown-item act-item" href="ConsultaActividad">Consulta	Actividad Turistica</a>
+					<a class="dropdown-item act-item" href="consultaActividad">Consulta	Actividad Turistica</a>
 				</div>
 				<%} else {%>
 				<a class="dropdown-item act-item" href="#">Actividades</a>
 				<div class="dropdown-submenu-actividades"
 					aria-labelledby="submenu-actividades">					
-					<a class="dropdown-item act-item" href="ConsultaActividad">Consulta	Actividad Turistica</a>
+					<a class="dropdown-item act-item" href="consultaActividad">Consulta	Actividad Turistica</a>
 				</div>
 				<% } %>	<!-- ******************************************************************************* -->	
 				<% if(usuarioLogueado instanceof DataProveedor) {%>		
@@ -72,14 +72,14 @@
 				<a class="dropdown-item sal-item" href="#">Salidas</a>
 				<div class="dropdown-submenu-salidas"
 					aria-labelledby="submenu-salidas">
-					<a class="dropdown-item sal-item" href="#">Alta Salida</a> 
-					<a class="dropdown-item sal-item" href="#">Inscripcion Salida</a> 
+					<a class="dropdown-item sal-item" href="AltaSalida">Alta Salida</a> 
+					<a class="dropdown-item sal-item" href="inscripcionSalida">Inscripcion Salida</a> <!-- ELIMINAR -->
 					<a class="dropdown-item sal-item" href="#">Consulta Salida</a>
 				</div>
 				<%} else if(usuarioLogueado instanceof DataTurista) {%>
 				<a class="dropdown-item sal-item" href="#">Salidas</a>
 				<div class="dropdown-submenu-salidas" aria-labelledby="submenu-salidas">					
-					<a class="dropdown-item sal-item" href="#">Inscripcion Salida</a> 
+					<a class="dropdown-item sal-item" href="inscripcionSalida">Inscripcion Salida</a> 
 					<a class="dropdown-item sal-item" href="#">Consulta Salida</a>
 				</div>
 				<%} else {%>
