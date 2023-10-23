@@ -73,20 +73,19 @@
     </div>
 	<script>
 		function actualizarDatos(select) {
-			console.log("entro al script");
-			console.log("-----------------------------");
-			
+		    console.log("entro al script");
+		    console.log("-----------------------------");
+	
 		    var paquetes = <%= new Gson().toJson(paquetes) %>;
 		    console.log("Lista de paquetes que traigo: ", paquetes);
 		    var selectedValue = select.value;
 		    var actividadesSelect = document.getElementById("cbActividades");
-
-	
+		    
 		    actividadesSelect.innerHTML = ''; // Limpiar las opciones actuales
 	
 		    for (var i = 0; i < paquetes.length; i++) {
 		        if (paquetes[i].nombre === selectedValue) {
-		        	
+	
 		            var paquete = paquetes[i];
 		            console.log("Paquete seleccionado: ", paquete);
 		            console.log("-----------------------------");
@@ -95,27 +94,25 @@
 		            console.log("Validez: " + paquete.validez);
 		            console.log("Descuento: " + paquete.descuento);
 		            console.log("-----------------------------");
-		            
-
-
-
+	
 		            document.getElementById("descripcion").value = paquetes[i].descripcion;
 		            document.getElementById("validez").value = paquetes[i].validez;
 		            document.getElementById("descuento").value = paquetes[i].descuento;
-		            
-		            
-
-		         // Carga actividades asociadas al paquete
+	
+		            // Carga actividades asociadas al paquete
 		            var actividades = paquetes[i].actividades;
 		            actividadesSelect.innerHTML = ''; // Limpiar las opciones actuales
-
+	
 		            if (actividades && actividades.length > 0) {
-		                actividades.forEach(function (actividad) {
+		                for (var j = 0; j < actividades.length; j++) {
+		                	//imprimo lo que recorro en el for
+		                	console.log("Actividad ID: " + actividades[j].id);
+		                    console.log("Actividad Nombre: " + actividades[j].nomAct);
 		                    var option = document.createElement("option");
-		                    option.value = actividad.id;
-		                    option.textContent = actividad.nombre;
+		                    option.value = actividades[j].id;
+		                    option.textContent = actividades[j].nomAct;
 		                    actividadesSelect.appendChild(option);
-		                });
+		                }
 		            } else {
 		                // Si no hay actividades asociadas, muestra un mensaje predeterminado
 		                var option = document.createElement("option");
@@ -123,10 +120,11 @@
 		                option.textContent = 'No hay actividades asociadas';
 		                actividadesSelect.appendChild(option);
 		            }
-
+	
 		        }
 		    }
 		}
+
 	</script>
 	
 	
