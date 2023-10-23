@@ -25,13 +25,13 @@
 		<div class="row justify-content-center">
 			<div class="col-lg-3">
 				<div>
-					<h1 class="tituloVentana">Commprar Paquetess</h1>
-					<div id="listaPaquetes">
-						<h2>Paquetes:</h2>
-						<div id="listaPaquetesDisponibles">
+					<h1 class="tituloVentana">Comprar Paquetess</h1>
+						<div id="listaPaquetes" style="max-height: 70vh; overflow-y: auto;">
+   							 <h2>Paquetes:</h2>
+    							<div id="listaPaquetesDisponibles">
 
-						</div>
-					</div>
+   						 		</div>
+							</div>
 				</div>
 			</div>
 			<div class="col-lg-9">
@@ -91,6 +91,7 @@
 									</div>
 								</div>
 							</div>
+							<button></button>
 						</div>
 					</div>
 				</section>
@@ -104,19 +105,71 @@
 	    xhr.open("POST", "http://localhost:8080/Labo2/CompraPaquete");
 	    xhr.onreadystatechange = function() {
 	        if (xhr.readyState == 4 && xhr.status == 200) {
-	        	console.log(xhr.responseText);
-	        	if (JSON.parse(xhr.responseText) != null) {
-	        		var res = JSON.parse(xhr.responseText);
-	        		console.log(res);
-	        	}
+	            var paquetes = JSON.parse(xhr.responseText);
+	            var listaPaquetesDisponibles = document.getElementById("listaPaquetesDisponibles");
+
+	            // Limpiar la lista antes de agregar nuevos elementos
+	            listaPaquetesDisponibles.innerHTML = '';
+
+	            paquetes.forEach(function(paquete) {
+	                var card = document.createElement("div");
+	                card.classList.add("card", "mb-4");
+	                card.style.cursor = "pointer";
+	                card.addEventListener("click", function() {
+	                    mostrarDetallesPaquete(paquete);
+	                });
+
+	                var cardBody = document.createElement("div");
+	                cardBody.classList.add("card-body");
+
+	                var cardTitle = document.createElement("h5");
+	                cardTitle.classList.add("card-title");
+	                cardTitle.textContent = paquete.nombre;
+
+	                cardBody.appendChild(cardTitle);
+	                card.appendChild(cardBody);
+	                listaPaquetesDisponibles.appendChild(card);
+	            });
 	        }
 	    };
 	    xhr.send();
 	}
 
+
+	function mostrarDetallesPaquete(paquete) {
+	    // Lógica para mostrar los detalles del paquete seleccionado en la sección correspondiente
+	    var nombrePaquete = document.getElementById("nombrePaquete");
+	    var descPaquete = document.getElementById("descPaquete");
+	    var validezPaquete = document.getElementById("validezPaquete");
+	    var fechaAltaPaquete = document.getElementById("fechaAltaPaquete");
+	    var contenedorActividades = document.getElementById("contenedorActividades");
+	    var cardActividades = document.getElementById("cardActividades");
+
+	    nombrePaquete.textContent = paquete.nombre;
+	    descPaquete.textContent = paquete.descripcion;
+	    validezPaquete.textContent = paquete.validez;
+	    fechaAltaPaquete.textContent = paquete.fechaAlta;
+
+	    // Lógica para mostrar actividades asociadas al paquete si las hay
+	    if (paquete.actividades.length > 0) {
+	        contenedorActividades.style.display = "block";
+	        cardActividades.innerHTML = ''; // Limpiar las actividades anteriores
+
+	        paquete.actividades.forEach(function(actividad) {
+	            var actividadElement = document.createElement("div");
+	            actividadElement.textContent = actividad.nomAct;
+	            cardActividades.appendChild(actividadElement);
+	        });
+	    } else {
+	        // Si no hay actividades, ocultar la sección de actividades
+	        contenedorActividades.style.display = "none";
+	    }
+	}
+
 	window.onload = function() {
-		listarPaquetes();
+	    listarPaquetes();
 	};
+
 	
 	</script>
 </body>

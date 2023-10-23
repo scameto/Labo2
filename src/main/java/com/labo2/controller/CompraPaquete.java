@@ -44,6 +44,7 @@ public class CompraPaquete extends HttpServlet {
 		if(usuarioLogueado instanceof DataTurista) {
 			String username = ((DataTurista)usuarioLogueado).getUsername();
 			List<DataPaquete> paquetes = sistema.getPaquetesNoCompradosTurista(username);
+			System.out.println("Consulta de paquetes: " + paquetes);
 			String paquetesJson = gson.toJson(paquetes);
 			response.setContentType("application/json");
 			response.getWriter().write(paquetesJson);
