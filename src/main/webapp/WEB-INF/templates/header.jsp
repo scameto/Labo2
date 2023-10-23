@@ -32,7 +32,6 @@
 				<div class="dropdown-submenu-usuario"
 					aria-labelledby="submenu-usuarios">
 					<a class="dropdown-item usr-item" href="ConsultarUsuario">Consultar Usuarios</a>
-					<a class="dropdown-item usr-item" href="#">Modificar Usuarios</a>
 				</div>
 				<% } %> <!-- ******************************************************************************* -->
 				<% if(usuarioLogueado instanceof DataProveedor) {%>
@@ -53,13 +52,13 @@
 				<a class="dropdown-item paq-item" href="#">Paquetes</a>
 				<div class="dropdown-submenu-paquetes" aria-labelledby="submenu-paquetes">
 					<a class="dropdown-item paq-item" href="#">Alta Paquete</a> 
-					<a class="dropdown-item paq-item" href="#">Compra Paquete</a> 
+					<a class="dropdown-item paq-item" href="CompraPaquete">Compra Paquete</a> 
 					<a class="dropdown-item paq-item" href="#">Consulta Paquete</a>
 				</div>
 				<%} else if(usuarioLogueado instanceof DataTurista) {%>
 				<a class="dropdown-item paq-item" href="#">Paquetes</a>
 				<div class="dropdown-submenu-paquetes" aria-labelledby="submenu-paquetes">
-					<a class="dropdown-item paq-item" href="#">Compra Paquete</a> 
+					<a class="dropdown-item paq-item" href="CompraPaquete">Compra Paquete</a> 
 					<a class="dropdown-item paq-item" href="#">Consulta Paquete</a>
 				</div>
 				<%} else {%>

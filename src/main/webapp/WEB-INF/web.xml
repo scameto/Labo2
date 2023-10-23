@@ -37,7 +37,7 @@
     <servlet-name>EstadoSesion</servlet-name>
     <url-pattern>/EstadoSesion</url-pattern>
   </servlet-mapping>
- <servlet>
+  <servlet>
     <servlet-name>ConsultarUsuario</servlet-name>
     <servlet-class>com.labo2.controller.ConsultarUsuarios</servlet-class>
   </servlet>
@@ -55,19 +55,7 @@
     <servlet-name>iniciar</servlet-name>
     <url-pattern>/iniciar</url-pattern>
   </servlet-mapping>
-  <!--  
   <servlet>
-    <description></description>
-    <display-name>AltaActividad</display-name>
-    <servlet-name>AltaActividad</servlet-name>
-    <jsp-file>/WEB-INF/AltaActividad.jsp</jsp-file>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>AltaActividad</servlet-name>
-    <url-pattern>/AltaActividad</url-pattern> 
-  </servlet-mapping>
-  -->
-  <servlet>  
     <description></description>
     <display-name>logoutServlet</display-name>
     <servlet-name>logoutServlet</servlet-name>
@@ -96,5 +84,15 @@
   <servlet-mapping>
     <servlet-name>AltaActividadServlet</servlet-name>
     <url-pattern>/AltaActividadServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>CompraPaquete</display-name>
+    <servlet-name>CompraPaquete</servlet-name>
+    <servlet-class>com.labo2.controller.CompraPaquete</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CompraPaquete</servlet-name>
+    <url-pattern>/CompraPaquete</url-pattern>
   </servlet-mapping>
 </web-app>
