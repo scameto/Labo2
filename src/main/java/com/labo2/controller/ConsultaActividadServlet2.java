@@ -123,7 +123,8 @@ public class ConsultaActividadServlet2 extends HttpServlet {
             response.setContentType("application/json");
             response.getWriter().write(salidasJson);
           }
-    	 
+    	 //Cargando las categorias a las que pertenece una actividad seleccionada
+   
 //        String username = request.getParameter("username");
 //        String idAct = request.getParameter("idActividad");
 //        DataDepartamento elegido = null;

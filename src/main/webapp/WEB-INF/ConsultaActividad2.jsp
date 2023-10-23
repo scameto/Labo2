@@ -15,6 +15,7 @@
 	<div class="container">
 		<div class="row justify-content-center">
 			<div class="col-lg-3">
+			
 				<div>
 					<h1 class="tituloVentana">Consulta Actividades</h1>
 					<div id="cajaDepartamentos">
@@ -39,7 +40,9 @@
 
 					<div class="select">
 						<label for="categorias">Categorías:</label>
-						<ul id="categorias" name="categoria">
+						<ul class="list-group">
+						
+<!-- 						<ul id="categorias" name="categoria"> -->
 
 							<%
 							List<DataCategoria> categorias = (List<DataCategoria>)request.getAttribute("categoria");
@@ -60,30 +63,30 @@
 			</div>
 
 			<style>
-#cajaDepartamentos {
+#cajaDepartamentos, #cajaCategorias {
 	max-height: 40vh;
 	overflow-y: auto;
+	width: 100%;
+	max-width:250px;
 }
 
-#cajaCategorias {
-	max-height: 40vh;
-	overflow-y: auto;
-}
+
 
 #cardActividades {
 	overflow-y: auto;
 	max-height: 30vh;
-	width: 30vw;
+	
 }
 
 #cardSalidas {
 	overflow-y: auto;
 	max-height: 30vh;
+	
+	
 }
 </style>
 			<div class="col-lg-9">
-				<section
-					style="background-color: rgba(238, 238, 238, 0.5); margin-top: 10vh;"
+				<section style="background-color: rgba(238, 238, 238, 0.5); margin-top: 10vh;"
 					id="datosTurista">
 					<div class="container py-5">
 						<div class="row">
@@ -102,109 +105,30 @@
 										</div>
 									</div>
 								</div>
-								<div class="card mb-4 mb-lg-0">
-									<div class="card-body p-0">
-<!-- 										<ul class="list-group list-group-flush rounded-3"> -->
-<!-- 											<li -->
-<!-- 												class="list-group-item d-flex justify-content-between align-items-center p-3"> -->
-<!-- 												<p class="mb-0">https://mdbootstrap.com</p> -->
-<!-- 											</li> -->
-<!-- 											<li -->
-<!-- 												class="list-group-item d-flex justify-content-between align-items-center p-3"> -->
-<!-- 												<p class="mb-0">mdbootstrap</p> -->
-<!-- 											</li> -->
-<!-- 											<li -->
-<!-- 												class="list-group-item d-flex justify-content-between align-items-center p-3"> -->
-<!-- 												<p class="mb-0">@mdbootstrap</p> -->
-<!-- 											</li> -->
-<!-- 											<li -->
-<!-- 												class="list-group-item d-flex justify-content-between align-items-center p-3"> -->
-<!-- 												<p class="mb-0">mdbootstrap</p> -->
-<!-- 											</li> -->
-<!-- 											<li -->
-<!-- 												class="list-group-item d-flex justify-content-between align-items-center p-3"> -->
-<!-- 												<p class="mb-0">mdbootstrap</p> -->
-<!-- 											</li> -->
-<!-- 										</ul> -->
-									</div>
-								</div>
+<!-- 								<div class="card mb-4 mb-lg-0"> -->
+<!-- 									<div class="card-body p-0"> -->
+<!-- 										<div class="card-body" id="cardCategoriasXAct"></div> -->
+<!-- 									</div> -->
+<!-- 								</div> -->
 							</div>
 							<div class="col-lg-8">
 								<div class="card mb-4">
 									<div class="card-body">
-									<div class="col-md-6">
-										<div class="card mb-4 mb-md-0">
+										<div class="card mb-4 mb-md-8">
 											<div class="card-body" id="cardActividades"></div>
 										</div>
 									</div>
-										<!-- div class="row">
-											<div class="col-sm-3">
-												<p class="mb-0">Nombre del Turista</p>
-											</div>
-											<div class="col-sm-9">
-												<p class="text-muted mb-0" id="nombreUsuario"></p>
-											</div>
-
-										</div>
-										<hr>
-										<div class="row">
-											<div class="col-sm-3">
-												<p class="mb-0">Email</p>
-											</div>
-											<div class="col-sm-9">
-												<p class="text-muted mb-0" id="emailUsuario"></p>
-											</div>
-										</div>
-										<hr>
-										<div class="row">
-											<div class="col-sm-3">
-												<p class="mb-0">Fecha de Nacimiento</p>
-											</div>
-											<div class="col-sm-9">
-												<p class="text-muted mb-0" id="fechaNacUsuario"></p>
-											</div>
-										</div>
-										<hr style="display: none;" id="hrNacionalidad">
-										<div class="row" style="display: none;"
-											id="nacionalidadTuristaRow">
-											<div class="col-sm-3">
-												<p class="mb-0">Nacionalidad</p>
-											</div>
-											<div class="col-sm-9">
-												<p class="text-muted mb-0" id="nacionalidadUsuario"></p>
-											</div>
-										</div>
-										<hr style="display: none;" id="descProveedorHr">
-										<div class="row" style="display: none;" id="descProveedorRow">
-
-											<div class="col-sm-3">
-												<p class="mb-0">Descripcion</p>
-											</div>
-											<div class="col-sm-9">
-												<p class="text-muted mb-0" id="descProveedor"></p>
-											</div>
-										</div>
-										<hr style="display: none;" id="linkWebProveedorHr">
-										<div class="row" style="display: none;"
-											id="linkWebProveedorRow">
-
-											<div class="col-sm-3">
-												<p class="mb-0">Link a la web</p>
-											</div>
-											<div class="col-sm-9">
-												<p class="text-muted mb-0" id="linkWebProveedor"></p>
-											</div>
-										</div-->
+										
 									</div>
 								</div>
 								<div class="row">
 									<div class="col-md-6">
-										<div class="card mb-4 mb-md-0">
+										<div class="card mb-0">
 											<div class="card-body" id="cardPaquetes"></div>
 										</div>
 									</div>
 									<div class="col-md-6">
-										<div class="card mb-4 mb-md-0">
+										<div class="card mb-0">
 											<div class="card-body" id="cardSalidas"></div>
 										</div>
 									</div>
@@ -253,6 +177,11 @@ function seleccionarDepartamento(idDepartamento) {
 							        actividadesHtml += "<p>Duración: " + actividad.duracion + " horas</p>";
 							        actividadesHtml += "<p>Costo: $" + actividad.costo + "</p>";
 							        actividadesHtml += "<p>Ciudad: " + actividad.ciudad + "</p>";
+							        var nombresCategorias = actividad.categorias.map(function(categoria) {
+							            return categoria.nombre;
+							        }).join(', ');
+
+							        actividadesHtml += "<p>Categorias: " + nombresCategorias + "<p>";
 							});
 				} else {
 					actividadesHtml += "<div class='actividad'>"
@@ -305,6 +234,11 @@ function seleccionarCategoria(idCategoria) {
 							        actividadesHtml += "<p>Duración: " + actividad.duracion + " horas</p>";
 							        actividadesHtml += "<p>Costo: $" + actividad.costo + "</p>";
 							        actividadesHtml += "<p>Ciudad: " + actividad.ciudad + "</p>";
+							        var nombresCategorias = actividad.categorias.map(function(categoria) {
+							            return categoria.nombre;
+							        }).join(', ');
+
+							        actividadesHtml += "<p>Categorias: " + nombresCategorias + "<p>";
 							});
 				} else {
 					actividadesHtml += "<div class='actividad'>"
@@ -314,6 +248,7 @@ function seleccionarCategoria(idCategoria) {
 				}
 
 				document.getElementById("cardActividades").innerHTML = actividadesHtml;
+
 			}
 		}
 	};
@@ -366,10 +301,8 @@ function buscarPaquetes(idActividad) { // esta funcion muesta las salidas asocia
 }
 function buscarSalidas(idActividad) { // esta funcion muesta las salidas asociadas a una actividad
 	var xhr = new XMLHttpRequest();
-	xhr.open("POST", "http://localhost:8080/Labo2/consultaActividad?idActiv=" + idActividad,
-			true);
-	xhr.setRequestHeader("Content-Type",
-			"application/x-www-form-urlencoded");
+	xhr.open("POST", "http://localhost:8080/Labo2/consultaActividad?idActiv=" + idActividad, true);
+	xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 	xhr.onreadystatechange = function() {
 		if (xhr.readyState == 4) {
 			if (xhr.status == 200) {
@@ -377,8 +310,7 @@ function buscarSalidas(idActividad) { // esta funcion muesta las salidas asociad
 				// Construir el contenido HTML de las salidas
 				var salidasHtml = "";
 				if (salidas.length > 0) {
-					salidas
-							.forEach(function(salida) {
+					salidas.forEach(function(salida) {
 								salidasHtml += "<div class='salida'>";
 								salidasHtml += "<h4>" + salida.nombre
 										+ "</h4>";
@@ -399,6 +331,8 @@ function buscarSalidas(idActividad) { // esta funcion muesta las salidas asociad
 							});
 				} else {
 					salidasHtml += "<p>No hay salidas disponibles para esta actividad.</p>";
+                    
+
 				}
 
 				// Agregar el contenido al elemento con id cardSalidas
@@ -413,6 +347,8 @@ function buscarSalidas(idActividad) { // esta funcion muesta las salidas asociad
 	// Enviar el ID de la actividad al servidor
 	xhr.send("idActividad=" + idActividad);
 }
+
+
 </script>
 </body>
 </html>
