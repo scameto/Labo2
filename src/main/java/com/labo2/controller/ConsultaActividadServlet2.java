@@ -57,10 +57,8 @@ public class ConsultaActividadServlet2 extends HttpServlet {
                 request.setAttribute("categoria", categorias);
             }            
             request.getRequestDispatcher("/WEB-INF/ConsultaActividad2.jsp").forward(request, response);
-        }
-       
-    }
-    
+        }       
+    }    
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -122,43 +120,6 @@ public class ConsultaActividadServlet2 extends HttpServlet {
           	}          	
             response.setContentType("application/json");
             response.getWriter().write(salidasJson);
-          }
-    	 //Cargando las categorias a las que pertenece una actividad seleccionada
-   
-//        String username = request.getParameter("username");
-//        String idAct = request.getParameter("idActividad");
-//        DataDepartamento elegido = null;
-//        if (username != null) {
-//            List<DataDepartamento> dep = sistema.getDepartamentosData();
-//            for(DataDepartamento de: dep) {
-//            	if(de.getNombre().equals(username)) {
-//            		elegido = de;
-//            		break;
-//            	}
-//            }
-//            if(elegido!= null) {
-//                String departamentoJson = gson.toJson(elegido);
-//                response.setContentType("application/json");
-//                response.getWriter().write(departamentoJson);
-//            
-//            } 
-//        }else if(idAct != null) {
-//        	Long idActividad = Long.parseLong(idAct);
-//        	System.out.println(idActividad);
-//        	List<DataSalida> salidas = sistema.getSalidasData(idActividad);
-//        	request.setAttribute("salidas", salidas);
-//          String salidasJson = gson.toJson(salidas);
-//          response.setContentType("application/json");
-//          response.getWriter().write(salidasJson);
-//        } 
-//        else {
-//        	String usernameProv = (String)request.getParameter("usernameProv");
-//            List<DataActividad> actividades = (List<DataActividad>) sistema.getActividadesProveedorConfirmadas(usernameProv);
-//            System.out.println("actis " + actividades);
-//            request.setAttribute("listaActividades", actividades);
-//            String actividadesJson = gson.toJson(actividades);
-//            response.setContentType("application/json");
-//            response.getWriter().write(actividadesJson);
-//        }
+          }    
     }
 }

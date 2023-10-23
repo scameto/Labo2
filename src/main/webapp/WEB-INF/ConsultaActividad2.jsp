@@ -274,20 +274,15 @@ function buscarPaquetes(idActividad) { // esta funcion muesta las salidas asocia
 								paquetesHtml += "<h4>" + paquete.nombre
 										+ "</h4>";
 										paquetesHtml += "<hr>";
-										paquetesHtml += "<p>Descripcion: "
-										+ paquete.descripcion + "</p>";
-										paquetesHtml += "<p>Validez: "
-										+ paquete.validez + "</p>";
-										paquetesHtml += "<p>Descuento: "
-										+ paquete.descuento + "</p>";
-										paquetesHtml += "<p>Fecha Alta: "
-										+ paquete.fechaAlta + "</p>";										
+										paquetesHtml += "<p>Descripcion: "	+ paquete.descripcion + "</p>";
+										paquetesHtml += "<p>Validez: "	+ paquete.validez + "</p>";
+										paquetesHtml += "<p>Descuento: " + paquete.descuento + "</p>";
+										paquetesHtml += "<p>Fecha Alta: " + paquete.fechaAlta + "</p>";										
 										paquetesHtml += "</div>";
 							});
 				} else {
 					paquetesHtml += "<p>No hay Paquetes disponibles para esta Actividad.</p>";
 				}
-
 				// Agregar el contenido al elemento con id cardSalidas
 				document.getElementById("cardPaquetes").innerHTML = paquetesHtml;
 			} else {
@@ -347,6 +342,7 @@ function buscarSalidas(idActividad) { // esta funcion muesta las salidas asociad
 	// Enviar el ID de la actividad al servidor
 	xhr.send("idActividad=" + idActividad);
 }
+
 
 
 </script>

@@ -145,8 +145,7 @@ public class AltaSalidaServlet extends HttpServlet {
 	    } else {
 	    	objSesion.setAttribute("mensajeError", "Hubo un problema en el registro de la Salida.");
 	    	 response.sendRedirect("AltaSalida");
-	    }
-		
+	    }		
 	}
 	private DataSalida tomarDatos(Date fechaSal, String lugar, String nombreSal, Integer cantMax, DataActividad act) {
 		DataSalida newSalida = new DataSalida();		
