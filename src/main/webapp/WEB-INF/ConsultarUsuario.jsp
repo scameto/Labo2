@@ -509,6 +509,9 @@
 	    }
 
 		function seleccionarUsuario(username) {
+			
+			document.getElementById("btneditarPerfil").style.display = "none";
+			document.getElementById("btneditarPerfilProveedor").style.display = "none";
 			document.getElementById("contenedorSalidas").style.display = "none";
 			document.getElementById("contenedorPaquetesUsuario").style.display = "none";
 			var xhr = new XMLHttpRequest();
