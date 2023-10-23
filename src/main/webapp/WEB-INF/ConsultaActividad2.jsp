@@ -239,26 +239,20 @@ function seleccionarDepartamento(idDepartamento) {
 				if (actividades.length != 0) {
 					actividades
 							.forEach(function(actividad) {
-								actividadesHtml += "<div class='actividad' onclick='buscarSalidas(" 
-										+ actividad.id 
-										+ "); buscarPaquetes(" 
-										+ actividad.id 
-										+ ")'>"
-										+ "<h4 style='cursor: pointer;'>"
-										+ actividad.nomAct
-										+ "</h4>"
-										+ "<hr>"
-										+ "<p>"
-										+ actividad.descripcion
-										+ "</p>"
-										+ "<hr>"
-										+ "<p>"
-										+ actividad.duracion
-										+ " horas</p>"
-										+ "<hr>"
-										+ "<p>$"
-										+ actividad.costo
-										+ "</p>" + "<hr>" + "</div>";
+								
+									actividadesHtml += "<div class='actividad' onclick='buscarSalidas(" 
+							            + actividad.id 
+							            + "); buscarPaquetes(" 
+							            + actividad.id 
+							            + ")'>";
+							        
+							        actividadesHtml += "<h4 style='cursor: pointer;'>" + actividad.nomAct + "</h4>";
+							        actividadesHtml += "<hr>";
+							        
+							        actividadesHtml += "<p>Descripcion: " + actividad.descripcion + "</p>";
+							        actividadesHtml += "<p>Duración: " + actividad.duracion + " horas</p>";
+							        actividadesHtml += "<p>Costo: $" + actividad.costo + "</p>";
+							        actividadesHtml += "<p>Ciudad: " + actividad.ciudad + "</p>";
 							});
 				} else {
 					actividadesHtml += "<div class='actividad'>"
@@ -297,26 +291,20 @@ function seleccionarCategoria(idCategoria) {
 				if (actividades.length != 0) {
 					actividades
 							.forEach(function(actividad) {
-								actividadesHtml += "<div class='actividad' onclick='buscarSalidas(" 
-										+ actividad.id 
-										+ "); buscarPaquetes(" 
-										+ actividad.id 
-										+ ")'>"
-										+ "<h4 style='cursor: pointer;'>"
-										+ actividad.nomAct
-										+ "</h4>"
-										+ "<hr>"
-										+ "<p>"
-										+ actividad.descripcion
-										+ "</p>"
-										+ "<hr>"
-										+ "<p>"
-										+ actividad.duracion
-										+ " horas</p>"
-										+ "<hr>"
-										+ "<p>$"
-										+ actividad.costo
-										+ "</p>" + "<hr>" + "</div>";
+								
+									actividadesHtml += "<div class='actividad' onclick='buscarSalidas(" 
+							            + actividad.id 
+							            + "); buscarPaquetes(" 
+							            + actividad.id 
+							            + ")'>";
+							        
+							        actividadesHtml += "<h4 style='cursor: pointer;'>" + actividad.nomAct + "</h4>";
+							        actividadesHtml += "<hr>";
+							        
+							        actividadesHtml += "<p>Descripcion: " + actividad.descripcion + "</p>";
+							        actividadesHtml += "<p>Duración: " + actividad.duracion + " horas</p>";
+							        actividadesHtml += "<p>Costo: $" + actividad.costo + "</p>";
+							        actividadesHtml += "<p>Ciudad: " + actividad.ciudad + "</p>";
 							});
 				} else {
 					actividadesHtml += "<div class='actividad'>"
