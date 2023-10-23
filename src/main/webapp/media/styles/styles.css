@@ -1,5 +1,3 @@
-
-
 body {
     margin: 0;
     padding: 0;
@@ -8,9 +6,9 @@ body {
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: center center;
-    overflow-y: auto;
+    height: 100vh;
+    overflow-y: scroll;
 }
-
 
 .navbar {
     background-color: rgba(100, 67, 67, 0.7);
@@ -23,7 +21,7 @@ body {
 }
 
 .container {
-    padding-top: 80px;
+    padding-top: 100px;
 }
 
 .dropdown-toggle{
@@ -32,6 +30,64 @@ body {
     color: black;    
 }
 
+h3 {
+    margin-top: 0; /* Ajusta el margen superior del título según tus preferencias */
+}
+
+
+.titulo{
+    text-align: center;
+    margin-top: -40px;
+}
+
+/* Estilo para el fondo gris transparente */
+.fondoTransparente {
+    color: black;
+    background-color: rgb(255, 255, 255, 0.4);
+    padding: 20px;
+    margin-right: 300px;
+    margin-left: 300px;
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /*border: 1px black solid;*/
+}
+
+.otrosCampos {
+    margin-left: -15px;
+    /*border: 5px black solid;*/
+}
+
+
+.foto {
+    height: 300px;
+    float: right;
+    border: 1px black solid;
+    margin-top: 50px;   
+}
+
+
+.btn-primary {
+    margin-top: 50px; /* margen para bajar un poquito el boton */
+}
+
+.btn-light {
+    margin-top: 50px; /* margen para bajar un poquito el boton */
+}
+
+#soloLectura {
+    color: black;
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+    
+/*.container {
+    border: 10px black solid;
+}*/
+
+
+/* 
 #submenu-usuarios, #submenu-actividades {
     display: none;
 }
@@ -80,18 +136,18 @@ body {
 label{
     color: white;
     font-weight: 400;
-    
-}
+}  */
+
+/* } */
 
 h1.tituloVentana{
 	color: white;
 	
 }
-
-
-
-
-
-
-
-
+.containerDepto {
+    flex: 1;
+    padding-right: 20px;
+    height: 40px;
+    overflow-y: auto;
+    /* Agregar más estilos según sea necesario */
+}
