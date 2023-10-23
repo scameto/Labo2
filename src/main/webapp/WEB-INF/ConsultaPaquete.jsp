@@ -23,7 +23,7 @@
                 <form>
                     <div class="form-group">
                         <label for="paquetes">Paquetes:</label>
-						<select class="form-control" id="paqueteSelect" name="paqueteSelect" onchange="actualizarDatos(this)">
+						<select class="form-control" id="paqueteSelect" name="paqueteSelect">
 						    <%
 						    List<DataPaquete> paquetes = (List<DataPaquete>)request.getAttribute("paquetes");
 						    if (paquetes != null) {
@@ -44,16 +44,13 @@
                     </div>
                     <div class="form-group">
                         <label for="categorias">Categoria/s del paquete seleccionado:</label>
-                        <select class="form-control" id="cbCategorias">
-                            
+                        <select class="form-control" id="cbCategorias" name="categoriasSelect">
+                        
                         </select>
                     </div>
                     <div class="form-group">
 					    <label for="exampleFormControlTextarea1 campoLectura">Descripción:</label>
 					    <textarea class="form-control" id="descripcion" rows="3" readonly></textarea>
-					</div>
-					<div class="form-group col-5 foto">
-					    Foto<!--Foto Aquí iría la foto asociada al paquete  -->
 					</div>
 					<div class="col-6 otrosCampos">
 					    <div class="form-group">
@@ -65,65 +62,97 @@
 					        <input type="text" class="form-control" id="descuento" readonly>
 					    </div>
 					</div>
-                    <button type="submit" class="btn btn-primary">Aceptar</button>
-                    <button type="submit" class="btn btn-light">Ver info. Actividad</button> <!--Para ir a la info de la act. seleccionada  -->
+                    <button type="submit" class="btn btn-primary">Consultar</button>
+                    <button type="submit" class="btn btn-light">Ver info. Actividad</button> 
                 </form>
             </div>
         </div>
     </div>
 	<script>
-		function actualizarDatos(select) {
-		    console.log("entro al script");
-		    console.log("-----------------------------");
 	
-		    var paquetes = <%= new Gson().toJson(paquetes) %>;
-		    console.log("Lista de paquetes que traigo: ", paquetes);
-		    var selectedValue = select.value;
-		    var actividadesSelect = document.getElementById("cbActividades");
-		    
-		    actividadesSelect.innerHTML = ''; // Limpiar las opciones actuales
-	
-		    for (var i = 0; i < paquetes.length; i++) {
-		        if (paquetes[i].nombre === selectedValue) {
-	
-		            var paquete = paquetes[i];
-		            console.log("Paquete seleccionado: ", paquete);
-		            console.log("-----------------------------");
-		            console.log("Nombre: " + paquete.nombre);
-		            console.log("Descripción: " + paquete.descripcion);
-		            console.log("Validez: " + paquete.validez);
-		            console.log("Descuento: " + paquete.descuento);
-		            console.log("-----------------------------");
-	
-		            document.getElementById("descripcion").value = paquetes[i].descripcion;
-		            document.getElementById("validez").value = paquetes[i].validez;
-		            document.getElementById("descuento").value = paquetes[i].descuento;
-	
-		            // Carga actividades asociadas al paquete
-		            var actividades = paquetes[i].actividades;
-		            actividadesSelect.innerHTML = ''; // Limpiar las opciones actuales
-	
-		            if (actividades && actividades.length > 0) {
-		                for (var j = 0; j < actividades.length; j++) {
-		                	//imprimo lo que recorro en el for
-		                	console.log("Actividad ID: " + actividades[j].id);
-		                    console.log("Actividad Nombre: " + actividades[j].nomAct);
-		                    var option = document.createElement("option");
-		                    option.value = actividades[j].id;
-		                    option.textContent = actividades[j].nomAct;
-		                    actividadesSelect.appendChild(option);
-		                }
-		            } else {
-		                // Si no hay actividades asociadas, muestra un mensaje predeterminado
-		                var option = document.createElement("option");
-		                option.value = '';
-		                option.textContent = 'No hay actividades asociadas';
-		                actividadesSelect.appendChild(option);
-		            }
-	
-		        }
-		    }
-		}
+	document.addEventListener("DOMContentLoaded", function() {
+	    var consultarBtn = document.querySelector(".btn-primary");
+	    consultarBtn.addEventListener("click", function(event) {
+	        event.preventDefault();
+	        actualizarDatos(event); // Pasar el evento como argumento
+	    });
+	});
+
+	function actualizarDatos(event) {
+	    var paquetes = <%= new Gson().toJson(paquetes) %>;
+	    var selectedValue = event.target.form.paqueteSelect.value; // Obtener el valor seleccionado
+	    var actividadesSelect = document.getElementById("cbActividades");
+	    var categoriasSelect = document.getElementById("cbCategorias");
+
+	    actividadesSelect.innerHTML = '';
+	    categoriasSelect.innerHTML = '';
+
+	    var idPaquete;
+	    for (var i = 0; i < paquetes.length; i++) {
+	        if (paquetes[i].nombre === selectedValue) {
+	            var paquete = paquetes[i];
+	            idPaquete = paquete.id;
+	            actualizarCategorias(idPaquete);
+// 	            console.log("Paquete seleccionado: ", paquete);
+// 	            console.log("-----------------------------");
+// 	            console.log("Nombre: " + paquete.nombre);
+// 	            console.log("Descripción: " + paquete.descripcion);
+// 	            console.log("Validez: " + paquete.validez);
+// 	            console.log("Descuento: " + paquete.descuento);
+// 	            console.log("-----------------------------");
+
+	            document.getElementById("descripcion").value = paquetes[i].descripcion;
+	            document.getElementById("validez").value = paquetes[i].validez;
+	            document.getElementById("descuento").value = paquetes[i].descuento;
+
+	            var actividades = paquetes[i].actividades;
+	            actividadesSelect.innerHTML = '';
+
+	            if (actividades && actividades.length > 0) {
+	                for (var j = 0; j < actividades.length; j++) {
+	                    console.log("Actividad ID: " + actividades[j].id);
+	                    console.log("Actividad Nombre: " + actividades[j].nomAct);
+	                    var option = document.createElement("option");
+	                    option.value = actividades[j].id;
+	                    option.textContent = actividades[j].nomAct;
+	                    actividadesSelect.appendChild(option);
+	                }
+	            } else {
+	                var option = document.createElement("option");
+	                option.value = '';
+	                option.textContent = 'No hay actividades asociadas';
+	                actividadesSelect.appendChild(option);
+	            }
+	        }
+	    }
+	}
+
+	function actualizarCategorias(idPaquete){
+	    var xhr = new XMLHttpRequest();
+	    xhr.open("POST", "http://localhost:8080/Labo2/ConsultaPaquete", true);
+	    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+	    xhr.onreadystatechange = function() {
+	        if (xhr.readyState == 4 && xhr.status == 200) {
+	            if (JSON.parse(xhr.responseText) != null) {
+	                var categorias = JSON.parse(xhr.responseText);
+	                if(categorias.length == 0){
+	                    console.log("No tiene categorias asociadas");
+	                    return;
+	                }
+	                categoriasSelect = document.getElementById("cbCategorias");
+	                categoriasSelect.innerHTML = ''; // Limpiar las opciones actuales
+	                categorias.forEach(function(categoria) {
+	                    var optionCat = document.createElement("option");
+	                    optionCat.value = categoria.id;
+	                    optionCat.textContent = categoria.nombre;
+	                    categoriasSelect.appendChild(optionCat);
+	                });
+	                console.log(categorias);
+	            }
+	        }
+	    };
+	    xhr.send("idPaquete=" + idPaquete);
+	}
 
 	</script>
 	

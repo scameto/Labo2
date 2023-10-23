@@ -75,7 +75,7 @@ public class ConsultarUsuarios extends HttpServlet {
             response.getWriter().write(salidasJson);
         } 
         else {
-        	String usernameProv = (String)request.getParameter("usernameProv");
+        	String usernameProv = (String)request.getParameter("idPaquete");
             List<DataActividad> actividades = (List<DataActividad>) sistema.getActividadesProveedorConfirmadas(usernameProv);
             System.out.println("actis " + actividades);
             request.setAttribute("listaActividades", actividades);
