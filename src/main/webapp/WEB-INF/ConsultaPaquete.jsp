@@ -131,12 +131,16 @@
 	    var xhr = new XMLHttpRequest();
 	    xhr.open("POST", "http://localhost:8080/Labo2/ConsultaPaquete", true);
 	    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+	    var categoriasSelect = document.getElementById("cbCategorias");
 	    xhr.onreadystatechange = function() {
 	        if (xhr.readyState == 4 && xhr.status == 200) {
 	            if (JSON.parse(xhr.responseText) != null) {
 	                var categorias = JSON.parse(xhr.responseText);
 	                if(categorias.length == 0){
-	                    console.log("No tiene categorias asociadas");
+	                	var optionCat2 = document.createElement("option");
+		                optionCat2.value = '';
+		                optionCat2.textContent = 'Este paquete no contiene ninguna categoria.';
+		                categoriasSelect.appendChild(optionCat2);
 	                    return;
 	                }
 	                categoriasSelect = document.getElementById("cbCategorias");
@@ -147,7 +151,6 @@
 	                    optionCat.textContent = categoria.nombre;
 	                    categoriasSelect.appendChild(optionCat);
 	                });
-	                console.log(categorias);
 	            }
 	        }
 	    };
