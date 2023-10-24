@@ -12,20 +12,12 @@ import logica.datatypes.DataActividad;
 import logica.datatypes.DataCategoria;
 import logica.datatypes.DataDepartamento;
 import logica.datatypes.DataProveedor;
-import logica.datatypes.DataTurista;
-import logica.modelos.Departamento;
-import logica.modelos.Proveedor;
-
 import java.io.IOException;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-/**
- * Servlet implementation class AltaActividadServlet
- */
 @WebServlet("/AltaActividad")
 public class AltaActividadServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -45,12 +37,6 @@ public class AltaActividadServlet extends HttpServlet {
     	
     	
 		HttpSession objSesion = request.getSession();//lo usamos para mostrar mensajes en la sesion
-		/*
-		List<DataDepartamento> departamentos = sistema.getDepartamentosData();
-		request.setAttribute("departamentos", departamentos);
-		for (DataDepartamento departamento : departamentos) {
-		    System.out.println(departamento);
-		}*/
 		
 		String actNomb = request.getParameter("inputNombreAct");
 		String actDesc = request.getParameter("inputDescAct");

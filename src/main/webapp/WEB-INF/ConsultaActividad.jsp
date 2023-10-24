@@ -1,164 +1,160 @@
-<%@page import="logica.datatypes.DataActividad"%>
-<%@page import="logica.datatypes.DataCategoria"%>
 <%@page import="java.util.List"%>
-<%@page import="logica.modelos.Departamento"%>
-<%@page import="logica.datatypes.DataDepartamento"%>
+<%@page import="logica.datatypes.DataTurista"%>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <jsp:include page="/WEB-INF/templates/head.jsp" />
-<title> Consulta Actividad</title>
+<title>Consultar Usuario</title>
 </head>
 <body>
-<jsp:include page="/WEB-INF/templates/header.jsp" />
-<div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-6">                
-				<form onsubmit="return validateForm()" action="ConsultaActividad" method="get">           				
+	<jsp:include page="/WEB-INF/templates/header.jsp" />
+	<div class="container">
+		<div class="row justify-content-center">
+			<div class="col-lg-6">
+				<div>
+					<h1 class="tituloVentana">Consultar Usuarios</h1>
 					<div>
-                    <h1 class="tituloVentana">Consulta Actividad</h1>
-                    </div> <!-- ----------------------------------MENSAJES A USUARIO ----------------------------------------------- -->
-                    	<% 
-					    String mensajeError = (String) session.getAttribute("mensajeError"); 
-					    if(mensajeError != null) {
-					%>
-					    <div class="alert alert-danger">
-					        <%= mensajeError %>
-					    </div>
-					<%
-					    session.removeAttribute("mensajeError");
-					}
-					    String mensajeExito = (String) session.getAttribute("mensajeExito"); 
-					    if(mensajeExito != null) {
-					    %>
-					        <div class="alert alert-success">
-					            <%= mensajeExito %>
-					        </div>
-					    <%
-					        session.removeAttribute("mensajeExito");
-					    }
-					    %> <!-- ----------------------------------MENSAJES A USUARIO ----------------------------------------------- -->
-                   
-                    <div class="containerDepto">
-	                    <div class="row mb-2 ">                    
-	                    <label for="inputNombreDpto" class="col-sm-4 col-form-label">Depto</label>   
-	                    	<div class="col-sm-8">                 
-			                   <Select id="departamentoSelect" name="departamentoSelect" class="form-control">
-								<% List<DataDepartamento> departamentos=(List<DataDepartamento>)request.getAttribute("departamentos");
-								if(departamentos!=null)
-								for(DataDepartamento departamento: departamentos){%>
-								<option value="<%=departamento.getNombre()%>"><%=departamento.getNombre()%></option>
-								<%} %>
-								</Select>
-							</div>	
-										
+						<h2>Turistas:</h2>
+						<div id="listaUsuarios">
+							<ul class="list-group">
+								<%
+                    List<String> usernames = (List<String>)request.getAttribute("usernames");
+                    if (usernames != null) {
+                        for (String username : usernames) {
+                %>
+								<li class="list-group-item"
+									onclick="seleccionarUsuario('<%= username %>')"><%= username %></li>
+								<%
+                        }
+                    }
+                %>
+							</ul>
 						</div>
 					</div>
-					<div class="containerCat">
-						<div class="row mb-2">
-	                    <label for="inputCategoriaAct" class="col-sm-4 col-form-label">Categoria</label>
-	                        <div class="col-sm-8">
-	                        	 <select id="categoriaSelect" name="categoriaSelect" class="form-control">
-								<% List<DataCategoria> categorias =(List<DataCategoria>)request.getAttribute("categorias");
-								if(categorias!=null)
-								for(DataCategoria cat: categorias){%>
-								<option value="<%=cat.getNombre()%>"><%=cat.getNombre()%></option>
-								<%} %>
-								</select>                            
-	                        </div>
-	                    </div>
-	                </div>	                   
-                    <div class="row mb-2">
-                    <label for="inputCategoriaAct" class="col-sm-4 col-form-label">Actividad</label>
-                        <div class="col-sm-8">
-                        	 <select id="actividadSelect" name="actividadSelect" class="form-control">
-							<% List<DataActividad> actividades =(List<DataActividad>)request.getAttribute("actividades");
-							if(actividades!=null)
-							for(DataActividad act: actividades){%>
-							<option value="<%=act.getNomAct()%>"><%=act.getNomAct()%></option>
-							<%} %>
-							</select>                            
-                        </div>
-                    </div>                                   
-                    <div class="row mb-2">
-                        <label for="readDescAct" class="col-sm-4 col-form-label">Descripcion</label>
-                        <div class="col-sm-8">
-                            <input type="text" class="form-control" id="readDescAct" name="readDescAct" value="${readDescAct}" readonly>
-                        </div>
-                    </div>
-                    <div class="row mb-2">
-                        <label for="readDuracionAct" class="col-sm-4 col-form-label">Duracion(hs)</label>
-                        <div class="col-sm-8">
-                            <input type="number" class="form-control" id="readDuracionAct" name="readDuracionAct" value="${readDuracionAct}" readonly>
-                        </div>
-                    </div>                    
-                    <div class="row mb-2">
-                        <label for="readCostoAct" class="col-sm-4 col-form-label">Costo($uy)</label>
-                        <div class="col-sm-8">
-                            <input type="number" class="form-control" id="readCostoAct" name="readCostoAct" value="${readCostoAct}" readonly>
-                        </div>
-                    </div>                
-                    <div class="row mb-2">
-                        <label for="readCiudadAct" class="col-sm-4 col-form-label">Ciudad</label>
-                        <div class="col-sm-8">
-                            <input type="text" class="form-control" id="readCiudadAct" name="readCiudadAct" value="${readCiudadAct}" readonly>
-                        </div>
-                    </div>
-                 
-                    <div class="row mb-2">
-                        <label for="readImageAct" class="col-sm-4 col-form-label">Foto_link</label>
-                        <div class="col-sm-8">
-                            <input type="file" class="form-control" id="readImageAct" name="readImageAct">
-                        </div>
-                    </div>
-                    <div class="row mb-2">
-                        <div class="col-lg-8 offset-lg-7">
-                            <button type="submit" class="btn btn-primary offset-sm-1" >Aceptar</button>
-                        </div>
-                    </div>
-                </form>
+					
+					    <p>Usuario seleccionado: <span id="usuarioSeleccionado"></span></p>
+					
+					
+				</div>
+			</div>
+		</div>
+		
+		
+<section style="background-color: rgba(238, 238, 238, 0.5);"  id="datosTurista">
+  <div class="container py-5">
+    <div class="row">
+      <div class="col-lg-4">
+        <div class="card mb-4">
+          <div class="card-body text-center">
+            <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
+              class="rounded-circle img-fluid" style="width: 150px;">
+            <h5 class="my-3">John Smith</h5> <!-- TODO poner nombre y apellido --> 
+            <p class="text-muted mb-4">Bay Area, San Francisco, CA</p>  <!-- TODO poner turista o prov -->
+            <div class="d-flex justify-content-center mb-2">
+              <button type="button" class="btn btn-primary">Follow</button>
+              <button type="button" class="btn btn-outline-primary ms-1">Message</button>
             </div>
+          </div>
         </div>
+        <div class="card mb-4 mb-lg-0">
+          <div class="card-body p-0">
+            <ul class="list-group list-group-flush rounded-3">
+              <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                <p class="mb-0">https://mdbootstrap.com</p>
+              </li>
+              <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                <p class="mb-0">mdbootstrap</p>
+              </li>
+              <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                <p class="mb-0">@mdbootstrap</p>
+              </li>
+              <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                <p class="mb-0">mdbootstrap</p>
+              </li>
+              <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                <p class="mb-0">mdbootstrap</p>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-8">
+        <div class="card mb-4">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Nombre completo</p>
+              </div>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0">Johnatan Smith</p>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Email</p>
+              </div>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0">example@example.com</p>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Fecha de Nacimiento</p>
+              </div>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0">(097) 234-5678</p>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Nacionalidad</p>
+              </div>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0">(098) 765-4321</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="card mb-4 mb-md-0">
+              <div class="card-body">
+
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="card mb-4 mb-md-0">
+              <div class="card-body">
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
+</section>
+
+	</div>
 </body>
+
  <script>
-       function validateForm() {
-            var name = document.getElementById("inputNombreAct").value;
-            if (name == "") {
-                alert("El nombre de la actividad no puede estar vacío.");
-                return false;
-            }
-            var description = document.getElementById("inputDescAct").value;
-            if (description == "") {
-                alert("La descripción no puede estar vacía.");
-                return false;
-            }
-            var duration = document.getElementById("inputDuracionAct").value;
-            if (isNaN(duration) || duration <= 0) {
-                alert("Introduce una duración válida.");
-                return false;
-            }
-            var cost = document.getElementById("inputCostoAct").value;
-            if (isNaN(cost) || cost < 0) {
-                alert("Introduce un costo válido.");
-                return false;
-            }
-            var city = document.getElementById("inputCiudadAct").value;
-            if (city == "") {
-                alert("La ciudad no puede estar vacía.");
-                return false;
-            }
-            var category = document.getElementById("inputCategoriaAct").value;
-            if (category == "") {
-                alert("La categoría no puede estar vacía.");
-                return false;
-            }
-            return true;
+        function seleccionarUsuario(username) {
+            // Oculta la lista de usernames
+            document.getElementById("listaUsuarios").style.display = "none";
+            document.getElementById("datosTurista").style.display = "none";
+            document.getElementById("usuarioSeleccionado").textContent = username;
+            
+            // Envia el nombre de usuario al servidor usando AJAX
+         
         }
     </script>
-
-
 
 </html>

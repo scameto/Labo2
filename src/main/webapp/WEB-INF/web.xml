@@ -38,15 +38,23 @@
     <url-pattern>/EstadoSesion</url-pattern>
   </servlet-mapping>
   <servlet>
-    <description></description>
-    <display-name>consultaUsuariosServlet</display-name>
-    <servlet-name>consultaUsuariosServlet</servlet-name>
-    <servlet-class>com.labo2.controller.consultaUsuariosServlet</servlet-class>
+    <servlet-name>ConsultarUsuario</servlet-name>
+    <servlet-class>com.labo2.controller.ConsultarUsuarios</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>consultaUsuariosServlet</servlet-name>
-    <url-pattern>/consultaUsuariosServlet</url-pattern>
+    <servlet-name>ConsultarUsuario</servlet-name>
+    <url-pattern>/ConsultarUsuario</url-pattern>
   </servlet-mapping>
+  
+    <servlet>
+    <servlet-name>ConsultaPaqueteServlet</servlet-name>
+    <servlet-class>com.labo2.controller.ConsultaPaqueteServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ConsultaPaqueteServlet</servlet-name>
+    <url-pattern>/ConsultaPaquete</url-pattern>
+  </servlet-mapping>
+  
   <servlet>
     <description></description>
     <display-name>iniciar</display-name>
@@ -86,5 +94,15 @@
   <servlet-mapping>
     <servlet-name>AltaActividadServlet</servlet-name>
     <url-pattern>/AltaActividadServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>CompraPaquete</display-name>
+    <servlet-name>CompraPaquete</servlet-name>
+    <servlet-class>com.labo2.controller.CompraPaquete</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CompraPaquete</servlet-name>
+    <url-pattern>/CompraPaquete</url-pattern>
   </servlet-mapping>
 </web-app>

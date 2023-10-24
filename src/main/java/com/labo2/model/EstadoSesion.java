@@ -1,9 +1,5 @@
 package com.labo2.model;
 
-/**
-*
-* @author Igui
-*/
 public enum EstadoSesion {
     NO_LOGIN,           // nunca intentó iniciar sesión
     LOGIN_TURISTA,// tiene la sesión iniciada 
