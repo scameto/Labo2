@@ -13,6 +13,7 @@ import logica.datatypes.DataSalida;
 import logica.datatypes.DataTurista;
 
 import java.io.IOException;
+import java.util.Iterator;
 import java.util.List;
 
 import com.google.gson.Gson;
@@ -40,7 +41,14 @@ public class CompraPaquete extends HttpServlet {
 		HttpSession session = request.getSession();
 		EstadoSesion estadoSesion = (EstadoSesion) session.getAttribute("estado_sesion");
 		Object usuarioLogueado = session.getAttribute("usuario_logueado");
-		
+		if(request.getParameter("idPaquete") != null) {
+			Long idPaquete = Long.parseLong(request.getParameter("idPaquete"));
+			String username = request.getParameter("username");
+			Integer cantTuristas = Integer.parseInt(request.getParameter("cantTuristas"));
+			float costoTotal = Float.parseFloat(request.getParameter("costoTotal"));
+			sistema.comprarPaquete(idPaquete,username,cantTuristas,costoTotal);
+		}
+			
 		if(usuarioLogueado instanceof DataTurista) {
 			String username = ((DataTurista)usuarioLogueado).getUsername();
 			List<DataPaquete> paquetes = sistema.getPaquetesNoCompradosTurista(username);
