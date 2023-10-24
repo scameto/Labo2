@@ -118,8 +118,8 @@
 				                            <div class="form-group">
 				                                <label for="formaDePago">Forma de pago:</label>
 				                                <select class="form-control" id="cbFormaDePago">
-				                                    <option value="opcion1">General</option>
-				                                    <option value="opcion2">Por Paquete</option>				                                
+				                                    <option value="general">General</option>
+				                                    <option value="porPaquete">Por Paquete</option>				                                
 				                                </select>
 				                                <label for="formaDePago">Paquetes disponibles:</label>				                                
 				                                 <Select id="actividadSelect" name="actividadSelect" class="form-control">							
