@@ -122,12 +122,12 @@
 									</div>
 								</div>
 								<div class="row">
-									<div class="col-md-6">
+									<div class="col-md-6" style="display: none;" id="contenedorPaquetes">
 										<div class="card mb-0">
 											<div class="card-body" id="cardPaquetes"></div>
 										</div>
 									</div>
-									<div class="col-md-6">
+									<div class="col-md-6"  style="display: none;" id="contenedorSalidas">
 										<div class="card mb-0">
 											<div class="card-body" id="cardSalidas"></div>
 										</div>
@@ -145,12 +145,16 @@
 function seleccionarDepartamento(idDepartamento) {
 	// Crear un objeto XMLHttpRequest
 	var xhr = new XMLHttpRequest();
+	
+	document.getElementById("contenedorPaquetes").style.display = "none";
+	document.getElementById("contenedorSalidas").style.display = "none";
+	
 	console.log("llegue no se q ...");
 	// Configurar la solicitud
 	xhr.open('POST', 'http://localhost:8080/Labo2/consultaActividad?idDepto=' // esto es una queryparam
 			+ idDepartamento, true);
 	xhr.setRequestHeader('Content-Type', 'application/json');
-
+// 	document.getElementById("cardPaquetes".style.display) = "none";
 	// Definir el comportamiento al cambio de estado
 	xhr.onreadystatechange = function() {
 		// Verificar si la solicitud se completó exitosamente
@@ -256,6 +260,7 @@ function seleccionarCategoria(idCategoria) {
 	xhr.send();
 }
 function buscarPaquetes(idActividad) { // esta funcion muesta las salidas asociadas a una actividad
+	document.getElementById("contenedorPaquetes").style.display = "flex";
 	var xhr = new XMLHttpRequest();
 	xhr.open("POST", "http://localhost:8080/Labo2/consultaActividad?idPaquet=" + idActividad,
 			true);
@@ -295,6 +300,7 @@ function buscarPaquetes(idActividad) { // esta funcion muesta las salidas asocia
 	xhr.send("idActividad=" + idActividad);
 }
 function buscarSalidas(idActividad) { // esta funcion muesta las salidas asociadas a una actividad
+	document.getElementById("contenedorSalidas").style.display = "flex";
 	var xhr = new XMLHttpRequest();
 	xhr.open("POST", "http://localhost:8080/Labo2/consultaActividad?idActiv=" + idActividad, true);
 	xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
