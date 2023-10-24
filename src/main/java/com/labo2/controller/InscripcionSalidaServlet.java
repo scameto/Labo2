@@ -22,8 +22,8 @@ import logica.datatypes.DataCategoria;
 import logica.datatypes.DataDepartamento;
 import logica.datatypes.DataPaquete;
 
-@WebServlet("/inscripcionSalida")
-public class InscriptionSalidaServlet extends HttpServlet {
+@WebServlet("/InscripcionSalida")
+public class InscripcionSalidaServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private ISistema sistema;
     private Gson gson;
@@ -57,10 +57,8 @@ public class InscriptionSalidaServlet extends HttpServlet {
                 request.setAttribute("categoria", categorias);
             }            
             request.getRequestDispatcher("/WEB-INF/InscripcionSalida.jsp").forward(request, response);
-        }
-       
-    }
-    
+        }       
+    }    
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -108,7 +106,7 @@ public class InscriptionSalidaServlet extends HttpServlet {
             response.setContentType("application/json");
             response.getWriter().write(paquetesJson);
           }
-    	//cargando los Paquetes por actividad seleccionada   listar paquetes comprados por el TURISTA 
+    	//cargando los Paquetes por actividad seleccionada
     	 if(request.getParameter("idActiv") != null) {
           	String idA = request.getParameter("idActiv");
           	Long idActividad = Long.parseLong(idA);
@@ -122,42 +120,6 @@ public class InscriptionSalidaServlet extends HttpServlet {
           	}          	
             response.setContentType("application/json");
             response.getWriter().write(salidasJson);
-          }
-    	 
-//        String username = request.getParameter("username");
-//        String idAct = request.getParameter("idActividad");
-//        DataDepartamento elegido = null;
-//        if (username != null) {
-//            List<DataDepartamento> dep = sistema.getDepartamentosData();
-//            for(DataDepartamento de: dep) {
-//            	if(de.getNombre().equals(username)) {
-//            		elegido = de;
-//            		break;
-//            	}
-//            }
-//            if(elegido!= null) {
-//                String departamentoJson = gson.toJson(elegido);
-//                response.setContentType("application/json");
-//                response.getWriter().write(departamentoJson);
-//            
-//            } 
-//        }else if(idAct != null) {
-//        	Long idActividad = Long.parseLong(idAct);
-//        	System.out.println(idActividad);
-//        	List<DataSalida> salidas = sistema.getSalidasData(idActividad);
-//        	request.setAttribute("salidas", salidas);
-//          String salidasJson = gson.toJson(salidas);
-//          response.setContentType("application/json");
-//          response.getWriter().write(salidasJson);
-//        } 
-//        else {
-//        	String usernameProv = (String)request.getParameter("usernameProv");
-//            List<DataActividad> actividades = (List<DataActividad>) sistema.getActividadesProveedorConfirmadas(usernameProv);
-//            System.out.println("actis " + actividades);
-//            request.setAttribute("listaActividades", actividades);
-//            String actividadesJson = gson.toJson(actividades);
-//            response.setContentType("application/json");
-//            response.getWriter().write(actividadesJson);
-//        }
+          }    
     }
 }

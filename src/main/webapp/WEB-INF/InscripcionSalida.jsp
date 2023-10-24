@@ -8,13 +8,14 @@
 <html>
 <head>
 <jsp:include page="/WEB-INF/templates/head.jsp" />
-<title>Inscripcion Salida</title>
+<title>Consultar Usuario</title>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/templates/header.jsp" />
 	<div class="container">
 		<div class="row justify-content-center">
 			<div class="col-lg-3">
+			
 				<div>
 					<h1 class="tituloVentana">Inscripcion Salida</h1>
 					<div id="cajaDepartamentos">
@@ -39,7 +40,9 @@
 
 					<div class="select">
 						<label for="categorias">Categorías:</label>
-						<ul id="categorias" name="categoria">
+						<ul class="list-group">
+						
+<!-- 						<ul id="categorias" name="categoria"> -->
 
 							<%
 							List<DataCategoria> categorias = (List<DataCategoria>)request.getAttribute("categoria");
@@ -60,151 +63,72 @@
 			</div>
 
 			<style>
-#cajaDepartamentos {
+#cajaDepartamentos, #cajaCategorias {
 	max-height: 40vh;
 	overflow-y: auto;
+	width: 100%;
+	max-width:250px;
 }
 
-#cajaCategorias {
-	max-height: 40vh;
-	overflow-y: auto;
-}
+
 
 #cardActividades {
 	overflow-y: auto;
 	max-height: 30vh;
-	width: 30vw;
+	
 }
+
 
 #cardSalidas {
 	overflow-y: auto;
 	max-height: 30vh;
 }
+#div.card.mb-0{
+	margin-top: 30px;
+	overflow-y: auto;
+	max-height: 30vh;
+	width:100%;	
+}
 </style>
 			<div class="col-lg-9">
-				<section
-					style="background-color: rgba(238, 238, 238, 0.5); margin-top: 10vh;"
+				<section style="background-color: rgba(238, 238, 238, 0.5); margin-top: 10vh;"
 					id="datosTurista">
 					<div class="container py-5">
 						<div class="row">
-							<div class="col-lg-4">
-								<div class="card mb-4">
-									<div class="card-body text-center">
-										<img
-											src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp"
-											alt="avatar" class="rounded-circle img-fluid"
-											style="width: 150px;">
-										<h5 class="my-3" id="usernameUsuarioTitle"></h5>
-										<p class="text-muted mb-4" id="divTipoUsuario">...</p>
-										<div class="d-flex justify-content-center mb-2">
-											<button type="button" class="btn btn-primary">Follow</button>
-											<button type="button" class="btn btn-outline-primary ms-1">Message</button>
-										</div>
-									</div>
-								</div>
-								<div class="card mb-4 mb-lg-0">
-									<div class="card-body p-0">
-										<ul class="list-group list-group-flush rounded-3">
-											<li
-												class="list-group-item d-flex justify-content-between align-items-center p-3">
-												<p class="mb-0">https://mdbootstrap.com</p>
-											</li>
-											<li
-												class="list-group-item d-flex justify-content-between align-items-center p-3">
-												<p class="mb-0">mdbootstrap</p>
-											</li>
-											<li
-												class="list-group-item d-flex justify-content-between align-items-center p-3">
-												<p class="mb-0">@mdbootstrap</p>
-											</li>
-											<li
-												class="list-group-item d-flex justify-content-between align-items-center p-3">
-												<p class="mb-0">mdbootstrap</p>
-											</li>
-											<li
-												class="list-group-item d-flex justify-content-between align-items-center p-3">
-												<p class="mb-0">mdbootstrap</p>
-											</li>
-										</ul>
-									</div>
-								</div>
+
+							<div class="col-md-6">
+								<div class="card mb-0">
+									<label for="formaDePago">Actividades Disponibles:</label>				
+									<div class="card-body" id="cardActividades"></div>
 							</div>
-							<div class="col-lg-8">
-								<div class="card mb-4">
-									<div class="card-body">
-									<div class="col-md-6">
-										<div class="card mb-4 mb-md-0">
-											<div class="card-body" id="cardActividades"></div>
+							</div>
+								<div class="col-md-6"  style="display: none;" id="contenedorSalidas">
+										<div class="card mb-0">
+											<label for="formaDePago">Salidas Disponibles:</label>											
+											<div class="card-body" id="cardSalidas"></div>
 										</div>
 									</div>
-										<!-- div class="row">
-											<div class="col-sm-3">
-												<p class="mb-0">Nombre del Turista</p>
-											</div>
-											<div class="col-sm-9">
-												<p class="text-muted mb-0" id="nombreUsuario"></p>
-											</div>
+									
+									<div class="col-md-12" style="display: none; margin-top: 30px" id="contenedorInscripcion">
+										<div class="card row-md-8">
+											 <div class="form-group">
+				                                <label for="cantTuristasInsc">Cant. de turistas a inscribir:</label>
+				                                <input type="text" class="form-control">
+				                            </div>    
+				                            <div class="form-group">
+				                                <label for="formaDePago">Forma de pago:</label>
+				                                <select class="form-control" id="cbFormaDePago">
+				                                    <option value="opcion1">General</option>
+				                                    <option value="opcion2">Por Paquete</option>				                                
+				                                </select>
+				                                <label for="formaDePago">Paquetes disponibles:</label>				                                
+				                                 <Select id="actividadSelect" name="actividadSelect" class="form-control">							
+												</Select>
+				                            </div>	
+				                        </div>
 
-										</div>
-										<hr>
-										<div class="row">
-											<div class="col-sm-3">
-												<p class="mb-0">Email</p>
-											</div>
-											<div class="col-sm-9">
-												<p class="text-muted mb-0" id="emailUsuario"></p>
-											</div>
-										</div>
-										<hr>
-										<div class="row">
-											<div class="col-sm-3">
-												<p class="mb-0">Fecha de Nacimiento</p>
-											</div>
-											<div class="col-sm-9">
-												<p class="text-muted mb-0" id="fechaNacUsuario"></p>
-											</div>
-										</div>
-										<hr style="display: none;" id="hrNacionalidad">
-										<div class="row" style="display: none;"
-											id="nacionalidadTuristaRow">
-											<div class="col-sm-3">
-												<p class="mb-0">Nacionalidad</p>
-											</div>
-											<div class="col-sm-9">
-												<p class="text-muted mb-0" id="nacionalidadUsuario"></p>
-											</div>
-										</div>
-										<hr style="display: none;" id="descProveedorHr">
-										<div class="row" style="display: none;" id="descProveedorRow">
-
-											<div class="col-sm-3">
-												<p class="mb-0">Descripcion</p>
-											</div>
-											<div class="col-sm-9">
-												<p class="text-muted mb-0" id="descProveedor"></p>
-											</div>
-										</div>
-										<hr style="display: none;" id="linkWebProveedorHr">
-										<div class="row" style="display: none;"
-											id="linkWebProveedorRow">
-
-											<div class="col-sm-3">
-												<p class="mb-0">Link a la web</p>
-											</div>
-											<div class="col-sm-9">
-												<p class="text-muted mb-0" id="linkWebProveedor"></p>
-											</div>
-										</div-->
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-md-6">
-										<div class="card mb-4 mb-md-0">
-											<div class="card-body" id="cardPaquetes"></div>
-										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="card mb-4 mb-md-0">
+									<div class="col-md-6"  style="display: none;" id="contenedorSalidas">
+										<div class="card mb-0">
 											<div class="card-body" id="cardSalidas"></div>
 										</div>
 									</div>
@@ -220,13 +144,16 @@
 	<script>
 function seleccionarDepartamento(idDepartamento) {
 	// Crear un objeto XMLHttpRequest
-	var xhr = new XMLHttpRequest();
+	var xhr = new XMLHttpRequest();	
+	document.getElementById("contenedorInscripcion").style.display = "none";
+	document.getElementById("contenedorSalidas").style.display = "none";
+	
 	console.log("llegue no se q ...");
 	// Configurar la solicitud
-	xhr.open('POST', 'http://localhost:8080/Labo2/inscripcionSalida?idDepto=' // esto es una queryparam
+	xhr.open('POST', 'http://localhost:8080/Labo2/consultaActividad?idDepto=' // esto es una queryparam
 			+ idDepartamento, true);
 	xhr.setRequestHeader('Content-Type', 'application/json');
-
+// 	document.getElementById("cardPaquetes".style.display) = "none";
 	// Definir el comportamiento al cambio de estado
 	xhr.onreadystatechange = function() {
 		// Verificar si la solicitud se completó exitosamente
@@ -239,26 +166,25 @@ function seleccionarDepartamento(idDepartamento) {
 				if (actividades.length != 0) {
 					actividades
 							.forEach(function(actividad) {
-								actividadesHtml += "<div class='actividad' onclick='buscarSalidas(" 
-										+ actividad.id 
-										+ "); buscarPaquetes(" 
-										+ actividad.id 
-										+ ")'>"
-										+ "<h4 style='cursor: pointer;'>"
-										+ actividad.nomAct
-										+ "</h4>"
-										+ "<hr>"
-										+ "<p>"
-										+ actividad.descripcion
-										+ "</p>"
-										+ "<hr>"
-										+ "<p>"
-										+ actividad.duracion
-										+ " horas</p>"
-										+ "<hr>"
-										+ "<p>$"
-										+ actividad.costo
-										+ "</p>" + "<hr>" + "</div>";
+								
+									actividadesHtml += "<div class='actividad' onclick='buscarSalidas(" 
+							            + actividad.id 
+							            + "); buscarPaquetes(" 
+							            + actividad.id 
+							            + ")'>";
+							        
+							        actividadesHtml += "<h4 style='cursor: pointer;'>" + actividad.nomAct + "</h4>";
+							        actividadesHtml += "<hr>";
+							        
+							        actividadesHtml += "<p>Descripcion: " + actividad.descripcion + "</p>";
+							        actividadesHtml += "<p>Duración: " + actividad.duracion + " horas</p>";
+							        actividadesHtml += "<p>Costo: $" + actividad.costo + "</p>";
+							        actividadesHtml += "<p>Ciudad: " + actividad.ciudad + "</p>";
+							        var nombresCategorias = actividad.categorias.map(function(categoria) {
+							            return categoria.nombre;
+							        }).join(', ');
+
+							        actividadesHtml += "<p>Categorias: " + nombresCategorias + "<p>";
 							});
 				} else {
 					actividadesHtml += "<div class='actividad'>"
@@ -276,12 +202,15 @@ function seleccionarDepartamento(idDepartamento) {
 }
 
 // 		<script>
-function seleccionarCategoria(idCategoria) {
+function seleccionarCategoria(idCategoria) {	
 	// Crear un objeto XMLHttpRequest
 	var xhr = new XMLHttpRequest();
+	
+	document.getElementById("contenedorInscripcion").style.display = "none";
+	document.getElementById("contenedorSalidas").style.display = "none";
 	console.log("llegue no se q ...");
 	// Configurar la solicitud
-	xhr.open('POST', 'http://localhost:8080/Labo2/inscripcionSalida?idCateg=' // esto es una queryparam
+	xhr.open('POST', 'http://localhost:8080/Labo2/consultaActividad?idCateg=' // esto es una queryparam
 			+ idCategoria, true);
 	xhr.setRequestHeader('Content-Type', 'application/json');
 
@@ -297,26 +226,25 @@ function seleccionarCategoria(idCategoria) {
 				if (actividades.length != 0) {
 					actividades
 							.forEach(function(actividad) {
-								actividadesHtml += "<div class='actividad' onclick='buscarSalidas(" 
-										+ actividad.id 
-										+ "); buscarPaquetes(" 
-										+ actividad.id 
-										+ ")'>"
-										+ "<h4 style='cursor: pointer;'>"
-										+ actividad.nomAct
-										+ "</h4>"
-										+ "<hr>"
-										+ "<p>"
-										+ actividad.descripcion
-										+ "</p>"
-										+ "<hr>"
-										+ "<p>"
-										+ actividad.duracion
-										+ " horas</p>"
-										+ "<hr>"
-										+ "<p>$"
-										+ actividad.costo
-										+ "</p>" + "<hr>" + "</div>";
+								
+									actividadesHtml += "<div class='actividad' onclick='buscarSalidas(" 
+							            + actividad.id 
+							            + "); buscarPaquetes(" 
+ 							            + actividad.id 
+							            + ")'>";
+							        
+							        actividadesHtml += "<h4 style='cursor: pointer;'>" + actividad.nomAct + "</h4>";
+							        actividadesHtml += "<hr>";
+							        
+							        actividadesHtml += "<p>Descripcion: " + actividad.descripcion + "</p>";
+							        actividadesHtml += "<p>Duración: " + actividad.duracion + " horas</p>";
+							        actividadesHtml += "<p>Costo: $" + actividad.costo + "</p>";
+							        actividadesHtml += "<p>Ciudad: " + actividad.ciudad + "</p>";
+							        var nombresCategorias = actividad.categorias.map(function(categoria) {
+							            return categoria.nombre;
+							        }).join(', ');
+
+							        actividadesHtml += "<p>Categorias: " + nombresCategorias + "<p>";
 							});
 				} else {
 					actividadesHtml += "<div class='actividad'>"
@@ -326,15 +254,17 @@ function seleccionarCategoria(idCategoria) {
 				}
 
 				document.getElementById("cardActividades").innerHTML = actividadesHtml;
+
 			}
 		}
 	};
 	// Enviar la solicitud
 	xhr.send();
 }
-function buscarPaquetes(idActividad) { // esta funcion muesta las salidas asociadas a una actividad
+function buscarPaquetes(idSalida) { // esta funcion muesta las salidas asociadas a una actividad
+	document.getElementById("contenedorInscripcion").style.display = "block";
 	var xhr = new XMLHttpRequest();
-	xhr.open("POST", "http://localhost:8080/Labo2/inscripcionSalida?idPaquet=" + idActividad,
+	xhr.open("POST", "http://localhost:8080/Labo2/consultaActividad?idPaquet=" + idActividad,
 			true);
 	xhr.setRequestHeader("Content-Type",
 			"application/x-www-form-urlencoded");
@@ -351,20 +281,15 @@ function buscarPaquetes(idActividad) { // esta funcion muesta las salidas asocia
 								paquetesHtml += "<h4>" + paquete.nombre
 										+ "</h4>";
 										paquetesHtml += "<hr>";
-										paquetesHtml += "<p>Descripcion: "
-										+ paquete.desc + "</p>";
-										paquetesHtml += "<p>Validez: "
-										+ paquete.val + "</p>";
-										paquetesHtml += "<p>Descuento: "
-										+ paquete.descuen + "</p>";
-										paquetesHtml += "<p>Fecha Alta: "
-										+ paquete.fAlta + "</p>";										
+										paquetesHtml += "<p>Descripcion: "	+ paquete.descripcion + "</p>";
+										paquetesHtml += "<p>Validez: "	+ paquete.validez + "</p>";
+										paquetesHtml += "<p>Descuento: " + paquete.descuento + "</p>";
+										paquetesHtml += "<p>Fecha Alta: " + paquete.fechaAlta + "</p>";										
 										paquetesHtml += "</div>";
 							});
 				} else {
 					paquetesHtml += "<p>No hay Paquetes disponibles para esta Actividad.</p>";
 				}
-
 				// Agregar el contenido al elemento con id cardSalidas
 				document.getElementById("cardPaquetes").innerHTML = paquetesHtml;
 			} else {
@@ -377,11 +302,10 @@ function buscarPaquetes(idActividad) { // esta funcion muesta las salidas asocia
 	xhr.send("idActividad=" + idActividad);
 }
 function buscarSalidas(idActividad) { // esta funcion muesta las salidas asociadas a una actividad
+	document.getElementById("contenedorSalidas").style.display = "block";
 	var xhr = new XMLHttpRequest();
-	xhr.open("POST", "http://localhost:8080/Labo2/inscripcionSalida?idActiv=" + idActividad,
-			true);
-	xhr.setRequestHeader("Content-Type",
-			"application/x-www-form-urlencoded");
+	xhr.open("POST", "http://localhost:8080/Labo2/consultaActividad?idActiv=" + idActividad, true);
+	xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 	xhr.onreadystatechange = function() {
 		if (xhr.readyState == 4) {
 			if (xhr.status == 200) {
@@ -389,9 +313,9 @@ function buscarSalidas(idActividad) { // esta funcion muesta las salidas asociad
 				// Construir el contenido HTML de las salidas
 				var salidasHtml = "";
 				if (salidas.length > 0) {
-					salidas
-							.forEach(function(salida) {
-								salidasHtml += "<div class='salida'>";
+					salidas.forEach(function(salida) {
+								salidasHtml += "<div class='salida'>";						
+								
 								salidasHtml += "<h4>" + salida.nombre
 										+ "</h4>";
 								salidasHtml += "<hr>";
@@ -410,9 +334,8 @@ function buscarSalidas(idActividad) { // esta funcion muesta las salidas asociad
 								salidasHtml += "</div>";
 							});
 				} else {
-					salidasHtml += "<p>No hay salidas disponibles para esta actividad.</p>";
+					salidasHtml += "<p>No hay salidas disponibles para esta actividad.</p>";                 
 				}
-
 				// Agregar el contenido al elemento con id cardSalidas
 				document.getElementById("cardSalidas").innerHTML = salidasHtml;
 			} else {
@@ -425,6 +348,9 @@ function buscarSalidas(idActividad) { // esta funcion muesta las salidas asociad
 	// Enviar el ID de la actividad al servidor
 	xhr.send("idActividad=" + idActividad);
 }
+
+
+
 </script>
 </body>
 </html>

@@ -11,6 +11,7 @@ import logica.ISistema;
 import logica.Sistema;
 import logica.datatypes.DataActividad;
 import logica.datatypes.DataProveedor;
+import logica.datatypes.DataTurista;
 import logica.datatypes.DataPaqueteComprado;
 
 
@@ -49,17 +50,21 @@ public class ListaPaqueteDisponiblesTurista extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		HttpSession objSesion = request.getSession();//lo usamos para mostrar mensajes en la sesion
-
+		
+		
 		
 		if(request.getParameter("cantTur") != null && request.getParameter("idActiv")!=null ) {
         	String idD = request.getParameter("idDepto");
         	Long idDepartamento = Long.parseLong(idD);
-    		DataProveedor yo = (DataProveedor) objSesion.getAttribute("usuario_logueado");
+    		DataTurista yo = (DataTurista) objSesion.getAttribute("usuario_logueado");
     		
-        	List<DataPaqueteComprado> paquetes = sistema.listarPaqutesDisponiblesTurista(1,yo.getId(), 1L);
-        	String actividadesJson = gson.toJson(paquetes);
+    		String idA = request.getParameter("idActiv");
+    		String cant = request.getParameter("cantTur");
+    		
+        	List<DataPaqueteComprado> paquetes = sistema.listarPaqutesDisponiblesTurista(Integer.parseInt(cant),yo.getId(), Long.parseLong(idA)); // List<DataPaqueteComprado> listarPaqutesDisponiblesTurista(Integer cantTur, Long idTur, Long idAct)
+        	String paquetesJson = gson.toJson(paquetes);
             response.setContentType("application/json");
-            response.getWriter().write(actividadesJson);
+            response.getWriter().write(paquetesJson);
         }
 	}
 

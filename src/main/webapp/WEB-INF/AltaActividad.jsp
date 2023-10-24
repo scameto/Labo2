@@ -1,3 +1,5 @@
+<%@page import="logica.datatypes.DataProveedor"%>
+<%@page import="com.labo2.model.EstadoSesion"%>
 <%@page import="logica.datatypes.DataCategoria"%>
 <%@page import="java.util.List"%>
 <%@page import="logica.modelos.Departamento"%>
@@ -19,7 +21,19 @@
 					<div>
                     <h1 class="tituloVentana">Alta Actividad</h1>
                     </div>
-                    	<% 
+                    <!--         ACA CHEQUEAMOS QUE EL USUARIO ESTE LOGUEADO PARA PERMITIR EL ACCESO -->
+					<%
+					    HttpSession sesion = request.getSession();
+					    EstadoSesion estadoSesion = (EstadoSesion) sesion.getAttribute("estado_sesion");
+					    Object usuarioLogueado = sesion.getAttribute("usuario_logueado");
+					
+					    if (!(estadoSesion != null && usuarioLogueado instanceof DataProveedor)) {
+					        response.sendRedirect(request.getContextPath() + "/iniciar");  
+					        return;
+					    }
+					%>
+<!--                     ------------------------------------------------------------------------------- -->
+                    <% 
 					    String mensajeError = (String) session.getAttribute("mensajeError"); 
 					    if(mensajeError != null) {
 					%>
