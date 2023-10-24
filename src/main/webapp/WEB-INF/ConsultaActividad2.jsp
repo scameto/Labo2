@@ -100,8 +100,8 @@
 										<h5 class="my-3" id="usernameUsuarioTitle"></h5>
 										<p class="text-muted mb-4" id="divTipoUsuario">...</p>
 										<div class="d-flex justify-content-center mb-2">
-											<button type="button" class="btn btn-primary">Follow</button>
-											<button type="button" class="btn btn-outline-primary ms-1">Message</button>
+<!-- 											<button type="button" class="btn btn-primary">Follow</button> -->
+<!-- 											<button type="button" class="btn btn-outline-primary ms-1">Message</button> -->
 										</div>
 									</div>
 								</div>
@@ -144,8 +144,7 @@
 	<script>
 function seleccionarDepartamento(idDepartamento) {
 	// Crear un objeto XMLHttpRequest
-	var xhr = new XMLHttpRequest();
-	
+	var xhr = new XMLHttpRequest();	
 	document.getElementById("contenedorPaquetes").style.display = "none";
 	document.getElementById("contenedorSalidas").style.display = "none";
 	
@@ -204,8 +203,13 @@ function seleccionarDepartamento(idDepartamento) {
 
 // 		<script>
 function seleccionarCategoria(idCategoria) {
+	
+	
 	// Crear un objeto XMLHttpRequest
 	var xhr = new XMLHttpRequest();
+	
+	document.getElementById("contenedorPaquetes").style.display = "none";
+	document.getElementById("contenedorSalidas").style.display = "none";
 	console.log("llegue no se q ...");
 	// Configurar la solicitud
 	xhr.open('POST', 'http://localhost:8080/Labo2/consultaActividad?idCateg=' // esto es una queryparam
