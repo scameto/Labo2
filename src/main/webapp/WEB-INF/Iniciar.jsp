@@ -9,12 +9,12 @@
 </head>
 <body>
 <jsp:include page="/WEB-INF/templates/header.jsp" />
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-6">
+    <div class="container mt-5">
+         <div class="titulo"><h3>Iniciar Sesión</h3></div>
+    		<div class="row justify-content-center fondoTransparente">
+          	  <div class="col-12">
                 <form action="iniciar-sesion">
 					<div>
-                    <h1 class="tituloVentana">Iniciar Sesion</h1>
                     </div>
                     
                     	<%

@@ -38,6 +38,7 @@ h3 {
 .titulo{
     text-align: center;
     margin-top: -40px;
+    font-weight: bold;
 }
 
 /* Estilo para el fondo gris transparente */
@@ -51,7 +52,7 @@ h3 {
     display: flex;
     justify-content: center;
     align-items: center;
-    /*border: 1px black solid;*/
+    /*border: 5px black solid;*/
 }
 
 .otrosCampos {

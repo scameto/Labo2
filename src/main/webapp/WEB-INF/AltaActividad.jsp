@@ -12,14 +12,12 @@
 </head>
 <body>
 <jsp:include page="/WEB-INF/templates/header.jsp" />
-<div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-6">                
+<div class="container mt-5">
+<div class="titulo"><h3>Alta de actividad</h3></div>
+        <div class="row justify-content-center fondoTransparente">
+            <div class="col-12">               
 				<form onsubmit="return validateForm()" action="AltaActividad" method="post">           				
-					<div>
-                    <h1 class="tituloVentana">Alta Actividad</h1>
-                    </div>
-                    	<% 
+					<% 
 					    String mensajeError = (String) session.getAttribute("mensajeError"); 
 					    if(mensajeError != null) {
 					%>
