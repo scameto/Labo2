@@ -197,7 +197,6 @@
 	    xhr.send();
 	}
 
-
 	function mostrarDetallesPaquete(paquete) {
 		
 	    document.getElementById("rowTotal").style.display = "none";
@@ -239,11 +238,9 @@
 	function consultarPrecio() {
 	    var numero = parseInt(document.getElementById("numeroInput").value);
 	    if (!isNaN(numero)) {
-	        var precioFinal = numero * 2;
 	        document.getElementById("rowTotal").style.display = "flex";
 	        document.getElementById("precioFinal").textContent = precioFinal;
 	        calcularPrecioTotal(numero);
-	        costoTotal = precioFinal;
 	    } else {
 	        alert("Por favor, ingrese un número válido.");
 	    }
@@ -257,7 +254,7 @@
 	        total += numeroInscripciones * actividad.costo;
 	        console.log(total);
 	    });
-		
+	    costoTotal = total;
 	    var descuento = parseInt(document.getElementById("descuentoPaquete").textContent);
 	    var descuentoDecimal = descuento / 100;
 	    var totalConDescuento = total * (1 - descuentoDecimal);
