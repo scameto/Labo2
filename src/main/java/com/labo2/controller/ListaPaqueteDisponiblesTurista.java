@@ -65,6 +65,9 @@ public class ListaPaqueteDisponiblesTurista extends HttpServlet {
         	String paquetesJson = gson.toJson(paquetes);
             response.setContentType("application/json");
             response.getWriter().write(paquetesJson);
+        }else {
+        	  response.setContentType("application/json");
+              response.getWriter().write("[]");
         }
 	}
 

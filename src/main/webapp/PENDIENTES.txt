@@ -7,19 +7,19 @@ PENDIENTES													|						PRONTAS
 ------------------------------------------------------------------------------------------------------------------
  SANTIAGO
 ------------------------------------------------------------------------------------------------------------------											
-																					ALTA ACTIVIDAD TURISTICA SC (LISTO Y AJUSTADO
-CONSULTA DE ACTIVIDAD TURISTICA	agregar categoria de la actividad y formatear datos actividad				
-																					ALTA DE SALIDA TURISTICA	 dar formato
-CONSULTA DE SALIDA TURISTICA - copiar consulta Actividad, sacar paquetes luego de formatear y listar paquetes por salida.
+																					ALTA ACTIVIDAD TURISTICA SC 
+																					CONSULTA DE ACTIVIDAD TURISTICA	SC			
+																					ALTA DE SALIDA TURISTICA SC
+																					CONSULTA DE SALIDA TURISTICA SC
 		
-INSCRIPCION a SALIDA TURISTICA                                                                                               <-----
+INSCRIPCION a SALIDA TURISTICA                                                                                               
 					
 ------------------------------------------------------------------------------------------------------------------
  MARIANO
 ------------------------------------------------------------------------------------------------------------------
 
 INSCRIPCION a SALIDA TURISTICA
-																					CONSULTA DE PAQUETE DE ACTIVIDADES TURISTICAS --proceso-- 
+																					CONSULTA DE PAQUETE DE ACTIVIDADES TURISTICAS MC y MB
 
 ------------------------------------------------------------------------------------------------------------------
  MATIAS
@@ -27,9 +27,9 @@ INSCRIPCION a SALIDA TURISTICA
 																					INICIO DE SESION SC
 																					CIERRE DE SESION SC
 																					ALTA DE USUARIO SC
-COMPRA DE PAQUETES en proceso avanzado
-																					CONSULTA DE USUARIO
-																					MODIFICAR DATOS DE USUARIO										
+																					COMPRA DE PAQUETES MB
+																					CONSULTA DE USUARIO MB 
+																					MODIFICAR DATOS DE USUARIO MB									
 																					S.CENTRAL -> ALTA DE CATEGORIA (NUEVO) MB
 																					S.CENTRAL -> ACEPTAR / RECHAZAR ACTIVIDAD TURISTICA (NUEVO) MB
 																					S.CENTRAL -> AGREGAR ACTIVIDAD TURISTICA a PAQUETE (MODIFICAR) MB

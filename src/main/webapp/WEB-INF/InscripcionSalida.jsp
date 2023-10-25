@@ -113,17 +113,20 @@
 										<div class="card row-md-8">
 											 <div class="form-group">
 				                                <label for="cantTuristasInsc">Cant. de turistas a inscribir:</label>
-				                                <input type="text" class="form-control">
+				                                <input type="number" class="form-control" id="cantTur">
 				                            </div>    
 				                            <div class="form-group">
 				                                <label for="formaDePago">Forma de pago:</label>
-				                                <select class="form-control" id="cbFormaDePago">
+				                                <select class="form-control" id="cbFormaDePago" onchange="mostraOcultarPaquetes(this.value)">
 				                                    <option value="general">General</option>
-				                                    <option value="porPaquete">Por Paquete</option>				                                
+				                                    <option value="porPaquete">Por Paquete</option>
+				                                    				                                
 				                                </select>
+				                                <div id="contenedorPaquete" style="display: none">
 				                                <label for="formaDePago">Paquetes disponibles:</label>				                                
-				                                 <Select id="actividadSelect" name="actividadSelect" class="form-control">							
+				                                 <Select id="paquetesSelect" name="paquetesSelect" class="form-control">							
 												</Select>
+												</div>
 				                            </div>	
 				                        </div>
 
@@ -142,6 +145,8 @@
 	</div>
 
 	<script>
+	var actividadSelected;
+	var salidaSelected;
 function seleccionarDepartamento(idDepartamento) {
 	// Crear un objeto XMLHttpRequest
 	var xhr = new XMLHttpRequest();	
@@ -261,11 +266,11 @@ function seleccionarCategoria(idCategoria) {
 	// Enviar la solicitud
 	xhr.send();
 }
-function buscarPaquetes(idSalida) { // esta funcion muesta las salidas asociadas a una actividad
+function buscarPaquetes(idActividad, cantTur) { // esta funcion muesta las salidas asociadas a una actividad
 	document.getElementById("contenedorInscripcion").style.display = "block";
 	var xhr = new XMLHttpRequest();
-	xhr.open("POST", "http://localhost:8080/Labo2/consultaActividad?idPaquet=" + idActividad,
-			true);
+	xhr.open("POST", "http://localhost:8080/Labo2/ListarPaquetesDisponiblesTurista?idActiv=" 
+			+ idActividad + "&cantTur=" + cantTur,	true);
 	xhr.setRequestHeader("Content-Type",
 			"application/x-www-form-urlencoded");
 	xhr.onreadystatechange = function() {
@@ -275,23 +280,17 @@ function buscarPaquetes(idSalida) { // esta funcion muesta las salidas asociadas
 				// Construir el contenido HTML de las salidas
 				var paquetesHtml = "";
 				if (paquetes.length > 0) {
-					paquetes
-							.forEach(function(paquete) {
-								paquetesHtml += "<div class='paquete'>";
+					paquetes.forEach(function(paquete) {
+								paquetesHtml += "<option value='" + paquete.id + "'>";
 								paquetesHtml += "<h4>" + paquete.nombre
 										+ "</h4>";
-										paquetesHtml += "<hr>";
-										paquetesHtml += "<p>Descripcion: "	+ paquete.descripcion + "</p>";
-										paquetesHtml += "<p>Validez: "	+ paquete.validez + "</p>";
-										paquetesHtml += "<p>Descuento: " + paquete.descuento + "</p>";
-										paquetesHtml += "<p>Fecha Alta: " + paquete.fechaAlta + "</p>";										
-										paquetesHtml += "</div>";
+										paquetesHtml += "</option>";									
 							});
 				} else {
-					paquetesHtml += "<p>No hay Paquetes disponibles para esta Actividad.</p>";
+					paquetesHtml += "<option disabled> No hay Paquetes disponibles para esta Actividad y cantidad de Turistas.</option>";
 				}
 				// Agregar el contenido al elemento con id cardSalidas
-				document.getElementById("cardPaquetes").innerHTML = paquetesHtml;
+				document.getElementById("paquetesSelect").innerHTML = paquetesHtml;
 			} else {
 				// Manejar errores si es necesario
 				console.error("Error al obtener Paquetes de la actividad.");
@@ -302,6 +301,8 @@ function buscarPaquetes(idSalida) { // esta funcion muesta las salidas asociadas
 	xhr.send("idActividad=" + idActividad);
 }
 function buscarSalidas(idActividad) { // esta funcion muesta las salidas asociadas a una actividad
+	actividadSelected = idActividad;
+	salidaSelected = undefined;
 	document.getElementById("contenedorSalidas").style.display = "block";
 	var xhr = new XMLHttpRequest();
 	xhr.open("POST", "http://localhost:8080/Labo2/consultaActividad?idActiv=" + idActividad, true);
@@ -314,7 +315,7 @@ function buscarSalidas(idActividad) { // esta funcion muesta las salidas asociad
 				var salidasHtml = "";
 				if (salidas.length > 0) {
 					salidas.forEach(function(salida) {
-								salidasHtml += "<div class='salida'>";						
+								salidasHtml += "<div class='salida'>";					
 								
 								salidasHtml += "<h4>" + salida.nombre
 										+ "</h4>";
@@ -349,7 +350,14 @@ function buscarSalidas(idActividad) { // esta funcion muesta las salidas asociad
 	xhr.send("idActividad=" + idActividad);
 }
 
-
+function mostraOcultarPaquetes(formaDePago){
+	if(formaDePago == "general"){
+		document.getElementById("contenedorPaquete").style.display = "none";		
+	}else{
+		document.getElementById("contenedorPaquete").style.display = "block";
+		buscarPaquetes(actividadSelected, parseInt(document.getElementById("cantTur").value));
+	}	
+}
 
 </script>
 </body>
