@@ -66,7 +66,7 @@ public class ConsultaActividadServlet2 extends HttpServlet {
     	 if(request.getParameter("idDepto") != null) {
          	String idD = request.getParameter("idDepto");
          	Long idDepartamento = Long.parseLong(idD);
-         	List<DataActividad> actividades = sistema.getActividadesConfirmadas(idDepartamento);
+         	List<DataActividad> actividades = (List<DataActividad>) sistema.getActividadesConfirmadas(idDepartamento);
          	System.out.println( " asdsa" + actividades);
          	String actividadesJson = gson.toJson(actividades);
             response.setContentType("application/json");
