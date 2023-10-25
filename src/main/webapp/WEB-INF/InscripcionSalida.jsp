@@ -127,6 +127,11 @@
 				                                 <Select id="paquetesSelect" name="paquetesSelect" class="form-control">							
 												</Select>
 												</div>
+												<hr>
+												<div id="contenedorSalidaSeleccionada" style="display: none">
+				                                <label for="formaDePago">Salida seleccionada:</label>
+				                             	<p id="salidaSeleccionadaText"></p>                   
+												</div>
 				                            </div>	
 				                        </div>
 
@@ -148,33 +153,24 @@
 	var actividadSelected;
 	var salidaSelected;
 function seleccionarDepartamento(idDepartamento) {
-	// Crear un objeto XMLHttpRequest
 	var xhr = new XMLHttpRequest();	
 	document.getElementById("contenedorInscripcion").style.display = "none";
 	document.getElementById("contenedorSalidas").style.display = "none";
 	
 	console.log("llegue no se q ...");
-	// Configurar la solicitud
 	xhr.open('POST', 'http://localhost:8080/Labo2/consultaActividad?idDepto=' // esto es una queryparam
 			+ idDepartamento, true);
 	xhr.setRequestHeader('Content-Type', 'application/json');
-// 	document.getElementById("cardPaquetes".style.display) = "none";
-	// Definir el comportamiento al cambio de estado
 	xhr.onreadystatechange = function() {
-		// Verificar si la solicitud se completó exitosamente
 		if (xhr.readyState == 4 && xhr.status == 200) {
 			if (JSON.parse(xhr.responseText) != null) {
 				var actividades = JSON.parse(xhr.responseText);
 				var actividadesHtml = "";
-
-				// Construir el contenido HTML de las actividades
 				if (actividades.length != 0) {
 					actividades
 							.forEach(function(actividad) {
 								
 									actividadesHtml += "<div class='actividad' onclick='buscarSalidas(" 
-							            + actividad.id 
-							            + "); buscarPaquetes(" 
 							            + actividad.id 
 							            + ")'>";
 							        
@@ -208,34 +204,26 @@ function seleccionarDepartamento(idDepartamento) {
 
 // 		<script>
 function seleccionarCategoria(idCategoria) {	
-	// Crear un objeto XMLHttpRequest
 	var xhr = new XMLHttpRequest();
-	
 	document.getElementById("contenedorInscripcion").style.display = "none";
 	document.getElementById("contenedorSalidas").style.display = "none";
 	console.log("llegue no se q ...");
-	// Configurar la solicitud
 	xhr.open('POST', 'http://localhost:8080/Labo2/consultaActividad?idCateg=' // esto es una queryparam
 			+ idCategoria, true);
 	xhr.setRequestHeader('Content-Type', 'application/json');
 
-	// Definir el comportamiento al cambio de estado
 	xhr.onreadystatechange = function() {
-		// Verificar si la solicitud se completó exitosamente
 		if (xhr.readyState == 4 && xhr.status == 200) {
 			if (JSON.parse(xhr.responseText) != null) {
 				var actividades = JSON.parse(xhr.responseText);
 				var actividadesHtml = "";
 
-				// Construir el contenido HTML de las actividades
 				if (actividades.length != 0) {
 					actividades
 							.forEach(function(actividad) {
 								
 									actividadesHtml += "<div class='actividad' onclick='buscarSalidas(" 
 							            + actividad.id 
-							            + "); buscarPaquetes(" 
- 							            + actividad.id 
 							            + ")'>";
 							        
 							        actividadesHtml += "<h4 style='cursor: pointer;'>" + actividad.nomAct + "</h4>";
@@ -259,17 +247,14 @@ function seleccionarCategoria(idCategoria) {
 				}
 
 				document.getElementById("cardActividades").innerHTML = actividadesHtml;
-
 			}
 		}
 	};
-	// Enviar la solicitud
 	xhr.send();
 }
 function buscarPaquetes(idActividad, cantTur) { // esta funcion muesta las salidas asociadas a una actividad
-	document.getElementById("contenedorInscripcion").style.display = "block";
 	var xhr = new XMLHttpRequest();
-	xhr.open("POST", "http://localhost:8080/Labo2/ListarPaquetesDisponiblesTurista?idActiv=" 
+	xhr.open("GET", "http://localhost:8080/Labo2/ListarPaquetesDisponiblesTurista?idActiv=" 
 			+ idActividad + "&cantTur=" + cantTur,	true);
 	xhr.setRequestHeader("Content-Type",
 			"application/x-www-form-urlencoded");
@@ -277,7 +262,7 @@ function buscarPaquetes(idActividad, cantTur) { // esta funcion muesta las salid
 		if (xhr.readyState == 4) {
 			if (xhr.status == 200) {
 				var paquetes = JSON.parse(xhr.responseText);
-				// Construir el contenido HTML de las salidas
+				console.log(paquetes);
 				var paquetesHtml = "";
 				if (paquetes.length > 0) {
 					paquetes.forEach(function(paquete) {
@@ -289,15 +274,12 @@ function buscarPaquetes(idActividad, cantTur) { // esta funcion muesta las salid
 				} else {
 					paquetesHtml += "<option disabled> No hay Paquetes disponibles para esta Actividad y cantidad de Turistas.</option>";
 				}
-				// Agregar el contenido al elemento con id cardSalidas
 				document.getElementById("paquetesSelect").innerHTML = paquetesHtml;
 			} else {
-				// Manejar errores si es necesario
 				console.error("Error al obtener Paquetes de la actividad.");
 			}
 		}
 	};
-	// Enviar el ID de la actividad al servidor
 	xhr.send("idActividad=" + idActividad);
 }
 function buscarSalidas(idActividad) { // esta funcion muesta las salidas asociadas a una actividad
@@ -311,11 +293,13 @@ function buscarSalidas(idActividad) { // esta funcion muesta las salidas asociad
 		if (xhr.readyState == 4) {
 			if (xhr.status == 200) {
 				var salidas = JSON.parse(xhr.responseText);
-				// Construir el contenido HTML de las salidas
 				var salidasHtml = "";
 				if (salidas.length > 0) {
 					salidas.forEach(function(salida) {
-								salidasHtml += "<div class='salida'>";					
+						
+						//document.getElementById("contenedorSalidaSeleccionada").style.display = "none";
+// 						onclick='buscarSalidas(
+								salidasHtml += "<div class='salida' onclick=\"setearSalida('" + salida.nombre + "')\">";					
 								
 								salidasHtml += "<h4>" + salida.nombre
 										+ "</h4>";
@@ -337,17 +321,20 @@ function buscarSalidas(idActividad) { // esta funcion muesta las salidas asociad
 				} else {
 					salidasHtml += "<p>No hay salidas disponibles para esta actividad.</p>";                 
 				}
-				// Agregar el contenido al elemento con id cardSalidas
 				document.getElementById("cardSalidas").innerHTML = salidasHtml;
 			} else {
-				// Manejar errores si es necesario
 				console
 						.error("Error al obtener salidas de la actividad.");
 			}
 		}
 	};
-	// Enviar el ID de la actividad al servidor
 	xhr.send("idActividad=" + idActividad);
+	document.getElementById("contenedorInscripcion").style.display = "block";
+}
+
+function setearSalida(nombreSalida){
+	document.getElementById("contenedorSalidaSeleccionada").style.display = "block";
+	document.getElementById("salidaSeleccionadaText").textContent = nombreSalida;
 }
 
 function mostraOcultarPaquetes(formaDePago){
