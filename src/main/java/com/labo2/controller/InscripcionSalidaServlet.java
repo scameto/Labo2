@@ -22,8 +22,8 @@ import logica.datatypes.DataCategoria;
 import logica.datatypes.DataDepartamento;
 import logica.datatypes.DataPaquete;
 
-@WebServlet("/consultaActividad")
-public class ConsultaActividadServlet2 extends HttpServlet {
+@WebServlet("/InscripcionSalida")
+public class InscripcionSalidaServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private ISistema sistema;
     private Gson gson;
@@ -56,7 +56,7 @@ public class ConsultaActividadServlet2 extends HttpServlet {
             } else {
                 request.setAttribute("categoria", categorias);
             }            
-            request.getRequestDispatcher("/WEB-INF/ConsultaActividad2.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/InscripcionSalida.jsp").forward(request, response);
         }       
     }    
     @Override

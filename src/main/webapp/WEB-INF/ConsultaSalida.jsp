@@ -17,7 +17,7 @@
 			<div class="col-lg-3">
 			
 				<div>
-					<h1 class="tituloVentana">Consulta Actividades</h1>
+					<h1 class="tituloVentana">Consulta Salidas</h1>
 					<div id="cajaDepartamentos">
 						<div id="listaActividades">
 							<label for="departamentos">Departamentos:</label>

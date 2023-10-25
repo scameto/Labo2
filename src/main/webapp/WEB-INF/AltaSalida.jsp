@@ -1,3 +1,5 @@
+<%@page import="logica.datatypes.DataProveedor"%>
+<%@page import="com.labo2.model.EstadoSesion"%>
 <%@page import="logica.datatypes.DataActividad"%>
 <%@page import="logica.datatypes.DataCategoria"%>
 <%@page import="java.util.List"%>
@@ -20,7 +22,21 @@
 					<div>
                     <h1 class="tituloVentana">Alta Salida</h1>
                     </div>
-                    	<% 
+<!--                     ACA CHEQUEAMOS QUE EL USUARIO ESTE LOGUEADO PARA PERMITIR EL ACCESO -->
+					<%
+					    HttpSession sesion = request.getSession();
+					    EstadoSesion estadoSesion = (EstadoSesion) sesion.getAttribute("estado_sesion");
+					    Object usuarioLogueado = sesion.getAttribute("usuario_logueado");
+					
+					    if (!(estadoSesion != null && usuarioLogueado instanceof DataProveedor)) {
+					        response.sendRedirect(request.getContextPath() + "/iniciar");  
+					        return;
+					    }
+					%>
+<!--                     ------------------------------------------------------------------------------- -->
+                    
+                    
+                    <% 
 					    String mensajeError = (String) session.getAttribute("mensajeError"); 
 					    if(mensajeError != null) {
 					%>
@@ -175,5 +191,53 @@ function seleccionarDepartamento(idDepartamento) {
 	// Enviar la solicitud
 	xhr.send();
 }
+    function validateForm() {
+        // Validar el nombre de la salida
+        var name = document.getElementById("inputNombreSal").value;
+        if (name.trim() == "") {
+            alert("El nombre de la salida no puede estar vacío.");
+            return false;
+        }
+        
+        // Validar la fecha de la salida
+        var fechaSal = document.getElementById("inputFechaSal").value;
+        if (fechaSal.trim() == "") {
+            alert("La fecha de salida no puede estar vacía.");
+            return false;
+        } else {
+            var today = new Date();
+            var dateOfSalida = new Date(fechaSal);
+            
+            // Chequear si la fecha ingresada es anterior a la fecha actual
+            if (dateOfSalida < today) {
+                alert("La fecha de salida no puede ser anterior a la fecha actual.");
+                return false;
+            }
+        }
+
+        // Validar la hora de la salida
+        var horaSal = document.getElementById("inputHoraSal").value;
+        if (horaSal.trim() == "") {
+            alert("La hora de salida no puede estar vacía.");
+            return false;
+        }
+
+        // Validar la cantidad máxima de turistas
+        var cantMaxSal = document.getElementById("inputCantMaxSal").value;
+        if (isNaN(cantMaxSal) || cantMaxSal <= 0) {
+            alert("Introduce una cantidad máxima de turistas válida.");
+            return false;
+        }
+
+        // Validar el lugar de salida
+        var lugarSal = document.getElementById("inputLugarSal").value;
+        if (lugarSal.trim() == "") {
+            alert("El lugar de salida no puede estar vacío.");
+            return false;
+        }
+
+        return true;
+    }
 </script>
+
 </html>

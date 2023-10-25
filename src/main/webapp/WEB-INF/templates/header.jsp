@@ -71,19 +71,19 @@
 				<div class="dropdown-submenu-salidas"
 					aria-labelledby="submenu-salidas">
 					<a class="dropdown-item sal-item" href="AltaSalida">Alta Salida</a> 
-					<a class="dropdown-item sal-item" href="inscripcionSalida">Inscripcion Salida</a> <!-- ELIMINAR -->
-					<a class="dropdown-item sal-item" href="#">Consulta Salida</a>
+					<a class="dropdown-item sal-item" href="InscripcionSalida">Inscripcion Salida</a> <!-- ELIMINAR -->
+					<a class="dropdown-item sal-item" href="consultaSalida">Consulta Salida</a>
 				</div>
 				<%} else if(usuarioLogueado instanceof DataTurista) {%>
 				<a class="dropdown-item sal-item" href="#">Salidas</a>
 				<div class="dropdown-submenu-salidas" aria-labelledby="submenu-salidas">					
-					<a class="dropdown-item sal-item" href="inscripcionSalida">Inscripcion Salida</a> 
-					<a class="dropdown-item sal-item" href="#">Consulta Salida</a>
+					<a class="dropdown-item sal-item" href="InscripcionSalida">Inscripcion Salida</a> 
+					<a class="dropdown-item sal-item" href="consultaSalida">Consulta Salida</a>
 				</div>
 				<%} else {%>
 				<a class="dropdown-item sal-item" href="#">Salidas</a>
 				<div class="dropdown-submenu-salidas" aria-labelledby="submenu-salidas">					
-					<a class="dropdown-item sal-item" href="#">Consulta Salida</a>
+					<a class="dropdown-item sal-item" href="consultaSalida">Consulta Salida</a>
 				</div>
 				<% } %>	<!-- ******************************************************************************* -->				
 			</div>
