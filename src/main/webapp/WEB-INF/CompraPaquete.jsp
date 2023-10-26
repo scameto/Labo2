@@ -257,11 +257,11 @@
 	        total += numeroInscripciones * actividad.costo;
 	        console.log(total);
 	    });
-		
+	   
 	    var descuento = parseInt(document.getElementById("descuentoPaquete").textContent);
 	    var descuentoDecimal = descuento / 100;
 	    var totalConDescuento = total * (1 - descuentoDecimal);
-	    
+	    costoTotal = totalConDescuento;
 	    document.getElementById("rowTotal").style.display = "flex";
 	    document.getElementById("precioFinal").textContent = totalConDescuento + " $";
 	}
@@ -271,7 +271,7 @@
 		var idPaq = idPaquete
 		cantTuristas = cantTuristas;
 		var username = "<%= username %>"
-		
+		 
 		console.log(idPaquete);
 		console.log(cantTuristas);
 		console.log(costoTotal);
