@@ -20,6 +20,7 @@ import logica.datatypes.DataTurista;
 import logica.datatypes.DataActividad;
 import logica.datatypes.DataCategoria;
 import logica.datatypes.DataDepartamento;
+import logica.datatypes.DataInscripcionSalida;
 import logica.datatypes.DataPaquete;
 
 @WebServlet("/InscripcionSalida")
@@ -62,6 +63,8 @@ public class InscripcionSalidaServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+         HttpSession objSesion = request.getSession();
+
     	//cargamso las actividades confirmadas por departamento 
     	 if(request.getParameter("idDepto") != null) {
          	String idD = request.getParameter("idDepto");
@@ -120,6 +123,59 @@ public class InscripcionSalidaServlet extends HttpServlet {
           	}          	
             response.setContentType("application/json");
             response.getWriter().write(salidasJson);
-          }    
+          }
+    	 if (request.getParameter("salida") != null && request.getParameter("cantTur") != null && "general".equals(request.getParameter("formaPago"))) {
+    		    String salNomb = request.getParameter("salida");
+    		    String cant = request.getParameter("cantTur");
+    		    String formaPago = request.getParameter("formaPago");
+    		    DataTurista yo = (DataTurista) objSesion.getAttribute("usuario_logueado");
+    		    try {
+    		    	if (sistema.estaInscripto(yo.getUsername(), salNomb)) { 
+    		 			objSesion.setAttribute("mensajeError", "El nombre de Salida ya existe. Por favor elige otro.");
+    		 		    response.sendRedirect("InscripcionSalida");
+    		 	        return;
+    		 	    }
+    		    	
+    		        Boolean resultado = sistema.agregarInscripcion(Integer.parseInt(cant), salNomb, yo.getUsername());
+    		        if (resultado) {
+    		            objSesion.setAttribute("mensajeExito", "Salida registrada exitosamente!.");
+    		            response.sendRedirect("InscripcionSalida");
+    		        } else {
+    		            objSesion.setAttribute("mensajeError", "Hubo un problema No Hay cupos Disponibles.");
+    		            response.sendRedirect("InscripcionSalida");
+    		        }
+    		    } catch (Exception e) {
+    		        e.printStackTrace();  
+    		        objSesion.setAttribute("mensajeError", "Hubo un problema en el registro de la Salida.");
+		            response.sendRedirect("InscripcionSalida");
+    		    }   
+    	 }
+    	 if (request.getParameter("salida") != null && request.getParameter("cantTur") != null && "porPaquete".equals(request.getParameter("formaPago")) && request.getParameter("paquete") != null) {
+ 		    String salNomb = request.getParameter("salida");
+ 		    String cant = request.getParameter("cantTur");
+ 		    String paquete = request.getParameter("paquete");
+ 		    String formaPago = request.getParameter("formaPago");
+ 		    DataTurista yo = (DataTurista) objSesion.getAttribute("usuario_logueado");
+ 		   try {
+		    	if (sistema.estaInscripto(yo.getUsername(), salNomb)) { 
+		 			objSesion.setAttribute("mensajeError", "El nombre de Salida ya existe. Por favor elige otro.");
+		 		    response.sendRedirect("InscripcionSalida");
+		 	        return;
+		 	    }  	
+		    	
+		        Boolean resultado = sistema.agregarInscripcionAPaquete(Integer.parseInt(cant), salNomb, yo.getUsername(), Long.parseLong(paquete));
+		        if (resultado) {
+		            objSesion.setAttribute("mensajeExito", "Salida registrada exitosamente!.");
+		            response.sendRedirect("InscripcionSalida");
+		        } else {
+		            objSesion.setAttribute("mensajeError", "Hubo un problema No Hay cupos Disponibles.");
+		            response.sendRedirect("InscripcionSalida");
+		        }
+		    } catch (Exception e) {
+		        e.printStackTrace();  
+		        objSesion.setAttribute("mensajeError", "Hubo un problema en el registro de la Salida.");
+	            response.sendRedirect("InscripcionSalida");
+		    } 
+    	 }
     }
 }
