@@ -80,35 +80,35 @@
 	
 	//----------------------------------------------------------------
 	
-	//function verInfoActividad() {
-    //var actividadSeleccionada = document.getElementById("cbActividades").value;
-    //if (actividadSeleccionada) {
-        // Redirigir a la página de consulta de actividad con el ID de la actividad como parámetro
-     //   window.location.href = "consultaActividad?actividadId=" + actividadSeleccionada;
-     //   console.log("actividad que tengo seleccionada: " + actividadSeleccionada);
-   // } else {
-   //     alert("Por favor, selecciona una actividad.");
-   // }
-	//}
+	function verInfoActividad() {
+    var actividadSeleccionada = document.getElementById("cbActividades").value;
+    if (actividadSeleccionada) {
+         // Redirigir a la página de consulta de actividad con el ID de la actividad como parámetro
+        window.location.href = "consultaActividad?actividadId=" + actividadSeleccionada;
+        console.log("actividad que tengo seleccionada: " + actividadSeleccionada);
+    } else {
+        alert("Por favor, selecciona una actividad.");
+    }
+	}
 	
-	 function verInfoActividad() {
+	<%--function verInfoActividad() {
 	        var actividadSeleccionada = document.getElementById("cbActividades").value;
 	        
 	        // Obtener los datos de la actividad seleccionada
-	        var actividades = <%= new Gson().toJson(paquetes) %>;
-	        var actividadSeleccionadaData = actividades.find(function(actividad) {
-	            return actividad.id == actividadSeleccionada;
+	 	        var actividades = <%= new Gson().toJson(paquetes) %>;
+		        var actividadSeleccionadaData = actividades.find(function(actividad) {
+		            return actividad.id == actividadSeleccionada;
 	        });
 	        
 	        // Almacenar los datos de la actividad en variables JavaScript
-	        var nombreActividad = actividadSeleccionadaData.nomAct;
-	        var descripcionActividad = actividadSeleccionadaData.descripcion;
+	 	     var nombreActividad = actividadSeleccionadaData.nomAct;
+	         var descripcionActividad = actividadSeleccionadaData.descripcion;
 	        // Y otros datos relevantes
 
 	        // Redirigir a la página de consulta de actividad con datos de actividad en la URL
 	        window.location.href = "consultaActividad.jsp?nombre=" + nombreActividad + "&descripcion=" + descripcionActividad;
-	    }
-	
+	    } --%>
+	    
 	
 	
 	
