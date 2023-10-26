@@ -9,13 +9,12 @@
 <body>  
 
 <jsp:include page="/WEB-INF/templates/header.jsp" />
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-6">                
+    <div class="container mt-5">
+    <h3 class="titulo">Alta Usuario</h3>
+        <div class="row justify-content-center fondoTransparente">
+            <div class="col-lg-10">                
                 <form onsubmit="return validateForm()" action="Alta-Usuario" method="post" >                     
-                    <div>
-                    <h5 class="tituloVentana">Alta Usuario</h5>
-                    </div>
+                    
 					<% 
 					    String mensajeError = (String) session.getAttribute("mensajeError"); 
 					    if(mensajeError != null) {
@@ -37,7 +36,7 @@
 					    }
 					    %>
 					 <div class="row mb-1">
-                     <label for="userType" class="col-sm-2 col-form-label">Tipo</label>
+                     <label for="userType" class="col-sm-2 col-form-label" style="margin-right: 30px;">Tipo</label>
                      <div class="col-sm-8">
                             <select class="form-control" id="userType" name="userType">
                                 <option for="userType" value="proveedor">Proveedor</option>
@@ -46,67 +45,67 @@
                         </div>
                     </div>					
                     <div class="row mb-1">
-                        <label for="inputUsuarioNick" class="col-sm-2 col-form-label">NickName</label>
+                        <label for="inputUsuarioNick" class="col-sm-2 col-form-label" style="margin-right: 30px;">NickName</label>
                         <div class="col-sm-8">
                             <input type="text" class="form-control" id="inputUsuarioNick" name="inputUsuarioNick">
                         </div>
                     </div>                   
                     <div class="row mb-1">
-                        <label for="inputUsuarioNombre" class="col-sm-2 col-form-label">Nombre</label>
+                        <label for="inputUsuarioNombre" class="col-sm-2 col-form-label" style="margin-right: 30px;">Nombre</label>
                         <div class="col-sm-8">
                             <input type="text" class="form-control" id="inputUsuarioNombre" name="inputUsuarioNombre">
                         </div>
                     </div>
                     <div class="row mb-1">
-                        <label for="inputUsuarioApellido" class="col-sm-2 col-form-label">Apellido</label>
+                        <label for="inputUsuarioApellido" class="col-sm-2 col-form-label" style="margin-right: 30px;">Apellido</label>
                         <div class="col-sm-8">
                             <input type="text" class="form-control" id="inputUsuarioApellido" name="inputUsuarioApellido">
                         </div>
                     </div>                    
                     <div class="row mb-1">
-                        <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
+                        <label for="inputPassword" class="col-sm-2 col-form-label" style="margin-right: 30px;">Password</label>
                         <div class="col-sm-8">
                             <input type="password" class="form-control" id="inputPassword" name="inputPassword">
                         </div>
                     </div>                
                     <div class="row mb-1">
-                        <label for="inputRePassword" class="col-sm-2 col-form-label">Password</label>
+                        <label for="inputRePassword" class="col-sm-2 col-form-label" style="margin-right: 30px;">Password</label>
                         <div class="col-sm-8">
                             <input type="password" class="form-control" id="inputRePassword" name="inputRePassword">
                         </div>
                     </div>
                     <div class="row mb-1">
-                        <label for="inputUsuarioEmail" class="col-sm-2 col-form-label">E mail</label>
+                        <label for="inputUsuarioEmail" class="col-sm-2 col-form-label" style="margin-right: 30px;">Email</label>
                         <div class="col-sm-8">
                             <input type="email" class="form-control" id="inputUsuarioEmail" name="inputUsuarioEmail"> 
                         </div>
                     </div>
                     <div class="row mb-1">
-                        <label for="inputUsuarioFNac" class="col-sm-2 col-form-label">FechaNac</label>
+                        <label for="inputUsuarioFNac" class="col-sm-2 col-form-label" style="margin-right: 30px;">FechaNac</label>
                         <div class="col-sm-8">
                             <input type="date" class="form-control" id="inputUsuarioFNac" name="inputUsuarioFNac">
                         </div>
                     </div>                     
                      <div class="row mb-1" id="campoTurista">
-                        <label for="inputUsuarioNacion" class="col-sm-2 col-form-label">Nacionalidad</label>
+                        <label for="inputUsuarioNacion" class="col-sm-2 col-form-label" style="margin-right: 30px;">Nacionalidad</label>
                         <div class="col-sm-8">
                             <input type="text" class="form-control" id="inputUsuarioNacion" name="inputUsuarioNacion">
                         </div>
                     </div>
                      <div class="row mb-1" id="campoProveedor">
-                        <label for="inputUsuarioDesc" class="col-sm-2 col-form-label">Descripcion</label>
+                        <label for="inputUsuarioDesc" class="col-sm-2 col-form-label" style="margin-right: 30px;">Descripcion</label>
                         <div class="col-sm-8">
                             <input type="text" class="form-control" id="inputUsuarioDesc" name="inputUsuarioDesc">
                         </div>
                     </div>
                      <div class="row mb-1" id="campoProveedor2">
-                        <label for="inputUsuarioLinkW" class="col-sm-2 col-form-label">LinkWeb</label>
+                        <label for="inputUsuarioLinkW" class="col-sm-2 col-form-label" style="margin-right: 30px;">LinkWeb</label>
                         <div class="col-sm-8">
                             <input type="text" class="form-control" id="inputUsuarioLinkW" name="inputUsuarioLinkW">
                         </div>
                     </div>                  
                     <div class="row mb-1">
-                        <label for="inputUsuarioImage" class="col-sm-2 col-form-label">Foto_link</label>
+                        <label for="inputUsuarioImage" class="col-sm-2 col-form-label" style="margin-right: 30px;">Foto_link</label>
                         <div class="col-sm-8">
                             <input type="file" class="form-control" id="inputUsuarioImage" name="inputUsuarioImage">
                         </div>
