@@ -14,13 +14,11 @@
 </head>
 <body>
 <jsp:include page="/WEB-INF/templates/header.jsp" />
-<div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-6">                
+<div class="container mt-5">
+	<h3 class="titulo">Alta Actividad</h3>
+        <div class="row justify-content-center fondoTransparente">
+            <div class="col-lg-10">                
 				<form onsubmit="return validateForm()" action="AltaActividad" method="post">           				
-					<div>
-                    <h1 class="tituloVentana">Alta Actividad</h1>
-                    </div>
                     <!--         ACA CHEQUEAMOS QUE EL USUARIO ESTE LOGUEADO PARA PERMITIR EL ACCESO -->
 					<%
 					    HttpSession sesion = request.getSession();
@@ -54,9 +52,9 @@
 					    }
 					    %>
                     <div class="row mb-2">
-                    <label for="inputNombreDpto" class="col-sm-2 col-form-label">Depto</label>   
+                    <label for="inputNombreDpto" class="col-sm-2 col-form-label" style="margin-right: 30px;">Departamento</label>   
                     	<div class="col-sm-8">                 
-		                   <select id="departamentoSelect" name="departamentoSelect" class="form-control">
+		                   <select id="departamentoSelect" name="departamentoSelect" class="form-control" style="margin-left: 40px;">
 							<% List<DataDepartamento> departamentos=(List<DataDepartamento>)request.getAttribute("departamentos");
 							if(departamentos!=null)
 							for(DataDepartamento departamento: departamentos){%>
@@ -66,39 +64,39 @@
 						</div>				
 					</div>
                     <div class="row mb-2">
-                        <label for="inputNombreAct" class="col-sm-2 col-form-label">NombreAct</label>
+                        <label for="inputNombreAct" class="col-sm-2 col-form-label" style="margin-right: 30px;">NombreActividad</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control" id="inputNombreAct" name="inputNombreAct">
+                            <input type="text" class="form-control" id="inputNombreAct" name="inputNombreAct" style="margin-left: 40px;">
                         </div>
                     </div>                   
                     <div class="row mb-2">
-                        <label for="inputDescAct" class="col-sm-2 col-form-label">Descripcion</label>
+                        <label for="inputDescAct" class="col-sm-2 col-form-label" style="margin-right: 30px;">Descripcion</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control" id="inputDescAct" name="inputDescAct">
+                            <input type="text" class="form-control" id="inputDescAct" name="inputDescAct" style="margin-left: 40px;">
                         </div>
                     </div>
                     <div class="row mb-2">
-                        <label for="inputDuracionAct" class="col-sm-2 col-form-label">Duracion(hs)</label>
+                        <label for="inputDuracionAct" class="col-sm-2 col-form-label" style="margin-right: 30px;">Duracion(hs)</label>
                         <div class="col-sm-8">
-                            <input type="number" class="form-control" id="inputDuracionAct" name="inputDuracionAct">
+                            <input type="number" class="form-control" id="inputDuracionAct" name="inputDuracionAct" style="margin-left: 40px;">
                         </div>
                     </div>                    
                     <div class="row mb-2">
-                        <label for="inputCostoAct" class="col-sm-2 col-form-label">Costo($uy)</label>
+                        <label for="inputCostoAct" class="col-sm-2 col-form-label" style="margin-right: 30px;">Costo($uy)</label>
                         <div class="col-sm-8">
-                            <input type="number" class="form-control" id="inputCostoAct" name="inputCostoAct">
+                            <input type="number" class="form-control" id="inputCostoAct" name="inputCostoAct" style="margin-left: 40px;">
                         </div>
                     </div>                
                     <div class="row mb-2">
-                        <label for="inputCiudadAct" class="col-sm-2 col-form-label">Ciudad</label>
+                        <label for="inputCiudadAct" class="col-sm-2 col-form-label" style="margin-right: 30px;">Ciudad</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control" id="inputCiudadAct" name="inputCiudadAct">
+                            <input type="text" class="form-control" id="inputCiudadAct" name="inputCiudadAct" style="margin-left: 40px;">
                         </div>
                     </div>
                     <div class="row mb-2">
-                        <label for="inputCategoriaAct" class="col-sm-2 col-form-label">Categoria</label>
+                        <label for="inputCategoriaAct" class="col-sm-2 col-form-label" style="margin-right: 30px;">Categoria</label>
                         <div class="col-sm-8">
-                        	 <select id="categoriaSelect" name="categoriaSelect" class="form-control">
+                        	 <select id="categoriaSelect" name="categoriaSelect" class="form-control" style="margin-left: 40px;">
 							<% List<DataCategoria> categorias =(List<DataCategoria>)request.getAttribute("categorias");
 							if(categorias!=null)
 							for(DataCategoria cat: categorias){%>
@@ -109,9 +107,9 @@
                         </div>
                     </div>
                     <div class="row mb-2">
-                        <label for="inputImageAct" class="col-sm-2 col-form-label">Foto_link</label>
+                        <label for="inputImageAct" class="col-sm-2 col-form-label" style="margin-right: 40px;">Foto_link</label>
                         <div class="col-sm-8">
-                            <input type="file" class="form-control" id="inputImageAct" name="inputImageAct">
+                            <input type="file" class="form-control" id="inputImageAct" name="inputImageAct" style="margin-left: 30px;">
                         </div>
                     </div>
                     <div class="row mb-2">

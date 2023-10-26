@@ -9,13 +9,12 @@
 </head>
 <body>
 <jsp:include page="/WEB-INF/templates/header.jsp" />
-    <div class="container">
-        <div class="row justify-content-center">
+    <div class="container mt-5">
+		<h3 class="titulo">Iniciar Sesion</h3>
+        <div class="row justify-content-center fondoTransparente">
             <div class="col-lg-6">
                 <form action="iniciar-sesion">
-					<div>
-                    <h1 class="tituloVentana">Iniciar Sesion</h1>
-                    </div>
+					
                     
                     	<%
         					EstadoSesion estadoSesion = (EstadoSesion) session.getAttribute("estado_sesion");
@@ -31,7 +30,7 @@
 					<div class="row mb-3">
                         <label for="userType" class="col-sm-2 col-form-label">Tipo</label>
                         <div class="col-sm-10">
-                            <select class="form-control" id="userType" name="userType">
+                            <select class="form-control" id="userType" name="userType" style="margin-left: 40px;">
                                 <option for="userType" value="proveedor">Proveedor</option>
                                 <option for="userType" value="turista">Turista</option>
                             </select>
@@ -40,13 +39,13 @@
                     <div class="row mb-3">
                         <label for="inputUsuario" class="col-sm-2 col-form-label">Usuario</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="inputUsuario" name="inputUsuario"> <!-- rutea por name -->
+                            <input type="text" class="form-control" id="inputUsuario" name="inputUsuario" style="margin-left: 40px;"> <!-- rutea por name -->
                         </div>
                     </div>
                     <div class="row mb-3">
                         <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
                         <div class="col-sm-10">
-                            <input type="password" class="form-control" id="inputPassword" name="inputPassword">
+                            <input type="password" class="form-control" id="inputPassword" name="inputPassword" style="margin-left: 40px;">
                         </div>
                     </div>                
                  

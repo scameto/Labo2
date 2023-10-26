@@ -142,6 +142,17 @@
 	</div>
 
 	<script>
+//------------------------------------------------------------------------------
+
+
+
+
+
+
+//-------------------------------------------------------------------------------
+	
+	
+	
 function seleccionarDepartamento(idDepartamento) {
 	// Crear un objeto XMLHttpRequest
 	var xhr = new XMLHttpRequest();	

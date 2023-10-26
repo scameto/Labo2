@@ -57,7 +57,19 @@ public class ConsultaActividadServlet2 extends HttpServlet {
                 request.setAttribute("categoria", categorias);
             }            
             request.getRequestDispatcher("/WEB-INF/ConsultaActividad2.jsp").forward(request, response);
-        }       
+        }
+  //---------------------------------------------------------------------------------------------------- 
+        
+        
+        if (request.getParameter("actividadId") != null) {
+        String idAct = request.getParameter("actividadId");
+        Long actividadId = Long.parseLong(idAct);
+     	System.out.println( "--------- " + actividadId);
+     
+        }
+        
+        
+  //----------------------------------------------------------------------------------------------------  
     }    
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -120,6 +132,11 @@ public class ConsultaActividadServlet2 extends HttpServlet {
           	}          	
             response.setContentType("application/json");
             response.getWriter().write(salidasJson);
-          }    
+          }
+    //----------------------------------------------------------------------------
+
+    	
+    //----------------------------------------------------------------------------
     }
+    
 }

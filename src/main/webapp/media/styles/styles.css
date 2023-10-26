@@ -43,7 +43,7 @@ h3 {
 /* Estilo para el fondo gris transparente */
 .fondoTransparente {
     color: black;
-    background-color: rgb(255, 255, 255, 0.4);
+    background-color: rgb(255, 255, 255, 0.3);
     padding: 20px;
     margin-right: 300px;
     margin-left: 300px;
