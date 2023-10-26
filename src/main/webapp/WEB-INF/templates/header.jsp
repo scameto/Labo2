@@ -51,7 +51,6 @@
 				<% if(usuarioLogueado instanceof DataProveedor) {%>		
 				<a class="dropdown-item paq-item" href="#">Paquetes</a>
 				<div class="dropdown-submenu-paquetes" aria-labelledby="submenu-paquetes">
-					<a class="dropdown-item paq-item" href="#">Alta Paquete</a> 
 					<a class="dropdown-item paq-item" href="ConsultaPaquete">Consulta Paquete</a>
 				</div>
 				<%} else if(usuarioLogueado instanceof DataTurista) {%>
@@ -71,7 +70,6 @@
 				<div class="dropdown-submenu-salidas"
 					aria-labelledby="submenu-salidas">
 					<a class="dropdown-item sal-item" href="AltaSalida">Alta Salida</a> 
-					<a class="dropdown-item sal-item" href="InscripcionSalida">Inscripcion Salida</a> <!-- ELIMINAR -->
 					<a class="dropdown-item sal-item" href="consultaSalida">Consulta Salida</a>
 				</div>
 				<%} else if(usuarioLogueado instanceof DataTurista) {%>
