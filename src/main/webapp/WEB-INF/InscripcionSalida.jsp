@@ -387,16 +387,13 @@ function mostraOcultarPaquetes(formaDePago){
 	}	
 }
 function Inscribir(){	
+	console.log("toy aca en inscribir");
 	var cantTur = document.getElementById("cantTur").value;
 	var formaPago = document.getElementById("cbFormaDePago").value;
 	var paqueteSeleccionado = document.getElementById("paquetesSelect").value;	
 	var xhr = new XMLHttpRequest();
 	xhr.open("POST", "http://localhost:8080/Labo2/InscripcionSalida?cantTur=" + cantTur + "&formaPago=" + formaPago + "&paquete=" + paqueteSeleccionado + "&salida=" + salidaSelected , true);
 	xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-// 	xhr.send("cantTur="  + cantTur);
-// 	xhr.send("formaPago="  + formaPago);
-// 	xhr.send("paquete="  + paqueteSeleccionado);
-// 	xhr.send("salida="  + salidaSelected);
 	xhr.onreadystatechange = function() {
 		if (xhr.readyState == 4) {
 			if (xhr.status == 200) {

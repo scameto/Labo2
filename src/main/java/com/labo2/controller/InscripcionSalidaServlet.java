@@ -135,7 +135,7 @@ public class InscripcionSalidaServlet extends HttpServlet {
     		 		    response.sendRedirect("InscripcionSalida");
     		 	        return;
     		 	    }
-    		    	
+    		    	System.out.println("inscripcion: " + Integer.parseInt(cant) +  salNomb + yo.getUsername());
     		        Boolean resultado = sistema.agregarInscripcion(Integer.parseInt(cant), salNomb, yo.getUsername());
     		        if (resultado) {
     		            objSesion.setAttribute("mensajeExito", "Salida registrada exitosamente!.");
@@ -156,9 +156,10 @@ public class InscripcionSalidaServlet extends HttpServlet {
  		    String paquete = request.getParameter("paquete");
  		    String formaPago = request.getParameter("formaPago");
  		    DataTurista yo = (DataTurista) objSesion.getAttribute("usuario_logueado");
+ 		    System.out.println("Estoy aca en el servlet");
  		   try {
 		    	if (sistema.estaInscripto(yo.getUsername(), salNomb)) { 
-		 			objSesion.setAttribute("mensajeError", "El nombre de Salida ya existe. Por favor elige otro.");
+		 			objSesion.setAttribute("mensajeError", "Ya estas inscripto en esta salida!.");
 		 		    response.sendRedirect("InscripcionSalida");
 		 	        return;
 		 	    }  	
@@ -168,7 +169,7 @@ public class InscripcionSalidaServlet extends HttpServlet {
 		            objSesion.setAttribute("mensajeExito", "Salida registrada exitosamente!.");
 		            response.sendRedirect("InscripcionSalida");
 		        } else {
-		            objSesion.setAttribute("mensajeError", "Hubo un problema No Hay cupos Disponibles.");
+		            objSesion.setAttribute("mensajeError", "Hubo un problema no hay cupos Disponibles.");
 		            response.sendRedirect("InscripcionSalida");
 		        }
 		    } catch (Exception e) {
