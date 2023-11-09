@@ -1,37 +1,33 @@
 /*
 
 	
-Iniciar--------> ver como camuflar la contrasena.. habia una manera.
+
 
 PENDIENTES													|						PRONTAS
 ------------------------------------------------------------------------------------------------------------------
  SANTIAGO
 ------------------------------------------------------------------------------------------------------------------											
+																					INICIO DE SESION SC
+																					CIERRE DE SESION SC
+																					ALTA DE USUARIO SC																					
 																					ALTA ACTIVIDAD TURISTICA SC 
 																					CONSULTA DE ACTIVIDAD TURISTICA	SC			
 																					ALTA DE SALIDA TURISTICA SC
-																					CONSULTA DE SALIDA TURISTICA SC
-		
-INSCRIPCION a SALIDA TURISTICA                                                                                               
-					
+																					CONSULTA DE SALIDA TURISTICA SC		
+																					INSCRIPCION a SALIDA TURISTICA SC Y MB                                                                                        
 ------------------------------------------------------------------------------------------------------------------
  MARIANO
 ------------------------------------------------------------------------------------------------------------------
-
-INSCRIPCION a SALIDA TURISTICA
+																					MAQUETADO, STYLES
 																					CONSULTA DE PAQUETE DE ACTIVIDADES TURISTICAS MC y MB
-
 ------------------------------------------------------------------------------------------------------------------
  MATIAS
-------------------------------------------------------------------------------------------------------------------
-																					INICIO DE SESION SC
-																					CIERRE DE SESION SC
-																					ALTA DE USUARIO SC
+------------------------------------------------------------------------------------------------------------------																				
 																					COMPRA DE PAQUETES MB
 																					CONSULTA DE USUARIO MB 
 																					MODIFICAR DATOS DE USUARIO MB									
 																					S.CENTRAL -> ALTA DE CATEGORIA (NUEVO) MB
 																					S.CENTRAL -> ACEPTAR / RECHAZAR ACTIVIDAD TURISTICA (NUEVO) MB
 																					S.CENTRAL -> AGREGAR ACTIVIDAD TURISTICA a PAQUETE (MODIFICAR) MB
-JUNIT TESTS
+																					JUNIT TESTS MB
 */

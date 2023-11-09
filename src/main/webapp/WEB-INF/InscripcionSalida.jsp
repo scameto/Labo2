@@ -1,3 +1,4 @@
+<%@page import="com.labo2.model.EstadoSesion"%>
 <%@page import="logica.datatypes.DataCategoria"%>
 <%@page import="logica.datatypes.DataDepartamento"%>
 <%@page import="java.util.List"%>
@@ -18,6 +19,40 @@
 			
 				<div>
 					<h1 class="tituloVentana">Inscripcion Salida</h1>
+					<!--                     ACA CHEQUEAMOS QUE EL USUARIO ESTE LOGUEADO PARA PERMITIR EL ACCESO -->
+					<%
+					    HttpSession sesion = request.getSession();
+					    EstadoSesion estadoSesion = (EstadoSesion) sesion.getAttribute("estado_sesion");
+					    Object usuarioLogueado = sesion.getAttribute("usuario_logueado");
+					
+					    if (!(estadoSesion != null && usuarioLogueado instanceof DataTurista)) {
+					        response.sendRedirect(request.getContextPath() + "/iniciar");  
+					        return;
+					    }
+					%>
+<!--                     ------------------------------------------------------------------------------- -->
+                    
+                    
+                    <% 
+					    String mensajeError = (String) session.getAttribute("mensajeError"); 
+					    if(mensajeError != null) {
+					%>
+					    <div class="alert alert-danger">
+					        <%= mensajeError %>
+					    </div>
+					<%
+					    session.removeAttribute("mensajeError");
+					}
+					    String mensajeExito = (String) session.getAttribute("mensajeExito"); 
+					    if(mensajeExito != null) {
+					    %>
+					        <div class="alert alert-success">
+					            <%= mensajeExito %>
+					        </div>
+					    <%
+					        session.removeAttribute("mensajeExito");
+					    }
+					%>
 					<div id="cajaDepartamentos">
 						<div id="listaActividades">
 							<label for="departamentos">Departamentos:</label>
@@ -110,6 +145,7 @@
 									</div>
 									
 									<div class="col-md-12" style="display: none; margin-top: 30px" id="contenedorInscripcion">
+<!-- 									<form action="InscripcionSalida" method="post"> -->
 										<div class="card row-md-8">
 											 <div class="form-group">
 				                                <label for="cantTuristasInsc">Cant. de turistas a inscribir:</label>
@@ -132,9 +168,12 @@
 				                                <label for="formaDePago">Salida seleccionada:</label>
 				                             	<p id="salidaSeleccionadaText"></p>                   
 												</div>
+												<div class="col-lg-12 offset-lg-9">
+						                            <button onclick="Inscribir()" value="Inscribir" class="btn btn-primary offset-sm-1" >Inscribir</button>
+						                        </div>
 				                            </div>	
 				                        </div>
-
+<!-- 									</form> -->
 									<div class="col-md-6"  style="display: none;" id="contenedorSalidas">
 										<div class="card mb-0">
 											<div class="card-body" id="cardSalidas"></div>
@@ -186,6 +225,7 @@ function seleccionarDepartamento(idDepartamento) {
 							        }).join(', ');
 
 							        actividadesHtml += "<p>Categorias: " + nombresCategorias + "<p>";
+							        actividadesHtml += "</div>";
 							});
 				} else {
 					actividadesHtml += "<div class='actividad'>"
@@ -238,6 +278,7 @@ function seleccionarCategoria(idCategoria) {
 							        }).join(', ');
 
 							        actividadesHtml += "<p>Categorias: " + nombresCategorias + "<p>";
+							        actividadesHtml += "</div>";
 							});
 				} else {
 					actividadesHtml += "<div class='actividad'>"
@@ -323,8 +364,7 @@ function buscarSalidas(idActividad) { // esta funcion muesta las salidas asociad
 				}
 				document.getElementById("cardSalidas").innerHTML = salidasHtml;
 			} else {
-				console
-						.error("Error al obtener salidas de la actividad.");
+				console.error("Error al obtener salidas de la actividad.");
 			}
 		}
 	};
@@ -333,6 +373,7 @@ function buscarSalidas(idActividad) { // esta funcion muesta las salidas asociad
 }
 
 function setearSalida(nombreSalida){
+	salidaSelected = nombreSalida;
 	document.getElementById("contenedorSalidaSeleccionada").style.display = "block";
 	document.getElementById("salidaSeleccionadaText").textContent = nombreSalida;
 }
@@ -345,7 +386,26 @@ function mostraOcultarPaquetes(formaDePago){
 		buscarPaquetes(actividadSelected, parseInt(document.getElementById("cantTur").value));
 	}	
 }
+function Inscribir(){	
+	console.log("toy aca en inscribir");
+	var cantTur = document.getElementById("cantTur").value;
+	var formaPago = document.getElementById("cbFormaDePago").value;
+	var paqueteSeleccionado = document.getElementById("paquetesSelect").value;	
+	var xhr = new XMLHttpRequest();
+	xhr.open("POST", "http://localhost:8080/Labo2/InscripcionSalida?cantTur=" + cantTur + "&formaPago=" + formaPago + "&paquete=" + paqueteSeleccionado + "&salida=" + salidaSelected , true);
+	xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+	xhr.onreadystatechange = function() {
+		if (xhr.readyState == 4) {
+			if (xhr.status == 200) {
+				document.open();
+				document.write(xhr.responseText);
+				document.close();
+			}			
+		}	
+	}
+	xhr.send();
 
+}
 </script>
 </body>
 </html>

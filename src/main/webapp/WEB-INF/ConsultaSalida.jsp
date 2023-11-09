@@ -72,7 +72,7 @@
 
 
 
-#cardActividades {
+#cardActividades, #cardPaquetes {
 	overflow-y: auto;
 	max-height: 30vh;
 	

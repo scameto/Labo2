@@ -66,11 +66,20 @@ public class ConsultaActividadServlet2 extends HttpServlet {
     	 if(request.getParameter("idDepto") != null) {
          	String idD = request.getParameter("idDepto");
          	Long idDepartamento = Long.parseLong(idD);
-         	List<DataActividad> actividades = sistema.getActividadesConfirmadas(idDepartamento);
-         	System.out.println( " asdsa" + actividades);
-         	String actividadesJson = gson.toJson(actividades);
-            response.setContentType("application/json");
-            response.getWriter().write(actividadesJson);
+//         	List<DataActividad> actividades = (List<DataActividad>) sistema.getActividadesConfirmadas(idDepartamento);
+//         	System.out.println( " asdsa" + actividades);
+//         	String actividadesJson = gson.toJson(actividades);
+//            response.setContentType("application/json");
+//            response.getWriter().write(actividadesJson);
+          if(idDepartamento !=null) {	         	
+	         	List<DataActividad> actividades = sistema.getActividadesConfirmadas(idDepartamento);
+	         	String actividadesJson = gson.toJson(actividades);
+	            response.setContentType("application/json");
+	            response.getWriter().write(actividadesJson);
+	      }else {
+	            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+	            response.getWriter().write("Categoria no encontrada");
+	        }   
          }
     	//cargamso las actividades confirmadas por categoria 
     	 if(request.getParameter("idCateg") != null) {

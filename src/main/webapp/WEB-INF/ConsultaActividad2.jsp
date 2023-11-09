@@ -72,7 +72,7 @@
 
 
 
-#cardActividades {
+#cardActividades, #cardPaquetes {
 	overflow-y: auto;
 	max-height: 30vh;
 	
@@ -185,6 +185,8 @@ function seleccionarDepartamento(idDepartamento) {
 							        }).join(', ');
 
 							        actividadesHtml += "<p>Categorias: " + nombresCategorias + "<p>";
+							        actividadesHtml += "</div>";
+
 							});
 				} else {
 					actividadesHtml += "<div class='actividad'>"
@@ -247,6 +249,8 @@ function seleccionarCategoria(idCategoria) {
 							        }).join(', ');
 
 							        actividadesHtml += "<p>Categorias: " + nombresCategorias + "<p>";
+							        actividadesHtml += "</div>";
+
 							});
 				} else {
 					actividadesHtml += "<div class='actividad'>"
